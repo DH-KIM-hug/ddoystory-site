@@ -1,171 +1,155 @@
-/* ddoystory 종이 페이지 공통 규칙 (v10: 크림 종이 한 장 위의 종이 작품) ─────────────
-   재료: 모든 면은 색지 한 장. 조각 하나 = 한 색. 그라데이션·광택·윤곽선·흰 테두리 없음.
-   결: 실제 크림 종이 사진에서 뽑은 밝기 결(paper/grain.webp, 회색 128 중심)을 soft-light 로 색지 위에 겹친다.
-   그림자: 광원은 위쪽 하나. 위 조각이 아래 조각에 좁고 부드러운 웜 다크(#2E241C) 그림자를 드리운다.
-   색: 크림 바탕, 나무 갈색 글자, 초록·짚색 땅, 크래프트·감빛 조각. 남색은 쓰지 않는다.
-   글꼴: 제목 Jua(영어 Fredoka), 본문 Noto Sans KR(영어 Nunito). 제목 Jua 는 400 하나(가짜 굵게는 font-synthesis:none 으로 막음).
+/* ddoystory 종이 페이지 공통 규칙 (v12: 흰 종이 위 편집 디자인) ─────────────
+   바탕: 아주 연한 크림이 도는 흰 종이 #FCFAF5 한 장. 그 위에 오린 종이 조각(달·솔가지·언덕·꼬리표·카드)만 얹는다.
+   글자는 띠나 밑장 위에 얹지 않고 바탕 종이에 바로 놓는다. 꼬리 글자(작은 영어 대문자)는 가늘고 자간을 넓게,
+   금색 가는 선(1px)으로 잇는다. 남색은 쓰지 않는다.
+   그림자: 위쪽 빛에서 떨어지는 웜 다크(#2E241C)만. 조각이 놓인 자리에 좁은 접촉 그림자.
+   글꼴: 제목 Jua(영어 Fredoka), 본문 Noto Sans KR(영어 Nunito), 꼬리 글자 Nunito 300~400 대문자.
    네 페이지(/, /tokitoki/, /tokitoki/support/, /tokitoki/privacy/)가 함께 쓴다. */
 
 :root{
-  /* 색지 */
-  --page:#F7DEC0;       /* 바탕 크림 종이 */
-  --sheet:#FBEEDB;      /* 바탕 위에 얹는 밝은 크림 조각 */
-  --kraft:#E6D1AB;      /* 크래프트(액자) */
-  --straw:#D9A94E;
-  --green:#3E6943;      /* 땅 능선과 같은 초록 */
-  --green-deep:#2E5340;
-  --bark:#6B4A32;       /* 오린 제목 글자 */
-  --bark-deep:#45301F;  /* 제목 글자 밑장 */
-  --persimmon:#E8703A;
-  --act:#E46A30;        /* 1차 행동(App Store) 앞장 */
-  --act-under:#B5501F;  /* 뒷장 */
-  --bean:#A93B32;
+  --page:#FCFAF5;       /* 바탕 흰 종이 */
+  --sheet:#F5E8DA;      /* 카드 앞장(card.webp 의 흰 종이와 같은 색) */
+  --kraft:#C49A6C;      /* 크래프트 밑장 */
+  --gold:#D9A94E;       /* 금색 가는 선 */
+  --gold-ink:#9A7330;   /* 금색 계열 작은 글자 */
+  --green:#3E6943;
+  --soil:#35583B;       /* 맨 아래 앞 땅(짙은 솔잎) */
+  --act:#E2672E;        /* 감빛 단추 */
+  --act-under:#B5501F;
   /* 글자 */
-  --ink:#3A2A1E;
-  --sub:#6B5646;
-  --on-green:#F6ECD8;
-  --on-green-sub:#D8E2CC;
+  --ink:#33261B;
+  --head-ink:#4A3424;
+  --sub:#6E5A4A;
+  --tail:#7A6655;
   --link:#A8441A;
   /* 그림자(웜 다크만) */
   --sh:46,36,28;
-  --lift:0 1px 1px rgba(var(--sh),.2),0 3px 6px -1px rgba(var(--sh),.22);
-  --lift-hi:0 2px 2px rgba(var(--sh),.2),0 10px 16px -4px rgba(var(--sh),.28);
-  --rim:inset 0 24px 26px -14px rgba(var(--sh),.62),inset 0 5px 5px -2px rgba(var(--sh),.55),inset 12px 0 16px -12px rgba(var(--sh),.42),inset -12px 0 16px -12px rgba(var(--sh),.42),inset 0 -3px 0 rgba(255,248,232,.8);
-  --piece-shadow:drop-shadow(0 1px 1px rgba(var(--sh),.4)) drop-shadow(0 3px 4px rgba(var(--sh),.16));
-  --letter-shadow:drop-shadow(0 2px 0 var(--bark-deep)) drop-shadow(0 4px 3px rgba(var(--sh),.32));
-  /* 종이 결: 루트 기준 경로(하위 페이지 인라인 스타일에서도 같은 파일) */
+  --lift:0 1px 1px rgba(var(--sh),.18),0 4px 8px -2px rgba(var(--sh),.2);
+  --lift-hi:0 2px 2px rgba(var(--sh),.18),0 12px 18px -6px rgba(var(--sh),.26);
+  --piece-shadow:drop-shadow(0 1px 1px rgba(var(--sh),.35)) drop-shadow(0 4px 5px rgba(var(--sh),.14));
   --grain:url("/assets/paper/grain.webp") 0 0/320px 320px;
   /* 글꼴 */
-  --serif:'Nunito','Noto Sans KR','Apple SD Gothic Neo',sans-serif;   /* 본문: 영어 Nunito, 한국어 Noto Sans KR */
-  --head:'Fredoka','Jua','Apple SD Gothic Neo',sans-serif;            /* 제목: 영어 Fredoka, 한국어 Jua */
-  --head-w:600;                                                       /* 영어 Fredoka 600. Jua 는 굵기가 하나(400)뿐이라 font-synthesis:none 으로 가짜 굵게 없이 400 그대로 나온다 */
-  --sc:'Fredoka','Jua',sans-serif;                                    /* 영어 꼬리표 */
+  --serif:'Nunito','Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+  --head:'Fredoka','Jua','Apple SD Gothic Neo',sans-serif;
+  --head-w:600;
+  --tailf:'Nunito','Noto Sans KR',sans-serif;
   /* 배치 */
-  --gutter:clamp(16px,4.5vw,72px);
-  --max:1360px;
+  --gutter:clamp(16px,4.4vw,64px);
+  --max:1320px;
   --ease:cubic-bezier(.2,.8,.2,1);
   color-scheme:light;
 }
-/* 다크 모드: 짙은 갈색 종이 + 짙은 솔잎 땅(사람이 켰을 때만) */
+/* 다크 모드(사람이 켰을 때만): 짙은 갈색 종이. 종이 조각 그림은 그대로 둔다. */
 @media (prefers-color-scheme:dark){
   :root{
-    --page:#2B231C;
-    --sheet:#3A2F25;
-    --kraft:#463829;
-    --green:#24412F;
-    --green-deep:#1B3324;
-    --bark:#E9C88A;
-    --bark-deep:#6B4A2C;
-    --ink:#F1E4CD;
-    --sub:#CDBBA2;
-    --on-green-sub:#C9D6BE;
+    --page:#2B241D;
+    --gold:#C6973F;
+    --gold-ink:#D9B572;
+    --ink:#F1E6D4;
+    --head-ink:#F4E3C4;
+    --sub:#CDBCA6;
+    --tail:#BCA78F;
     --link:#F2B366;
-    --sh:8,6,4;
-    --lift:0 1px 1px rgba(var(--sh),.5),0 3px 7px -1px rgba(var(--sh),.5);
-    --lift-hi:0 2px 2px rgba(var(--sh),.45),0 10px 18px -4px rgba(var(--sh),.6);
-    --piece-shadow:drop-shadow(0 1px 1px rgba(var(--sh),.6)) drop-shadow(0 3px 4px rgba(var(--sh),.35));
+    --soil:#2C4A31;
+    --sh:10,7,4;
+    --lift:0 1px 1px rgba(var(--sh),.5),0 4px 9px -2px rgba(var(--sh),.55);
+    --lift-hi:0 2px 2px rgba(var(--sh),.5),0 12px 20px -6px rgba(var(--sh),.6);
+    --piece-shadow:drop-shadow(0 1px 1px rgba(var(--sh),.6)) drop-shadow(0 4px 6px rgba(var(--sh),.4));
     color-scheme:dark;
   }
 }
 
-/* 색지 한 장: --tone 색 위에 종이 결 */
-.paper,body{background:var(--grain),var(--tone,var(--page));background-blend-mode:soft-light,normal}
-
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;background:var(--page)}
-body{margin:0;--tone:var(--page);color:var(--ink);font-family:var(--serif);font-weight:400;font-size:18px;line-height:1.85;letter-spacing:.01em;overflow-x:hidden;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased;font-synthesis:none}
+body{margin:0;background:var(--grain),var(--page);background-blend-mode:soft-light,normal;color:var(--ink);font-family:var(--serif);font-weight:400;font-size:18px;line-height:1.85;letter-spacing:.01em;overflow-x:hidden;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased;font-synthesis:none}
+@supports (overflow:clip){body{overflow-x:clip}}
 img{display:block;max-width:100%;height:auto}
 p,h1,h2,h3,h4{text-wrap:pretty}
-h1,h2,h3,h4{font-family:var(--head);font-weight:var(--head-w)!important;letter-spacing:.02em}
+h1,h2,h3,h4{font-family:var(--head);font-weight:var(--head-w)!important;letter-spacing:.02em;color:var(--head-ink)}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--act);outline-offset:3px;border-radius:6px}
+:focus-visible{outline:2px solid var(--act);outline-offset:4px;border-radius:4px}
 html[lang=ko] [data-l=en],html[lang=en] [data-l=ko]{display:none!important}
 .wrap{max-width:var(--max);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
 .skip{position:absolute;left:-9999px}
-.skip:focus{left:16px;top:12px;background:var(--sheet);color:var(--ink);padding:8px 12px;z-index:20;border-radius:8px}
-.sc{font-family:var(--sc);font-weight:500;letter-spacing:.04em}
+.skip:focus{left:16px;top:12px;background:var(--page);color:var(--ink);padding:8px 12px;z-index:20}
 
-/* 오린 글자: 나무 갈색 색지 글자 + 한 겹 아래 더 짙은 갈색 + 얕은 웜 그림자 */
-.cutletters{color:var(--bark);filter:var(--letter-shadow)}
+/* ── 꼬리 글자: 가늘고 넓은 영어 대문자 ── */
+.tail{font-family:var(--tailf);font-weight:400;font-size:12px;line-height:1.5;letter-spacing:.26em;text-transform:uppercase;color:var(--tail);white-space:nowrap}
+.tail.lt{font-weight:300}
+.tail [data-l=ko]{letter-spacing:.12em}
+/* 금색 가는 선 */
+.rule{display:block;height:1px;background:var(--gold);border:0;margin:0}
+.vrule{display:block;width:1px;background:var(--gold)}
 
-/* ── 구멍(음각 무대) ────────────────────────────────
-   크림 종이판을 파낸 창. 위·안쪽 테두리에 그림자 띠, 아래 테두리에 밝은 절단면. */
-.hole{position:relative;overflow:hidden;isolation:isolate}
-.hole{box-shadow:0 0 0 2px rgba(255,246,228,.75),0 0 0 3px rgba(var(--sh),.14)}
-.hole::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--rim);pointer-events:none;z-index:9}
+/* ── 머리: ddoystory ─── 금색 선 ─── iPhone · iPad | KO / EN ── */
+.mast{display:flex;align-items:center;gap:clamp(14px,2.2vw,32px);padding-top:clamp(18px,2.6vw,36px);padding-bottom:clamp(14px,2vw,28px);position:relative;z-index:5}
+.brand{font-family:'Fredoka',sans-serif;font-weight:500;font-size:clamp(19px,1.7vw,24px);letter-spacing:.14em;line-height:1;color:var(--head-ink);text-decoration:none;white-space:nowrap;padding:10px 0}
+.mast .rule{flex:1 1 auto;min-width:24px}
+.mast .tails{display:flex;align-items:center;gap:clamp(12px,1.8vw,24px)}
+.mast .tails .vrule{height:16px}
+.mast a.tail{text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.mast a.tail:hover{color:var(--head-ink)}
+.lang{display:flex;align-items:center;gap:2px}
+.lang a{font-family:var(--tailf);font-size:12px;letter-spacing:.22em;color:var(--tail);text-decoration:none;min-width:34px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding-left:.22em}
+.lang a[aria-current]{color:var(--head-ink);font-weight:700;text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:6px;text-decoration-thickness:1px}
+.lang .sl{color:var(--gold);font-size:12px}
 
-/* 색지 조각 */
-.piece{--tone:var(--sheet);background:var(--grain),var(--tone);background-blend-mode:soft-light,normal;border-radius:var(--r,14px);box-shadow:var(--lift)}
+/* 머리 왼쪽 길(지원·처리방침): ddoystory / TOKI TOKI TALE */
+.crumbs{display:flex;align-items:center;gap:12px;min-width:0}
+.crumbs .sl{color:var(--gold)}
 
-/* ── App Store 단추: 감빛 색지 두 장 겹침. 화면당 하나만 이렇게 강하다. ── */
-.store{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:58px;padding:0 30px 0 26px;border-radius:999px;text-decoration:none;font-family:var(--serif);font-size:17px;font-weight:700;letter-spacing:.03em;white-space:nowrap;color:#FFF7EA;
+/* ── 단추: 감빛 종이 두 장(앞장 + 아래로 비친 짙은 뒷장). 화면당 하나만 강하게. ── */
+.store{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:56px;padding:0 30px 0 26px;border-radius:999px;text-decoration:none;font-family:var(--serif);font-size:16.5px;font-weight:700;letter-spacing:.03em;white-space:nowrap;color:#FFF8EE;
   background:var(--grain),var(--act);background-blend-mode:soft-light,normal;
-  box-shadow:0 1px 1px rgba(var(--sh),.25),-4px 7px 0 var(--act-under),-4px 9px 8px -2px rgba(var(--sh),.35);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
-.store svg{width:20px;height:20px;flex:none}
-.store:hover{transform:translate(1px,-2px);box-shadow:0 1px 1px rgba(var(--sh),.25),-5px 9px 0 var(--act-under),-5px 12px 12px -3px rgba(var(--sh),.38)}
-.store:active{transform:translate(-2px,4px);box-shadow:0 1px 1px rgba(var(--sh),.25),-2px 3px 0 var(--act-under),-2px 4px 4px rgba(var(--sh),.3)}
+  box-shadow:0 1px 1px rgba(var(--sh),.25),-3px 5px 0 var(--act-under),-3px 8px 8px -2px rgba(var(--sh),.3);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.store svg{width:19px;height:19px;flex:none}
+.store:hover{transform:translate(1px,-2px);box-shadow:0 1px 1px rgba(var(--sh),.25),-4px 7px 0 var(--act-under),-4px 11px 12px -3px rgba(var(--sh),.34)}
+.store:active{transform:translate(-2px,3px);box-shadow:0 1px 1px rgba(var(--sh),.25),-1px 2px 0 var(--act-under),-1px 3px 4px rgba(var(--sh),.3)}
+/* 글자 링크: 금색 밑줄 */
+.more{color:var(--ink);font-weight:700;font-size:16.5px;letter-spacing:.03em;text-decoration:underline;text-decoration-color:var(--gold);text-decoration-thickness:1px;text-underline-offset:.45em;min-height:44px;display:inline-flex;align-items:center;gap:10px}
+.more svg{width:18px;height:18px;transition:transform .3s var(--ease)}
+.more:hover svg{transform:translateX(4px)}
 
-/* ── 머리글: 바탕 위에 한 장 더 얹은 밝은 크림 종이(아래 가장자리 곧게 자름) + 꼬리표들 ── */
-.top-sheet{--tone:var(--sheet);position:relative;z-index:3;box-shadow:0 1px 1px rgba(var(--sh),.16),0 3px 5px -1px rgba(var(--sh),.18);margin-bottom:clamp(12px,2vw,28px)}
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:16px;padding-bottom:16px}
-.brand{display:block;line-height:0;flex:none}
-.brand img{width:150px}
-.top nav{display:flex;align-items:center;gap:clamp(6px,1.2vw,14px)}
-/* 꼬리표: 밝은 크림 조각 한 장 */
-.tag{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;text-decoration:none;font-size:15.5px;font-weight:700;letter-spacing:.03em;color:var(--ink);
-  background:var(--grain),var(--sheet);background-blend-mode:soft-light,normal;box-shadow:var(--lift);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
-.tag:hover{transform:translateY(-2px);box-shadow:var(--lift-hi)}
-.tag svg{width:16px;height:16px;flex:none}
-.crumbs{display:flex;align-items:center;flex-wrap:wrap;gap:8px;min-width:0}
-/* 한/En: 고른 쪽이 짚색 조각 */
-.lang{display:flex;gap:6px}
-.lang a{min-width:46px;justify-content:center;padding:0 12px}
-.lang a[lang=en]{font-family:var(--sc);font-weight:500;font-size:16px}
-.lang a[aria-current]{--tone:var(--straw);background:var(--grain),var(--straw);background-blend-mode:soft-light,normal;color:#3A2A1E;box-shadow:0 1px 1px rgba(var(--sh),.3),0 1px 2px rgba(var(--sh),.2);transform:translateY(1px)}
+/* ── 종이 카드: 흰 종이 + 크래프트 밑장(card.webp 를 9조각으로 써서 찌그러지지 않게) ── */
+.paper-card{position:relative;border-style:solid;border-width:24px 40px 33px 38px;border-image:url("/assets/paper/card.webp") 44 74 60 70 / 24px 40px 33px 38px round;background:var(--sheet);background-clip:padding-box;filter:drop-shadow(0 1px 1px rgba(var(--sh),.22)) drop-shadow(0 8px 12px rgba(var(--sh),.14))}
+/* 구멍(종이를 파낸 창): 위·안쪽 테두리에 그림자 */
+.hole{position:relative;overflow:hidden;isolation:isolate;background:#E9DCC8}
+.hole > img{width:100%;height:100%;object-fit:cover}
+.hole::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;box-shadow:inset 0 10px 14px -8px rgba(var(--sh),.55),inset 0 2px 3px rgba(var(--sh),.45),inset 6px 0 10px -8px rgba(var(--sh),.4),inset -6px 0 10px -8px rgba(var(--sh),.4),inset 0 -1px 0 rgba(255,250,240,.8)}
 
-/* 별 조각(짚 금색 색지) */
-.star{position:absolute;color:var(--straw);width:var(--s);height:var(--s);filter:var(--piece-shadow)}
-
-/* ── 땅: 초록 능선 아래 초록 종이(문의·바닥글), 맨 아래 짚색 능선 ── */
-.ground{position:relative;margin-top:clamp(28px,4vw,64px);color:var(--on-green)}
-.ground .ridge{display:block;width:100%;height:clamp(60px,9vw,150px);object-fit:cover;object-position:50% 0;margin-bottom:-2px;filter:drop-shadow(0 -2px 3px rgba(var(--sh),.22));position:relative;z-index:1}
-.ground .soil{--tone:var(--green);position:relative;z-index:1}
-.ground .gold{position:relative;z-index:2;height:clamp(70px,8vw,120px);margin-top:-2px}
-.ground .gold img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;filter:drop-shadow(0 -2px 3px rgba(var(--sh),.3))}
-@media (prefers-color-scheme:dark){.ground .ridge,.ground .gold img{filter:drop-shadow(0 -2px 3px rgba(0,0,0,.4)) brightness(.62)}}
-.ground .contact{padding-top:clamp(24px,3vw,48px);padding-bottom:clamp(28px,3vw,44px);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:28px clamp(40px,5vw,88px);align-items:end}
-.ground .contact h2{margin:0;font-size:clamp(1.9rem,2.8vw,2.5rem);line-height:1.25;color:#F6ECD8;filter:drop-shadow(0 2px 0 rgba(30,40,25,.55)) drop-shadow(0 3px 3px rgba(var(--sh),.3))}
-.ground .contact p{margin:12px 0 0;color:var(--on-green-sub);max-width:28em}
-/* 메일: 크림 쪽지 한 장 */
-.mail{display:inline-flex;align-items:center;gap:14px;max-width:100%;padding:16px 26px 16px 22px;border-radius:10px;color:#3A2A1E;text-decoration:none;font-weight:700;font-size:clamp(1.05rem,1.5vw,1.25rem);letter-spacing:.03em;overflow-wrap:anywhere;
-  background:var(--grain),#FBF1DF;background-blend-mode:soft-light,normal;box-shadow:0 1px 1px rgba(20,30,18,.35),0 6px 12px -2px rgba(20,30,18,.45);transform:rotate(-.6deg);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
-.mail svg{width:24px;height:24px;flex:none;color:var(--act)}
-.mail:hover{transform:rotate(-.6deg) translateY(-2px);box-shadow:0 2px 2px rgba(20,30,18,.3),0 12px 18px -4px rgba(20,30,18,.5)}
-.foot{border-top:2px solid rgba(20,40,24,.35);box-shadow:0 1px 0 rgba(246,236,216,.12);padding-top:20px;padding-bottom:22px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;font-size:15px;color:var(--on-green-sub)}
+/* ── 땅: 언덕 띠(그림) + 맨 앞 짙은 솔잎 땅 한 장(바닥글) ── */
+.land{position:relative;margin-top:clamp(40px,6vw,96px)}
+.land .hills{position:relative;line-height:0}
+.land .hills > img{width:100%;height:auto;min-height:120px;object-fit:cover;object-position:0 100%}
+.land .soil{position:relative;z-index:2;margin-top:clamp(-70px,-4.4vw,-34px);padding-top:clamp(40px,4.6vw,72px);background:var(--grain),var(--soil);background-blend-mode:soft-light,normal;color:#EFE6D2;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'%3E%3Cpath d='M0 34C150 14 300 8 470 20s330 30 500 16 230-26 230-26V60H0z'/%3E%3C/svg%3E") 0 0/100% clamp(34px,4.4vw,70px) no-repeat,linear-gradient(#000,#000) 0 clamp(33px,4.35vw,69px)/100% 100% no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'%3E%3Cpath d='M0 34C150 14 300 8 470 20s330 30 500 16 230-26 230-26V60H0z'/%3E%3C/svg%3E") 0 0/100% clamp(34px,4.4vw,70px) no-repeat,linear-gradient(#000,#000) 0 clamp(33px,4.35vw,69px)/100% 100% no-repeat}
+.land .soil-sh{position:relative;z-index:2;filter:drop-shadow(0 -2px 3px rgba(30,22,14,.28))}
+.foot{display:flex;flex-wrap:wrap;align-items:center;gap:6px clamp(16px,2.4vw,36px);padding-bottom:28px;font-size:14.5px;color:#DCE3CF}
+.foot .tail{color:#EFE6D2;font-size:13px;letter-spacing:.3em}
+.foot .rule{flex:1 1 60px;background:rgba(217,169,78,.75)}
+.foot ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:0 22px}
+.foot a{color:#EFE6D2;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+.foot a:hover{text-decoration:underline;text-underline-offset:.3em;text-decoration-color:var(--gold)}
 .foot p{margin:0}
-.foot img{width:112px}
-.foot > a{line-height:0}
-.foot ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 20px}
-.foot ul a{color:var(--on-green-sub);text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
-.foot ul a:hover{color:#F6ECD8;text-decoration:underline;text-underline-offset:.25em}
-html[lang=en] .foot p{font-family:var(--sc);font-weight:500;font-size:16px;letter-spacing:.03em}
+/* 쪽지 꼬리표 위 메일 */
+.tagnote{position:absolute;display:block;text-decoration:none;color:#33261B;z-index:3;filter:var(--piece-shadow);transition:transform .25s var(--ease)}
+.tagnote img{width:100%}
+.tagnote span{position:absolute;left:22%;right:7%;top:50%;transform:translateY(-50%) rotate(-4.6deg);text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:clamp(14px,1.35vw,19px);letter-spacing:.04em;line-height:1.2;white-space:nowrap}
+.tagnote:hover{transform:translateY(-3px) rotate(-.6deg)}
 
-/* 움직임(assets/motion.js): <head> 스크립트가 붙인 html.mo 동안만 첫 화면([data-intro])을 숨긴다.
-   motion.js 가 첫 프레임을 잡은 뒤, GSAP 를 못 불러오면 곧바로, 늦어도 2.5초(+글꼴 최대 2.5초) 뒤에는 걷힌다. */
-.mo [data-intro]{opacity:0}
-/* 글꼴이 늦을 때(motion.js 가 붙임): 첫 화면 글자만 글꼴이 올 때까지 숨긴다 */
-.mo-font .top-sheet .top,.mo-font .intro-tx{visibility:hidden}
+/* 움직임(assets/motion.js): <head> 스크립트가 붙인 html.mo 동안만 첫 화면([data-intro])을 숨긴다. */
+.mo [data-intro],.mo [data-piece],.mo .tales li{opacity:0}
+.mo-font [data-intro] h1,.mo-font [data-intro] p,.mo-font .mast{visibility:hidden}
 
-@media (max-width:1000px){.ground .contact{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:640px){
   body{font-size:16.5px;line-height:1.8}
-  .brand img{width:118px}
-  .top .nl{display:none}
-  .tag{padding:0 12px;font-size:15px}
+  .mast{gap:12px}
+  .mast .opt{display:none}
   .store{width:100%}
-  .mail{width:100%;padding:14px 18px}
+  .foot{font-size:14px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
-  .store:hover,.mail:hover,.tag:hover{transform:none}
+  .store:hover,.tagnote:hover{transform:none}
 }
