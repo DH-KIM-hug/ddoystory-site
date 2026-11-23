@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ddoystory · 톡톡 동화극장 | Toki Toki Tale</title>
+<meta name="description" content="ddoystory — 2~5세를 위한 종이 동화 앱 톡톡 동화극장(Toki Toki Tale)">
+<link rel="icon" href="assets/favicon-32.png">
+<style>
+:root{--bg:#F3F3F1;--card:#FFFFFF;--ink:#2B2520;--sub:#6E655D;--line:#E4E1DC;--accent:#D9622F;--link:#A8441A}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;line-height:1.65;-webkit-text-size-adjust:100%}
+main{max-width:720px;margin:0 auto;padding:32px 16px 56px}
+header{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+header img{width:64px;height:64px;border-radius:15px;border:1px solid var(--line)}
+h1{font-size:1.45rem;margin:0;letter-spacing:.01em}
+header p{margin:2px 0 0;color:var(--sub);font-size:.95rem}
+.lang{margin-left:auto;display:flex;gap:4px}
+.lang a{font-size:.85rem;color:var(--sub);text-decoration:none;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+.lang a[aria-current]{color:#fff;background:var(--link);border-color:var(--link)}
+section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+h2{font-size:1.05rem;margin:0 0 10px}
+p{margin:0 0 8px}
+.contact{font-size:1.1rem;font-weight:600}
+.contact a{color:var(--link);text-decoration:none}
+dl{margin:0}
+dt{font-weight:600;margin-top:12px}
+dt:first-child{margin-top:0}
+dd{margin:2px 0 0;color:var(--sub)}
+a{color:var(--link)}
+footer{color:var(--sub);font-size:.85rem;text-align:center;margin-top:24px}
+[data-l]{display:none}
+html[lang=ko] [data-l=ko],html[lang=en] [data-l=en]{display:block}
+html[lang=ko] h1 .en,html[lang=en] h1 .ko{display:none}
+@media (max-width:420px){header{flex-wrap:wrap}.lang{margin-left:0}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <img src="assets/icon.png" alt="">
+  <div>
+    <h1><span class="ko">톡톡 동화극장</span><span class="en">Toki Toki Tale</span></h1>
+    <p data-l="ko">2~5세를 위한 종이 동화 앱</p>
+    <p data-l="en">Paper-cut story app for ages 2–5</p>
+  </div>
+  <nav class="lang" aria-label="Language">
+    <a href="#ko" data-set="ko">한국어</a><a href="#en" data-set="en">English</a>
+  </nav>
+</header>
+
+<div data-l="ko">
+<section>
+  <h2>톡톡 동화극장</h2>
+  <p>종이를 오려 만든 동화 속으로 들어가 이야기를 함께 이어 가는 2~5세 동화 앱입니다. 놀이 모드에서는 누르고 고르며 이야기를 잇고, 읽어 주기 모드에서는 화면을 꺼도 끝까지 읽어 줍니다. 한국어와 영어로 들을 수 있습니다.</p>
+  <p>광고 없음 · 로그인 없음 · iPhone과 iPad</p>
+</section>
+<section>
+  <h2>도움이 필요하신가요?</h2>
+  <p><a href="support/#ko">고객 지원</a> · <a href="https://paper-tale-sync.papertale.workers.dev/privacy">개인정보 처리방침</a> · <a href="mailto:hello@ddoystory.com">hello@ddoystory.com</a></p>
+</section>
+</div>
+
+<div data-l="en">
+<section>
+  <h2>Toki Toki Tale</h2>
+  <p>A story app for ages 2 to 5 where children step into hand-cut paper tales and carry the story along. Play mode lets them tap, choose and order to move the story on; read-aloud mode keeps reading to the end even with the screen off. Every tale can be heard in Korean and English.</p>
+  <p>No ads · No sign-in · iPhone and iPad</p>
+</section>
+<section>
+  <h2>Need help?</h2>
+  <p><a href="support/#en">Support</a> · <a href="https://paper-tale-sync.papertale.workers.dev/privacy">Privacy policy</a> · <a href="mailto:hello@ddoystory.com">hello@ddoystory.com</a></p>
+</section>
+</div>
+
+<footer>© 2026 DH-KIM-hug · Toki Toki Tale</footer>
+</main>
+<script>
+(function(){
+  var h=document.documentElement;
+  function set(l){h.lang=l;var as=document.querySelectorAll('.lang a');for(var i=0;i<as.length;i++){if(as[i].getAttribute('data-set')===l)as[i].setAttribute('aria-current','true');else as[i].removeAttribute('aria-current');}}
+  var l=location.hash==='#en'?'en':location.hash==='#ko'?'ko':((navigator.language||'').toLowerCase().indexOf('ko')===0?'ko':'en');
+  set(l);
+  window.addEventListener('hashchange',function(){set(location.hash==='#en'?'en':'ko');});
+})();
+</script>
+</body>
+</html>
