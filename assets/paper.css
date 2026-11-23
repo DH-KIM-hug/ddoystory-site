@@ -143,6 +143,8 @@ html[lang=ko] [data-l=en],html[lang=en] [data-l=ko]{display:none!important}
 /* 움직임(assets/motion.js): <head> 스크립트가 붙인 html.mo 동안만 첫 화면을 숨긴다.
    motion.js 가 첫 프레임을 잡은 뒤, GSAP 를 못 불러오면 곧바로, 늦어도 2.5초 뒤에는 걷힌다. */
 .mo .head > :not(.cut){opacity:0}
+/* 글꼴이 늦을 때(motion.js 가 붙임): 첫 화면 글자만 글꼴이 올 때까지 숨긴다 */
+.mo-font .head .top,.mo-font .head h1,.mo-font .head p,.mo-font .head .ctas,.mo-font .head figcaption{visibility:hidden}
 
 /* 별 조각(짚 금색 색지) */
 .star{position:absolute;color:var(--straw);width:var(--s);height:var(--s);filter:var(--piece-shadow)}

@@ -15,6 +15,33 @@
 
   var $=function(s,c){return (c||document).querySelector(s);};
   var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+
+  /* 글꼴이 준비된 뒤에 시작한다: 대체 글꼴로 떠오르다 바뀌는 모습(FOUT)을 막는다.
+     첫 화면에 실제로 쓰는 글자만 불러오게 text 를 넘긴다(한국어 글꼴은 unicode-range 로 쪼개져 있다).
+     1.5초 안에 안 오면 그냥 시작한다. */
+  function fontsReady(){
+    if(!document.fonts||!document.fonts.load) return Promise.resolve();
+    var h=document.querySelector('.head h1')||document.querySelector('.head');
+    var head=(document.querySelector('.head')||document.body).textContent.replace(/\s+/g,'');
+    var ht=h?h.textContent.replace(/\s+/g,''):head;
+    var jobs=['400 1em Jua','400 1em Fredoka'].map(function(f){return document.fonts.load(f,ht);})
+      .concat(['400 1em "Noto Sans KR"','600 1em "Noto Sans KR"','400 1em Nunito','600 1em Nunito','700 1em Nunito'].map(function(f){return document.fonts.load(f,head);}));
+    fontsAll=Promise.all(jobs).then(function(){fontsOk=true;},function(){fontsOk=true;});
+    var cap=new Promise(function(r){setTimeout(r,1500);});
+    return Promise.race([fontsAll,cap]);
+  }
+  var fontsOk=false,fontsAll=Promise.resolve();
+  /* 여기까지 왔으면 머리의 2.5초 안전장치 대신 이 파일이 책임진다(글꼴 기다림 최대 1.5초) */
+  if(window.__moT) clearTimeout(window.__moT);
+  fontsReady().then(run);
+
+  function run(){
+  /* 1.5초 안에 글꼴이 안 왔으면 연출은 시작하되, 첫 화면 글자만 글꼴이 올 때까지(최대 3초 더) 숨겨 둔다.
+     대체 글꼴이 한 프레임도 보이지 않게 하려는 것. 그림 층은 그대로 내려앉는다. */
+  if(!fontsOk&&document.fonts){
+    root.classList.add('mo-font');
+    Promise.race([fontsAll,new Promise(function(r){setTimeout(r,3000);})]).then(function(){root.classList.remove('mo-font');});
+  }
   /* 머리 스크립트의 안전 시간(2.5초)이 먼저 지나 이미 보이는 상태라면 등장 연출은 건너뛴다 */
   var intro=root.classList.contains('mo');
 
@@ -125,5 +152,6 @@
       var nx=e.clientX/window.innerWidth-.5, ny=e.clientY/window.innerHeight-.5;
       for(var i=0;i<movers.length;i++){ movers[i].x(nx*movers[i].d*1.6); movers[i].y(ny*movers[i].d); }
     },{passive:true});
+  }
   }
 })();
