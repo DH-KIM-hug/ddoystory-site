@@ -6,7 +6,7 @@
 <title>톡톡 동화극장 | Toki Toki Tale</title>
 <meta name="description" content="톡톡 동화극장(Toki Toki Tale): 또이다은 스튜디오(ddoystory)가 만든 2~5세 종이 오림 동화 앱, iPhone과 iPad">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#1F2A56">
+<meta name="theme-color" content="#F7E5C8">
 <meta property="og:title" content="톡톡 동화극장 | Toki Toki Tale">
 <meta property="og:url" content="https://ddoystory.com/tokitoki/">
 <meta property="og:description" content="톡톡 동화극장(Toki Toki Tale) — 2~5세를 위한 종이 오림 동화 앱">
@@ -25,105 +25,98 @@
 <script defer fetchpriority="high" src="../assets/vendor/gsap/ScrollTrigger.min.js"></script>
 <script defer fetchpriority="high" src="../assets/motion.js"></script>
 <style>
-/* 톡톡 동화극장: 밤 종이(머리·아치 무대) → 크림 종이(앱 소개) → 크래프트 종이(동화 서가) → 밤 종이(문의).
-   위 장의 아래 가장자리를 오려 다음 장 위에 얹는다. */
-.head{z-index:4}
-/* 스튜디오 홈으로 돌아가는 작은 머리글 */
-.home{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding-right:6px;text-decoration:none;color:var(--on-night-sub);font-weight:600;font-size:16px;letter-spacing:.03em;flex:none}
-.home svg{width:18px;height:18px;flex:none;transition:transform .25s var(--ease)}
-.home:hover{color:var(--on-night)}
-.home:hover svg{transform:translateX(-3px)}
-html[lang=en] .home [data-l=en]{font-family:var(--sc);font-weight:500;font-size:17px;letter-spacing:.03em}
+/* 톡톡 동화극장: 크림 종이 한 장 위의 종이 작품(스튜디오 홈과 같은 언어).
+   첫머리 = 왼쪽 오린 갈색 제목 + 오른쪽 아치 구멍(오누이 장면 + 억새·솔가지 앞 층).
+   앱 소개 = 색지 조각(감빛·짚색·솔잎), 서가 = 크림 조각, 맨 아래 = 초록·짚색 능선 땅. */
+.home svg{width:16px;height:16px}
+html[lang=en] .home [data-l=en]{font-family:var(--sc);font-weight:500;font-size:16px;letter-spacing:.03em}
 
-.hero{padding-top:clamp(24px,4vw,56px);padding-bottom:clamp(36px,4vw,56px)}
-.hero h1{margin:0;font-weight:900;font-size:clamp(2.1rem,4.2vw,4.1rem);line-height:1.3;letter-spacing:.03em}
+/* ── 첫머리 ─────────────────────────────────────── */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);align-items:center;gap:36px clamp(36px,5vw,88px);padding-top:clamp(12px,3vw,40px);padding-bottom:clamp(40px,5vw,72px)}
+.hero h1{margin:0;font-size:clamp(2.1rem,3.6vw,3.7rem);line-height:1.3;letter-spacing:.03em}
 .hero h1 .ln{display:block}
-.hero-row{margin-top:clamp(22px,2.4vw,34px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px 40px}
-.hero-row p{margin:0;font-size:clamp(1.05rem,1.3vw,1.2rem);color:var(--on-night-sub);max-width:38em;text-wrap:balance}
-.ctas{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
-.ctas .more{color:var(--on-night);text-decoration:underline;text-decoration-color:var(--straw);text-decoration-thickness:2px;text-underline-offset:.4em;font-size:17px;font-weight:600;letter-spacing:.03em;min-height:44px;display:inline-flex;align-items:center}
+.intro-tx > p{margin:clamp(18px,2vw,28px) 0 0;font-size:clamp(1.05rem,1.3vw,1.2rem);max-width:32em}
+.ctas{margin-top:clamp(24px,2.6vw,36px);display:flex;flex-wrap:wrap;align-items:center;gap:18px 26px}
+.ctas .more{color:var(--ink);font-weight:700;text-decoration:underline;text-decoration-color:var(--straw);text-decoration-thickness:3px;text-underline-offset:.4em;font-size:17px;letter-spacing:.03em;min-height:44px;display:inline-flex;align-items:center}
 
-/* 무대: 남색 종이에 뚫린 넓은 아치. 안에는 장면(맨 뒤) → 앞 억새·솔가지(앞 가림 층). */
-.stage{position:relative;margin:clamp(36px,4.5vw,60px) 0 0}
-.arch{border-radius:50% 50% 22px 22px / 36% 36% 22px 22px;aspect-ratio:21/9;background:#16204A}
-.arch > img{width:100%;height:100%;object-fit:cover;object-position:50% 62%}
+/* 아치 구멍: 오누이 장면(맨 뒤) → 앞 억새·솔가지 */
+.stage{position:relative;margin:0}
+.arch{aspect-ratio:7/6;border-radius:50% 50% 6px 6px / 42% 42% 6px 6px;background:#3A2A1E}
+.arch > img{width:100%;height:100%;object-fit:cover;object-position:46% 62%}
 .arch .lyr{position:absolute;height:auto;filter:var(--piece-shadow);z-index:2;pointer-events:none}
-.arch .pampas-l{width:19%;left:-2%;bottom:-6%}
-.arch .pampas-r{width:16%;right:-1%;bottom:-8%;transform:scaleX(-1)}
-.arch .pine{width:20%;left:-3%;top:-9%;transform:rotate(-6deg)}
-.stage figcaption{position:absolute;right:clamp(16px,3vw,40px);bottom:-18px;z-index:6;padding:6px 16px;border-radius:6px;background:var(--grain),#F6ECD8;color:#1F2A56;font-size:15px;font-weight:600;letter-spacing:.03em;box-shadow:0 1px 1px rgba(var(--sh),.45),0 4px 8px -2px rgba(var(--sh),.45)}
-.stage .star.a{--s:36px;left:-14px;top:24%}
-.stage .star.b{--s:22px;right:12%;top:-30px}
-.stage .star.c{--s:15px;left:24%;top:-22px;color:#F6ECD8}
+.arch .pampas-l{width:30%;left:-3%;bottom:-6%}
+.arch .pampas-r{width:25%;right:-2%;bottom:-8%;transform:scaleX(-1)}
+.arch .pine{width:34%;right:-5%;top:-4%;transform:scaleX(-1) rotate(6deg)}
+/* 그림 이름: 크래프트 꼬리표 한 장 */
+.arch-cap{position:absolute;right:18px;bottom:-16px;z-index:6;padding:6px 16px;--tone:var(--kraft);--r:6px;color:var(--ink);font-size:15px;font-weight:700;letter-spacing:.03em;transform:rotate(-1.5deg)}
+.stage .star{z-index:7}
+.stage .star.a{--s:30px;left:-14px;top:22%}
+.stage .star.b{--s:20px;right:14%;top:-26px}
 
-/* ── 앱 소개: 크림 종이 ───────────────────────────── */
-.app-sheet{z-index:3}
-.app{padding-top:clamp(96px,9vw,140px);padding-bottom:clamp(56px,6vw,96px)}
+/* ── 앱 소개 ───────────────────────────────────── */
+.app{padding-top:clamp(40px,5vw,80px);padding-bottom:clamp(40px,5vw,72px)}
 .app-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,4.5vw,80px);align-items:start}
 .col-l,.col-r{display:flex;flex-direction:column;gap:clamp(36px,3.4vw,52px)}
 .app-info{display:flex;flex-direction:column;gap:28px}
 .app-id{display:flex;align-items:center;gap:20px}
 .app-id img{width:96px;height:96px;border-radius:22px;box-shadow:var(--lift)}
-.app-id h2{margin:0;font-size:clamp(2rem,3vw,2.7rem);line-height:1.2;font-weight:900}
+.app-id h2{margin:0;font-size:clamp(2rem,3vw,2.7rem);line-height:1.2}
 .app-id p{margin:2px 0 0;color:var(--sub);font-family:var(--sc);font-weight:500;font-size:19px;letter-spacing:.03em}
 .app-id p [data-l=en]{font-family:var(--serif);font-size:16px;letter-spacing:.02em}
 .lede{margin:0;font-size:clamp(1.08rem,1.35vw,1.22rem);line-height:1.9}
-/* 꼬리표: 크래프트 종이 조각 */
 .facts{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
-.facts li{padding:4px 14px;border-radius:6px;background:var(--grain),var(--kraft);box-shadow:0 1px 1px rgba(var(--sh),.25),0 2px 3px rgba(var(--sh),.12);font-size:15px;white-space:nowrap}
-/* 약속: 솔잎 초록 색지 한 장 */
-.promise{--tone:var(--pine);--under:var(--straw);--ux:-8px;--uy:8px;--r:16px;color:#F6ECD8;padding:22px 26px}
-.promise h3{margin:0;font-size:1.22rem;line-height:1.45;font-weight:900}
-.promise p{margin:8px 0 0;font-size:17px;opacity:.92}
-/* 길잡이 쪽지: 크림 색지 띠 두 장 */
+.facts li{padding:4px 14px;border-radius:6px;background:var(--grain),var(--sheet);background-blend-mode:soft-light,normal;box-shadow:0 1px 1px rgba(var(--sh),.25),0 2px 3px rgba(var(--sh),.12);font-size:15px;white-space:nowrap}
+/* 약속: 크래프트 조각 한 장 */
+.promise{--tone:var(--kraft);--r:10px;padding:22px 26px;transform:rotate(.4deg)}
+.promise h3{margin:0;font-size:1.3rem;line-height:1.45}
+.promise p{margin:8px 0 0;font-size:17px}
+/* 길잡이 쪽지: 밝은 크림 조각 */
 .links{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
-.links a{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px;padding:12px 22px;border-radius:12px;background:var(--grain),var(--sheet);box-shadow:var(--lift);text-decoration:none;color:var(--ink);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.links a{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px;padding:12px 22px;border-radius:10px;background:var(--grain),var(--sheet);background-blend-mode:soft-light,normal;box-shadow:var(--lift);text-decoration:none;color:var(--ink);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
 .links a:hover{transform:translateY(-2px);box-shadow:var(--lift-hi)}
 .links .t{font-weight:700;font-size:1.08rem;letter-spacing:.02em}
 .links small{display:block;font-size:15px;color:var(--sub);line-height:1.55}
 .links svg{width:22px;height:22px;flex:none;color:var(--act);transition:transform .3s var(--ease)}
 .links a:hover svg{transform:translateX(4px)}
 
-/* 색지 조각 세 장: 잠자리(밤) · 누르기(감) · 두 언어(짚). 밑장 색이 오른쪽 아래로 비죽 나온다. */
-.sheet{--r:26px;padding:clamp(24px,3vw,42px)}
-.sheet h3{margin:0;font-size:clamp(1.4rem,1.9vw,1.8rem);line-height:1.35;font-weight:900}
+/* 색지 조각 세 장: 잠자리(짙은 솔잎) · 누르기(감빛) · 두 언어(짚색). 살짝 비뚤게 놓인다. */
+.sheet{--r:16px;padding:clamp(24px,3vw,42px);position:relative}
+.sheet h3{margin:0;font-size:clamp(1.45rem,1.9vw,1.85rem);line-height:1.35}
 .sheet p{margin:12px 0 0;font-size:17.5px;line-height:1.85;max-width:36em}
-.sheet .win{margin-top:26px;border-radius:16px;background:rgba(0,0,0,.12)}
+.sheet .win{margin-top:26px;border-radius:10px;background:rgba(0,0,0,.12)}
 .sheet .win img{width:100%}
-.s-play{--tone:var(--persimmon);--under:var(--bean);color:#2B2420}
-.s-lang{--tone:var(--straw);--under:var(--pine);color:#2B2420}
-.s-night{--tone:#1F2A56;--under:var(--straw);color:#F6ECD8;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,230px);gap:24px clamp(24px,3vw,48px);align-items:center}
-.s-night p{color:#C8CCE0}
-.s-night .win{margin-top:0;border-radius:26px}
+.s-play{--tone:var(--persimmon);color:#2E2016;transform:rotate(.5deg)}
+.s-lang{--tone:var(--straw);color:#2E2016;transform:rotate(-.5deg)}
+.s-night{--tone:var(--green-deep);color:#F6ECD8;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,230px);gap:24px clamp(24px,3vw,48px);align-items:center;transform:rotate(-.4deg)}
+.s-night p{color:#D8E2CC}
+.s-night .win{margin-top:0;border-radius:24px}
 .s-night .star.a{--s:20px;left:clamp(24px,3vw,42px);bottom:40px}
 .s-night .star.b{--s:30px;left:calc(clamp(24px,3vw,42px) + 42px);bottom:66px;color:#F6ECD8}
-@media (prefers-color-scheme:dark){.s-night{--tone:#2A376E}}
 
-/* ── 동화 한 편 + 서가: 크래프트 종이 ───────────────── */
-.library{--tone:var(--kraft);z-index:2;padding-top:clamp(96px,9vw,140px);padding-bottom:clamp(64px,7vw,112px)}
+/* ── 동화 한 편 + 서가 ───────────────────────────── */
+.library{padding-top:clamp(40px,5vw,80px)}
 .feature{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(36px,6vw,112px);align-items:center}
-.poster{margin:0;border-radius:10px;overflow:hidden;background:#F4ECDD;box-shadow:var(--lift),-14px 14px 0 var(--pine),-14px 17px 6px -1px rgba(var(--sh),.28);overflow:visible}
-.poster img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px}
-.feature-tx .from{margin:0;color:var(--sub);font-size:16px;font-weight:600;letter-spacing:.03em}
-.feature-tx h3{margin:8px 0 0;font-size:clamp(2.1rem,3.8vw,3.4rem);line-height:1.2;font-weight:900}
+/* 포스터: 크래프트 받침 종이에 붙여 둔다 */
+.poster{margin:0;padding:clamp(10px,1.2vw,16px);border-radius:6px;background:var(--grain),var(--kraft);background-blend-mode:soft-light,normal;box-shadow:var(--lift);transform:rotate(-1deg)}
+.poster img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:3px;box-shadow:0 1px 2px rgba(var(--sh),.35)}
+.feature-tx .from{margin:0;color:var(--sub);font-size:16px;font-weight:700;letter-spacing:.03em}
+.feature-tx h3{margin:8px 0 0;font-size:clamp(2.1rem,3.8vw,3.4rem);line-height:1.2}
 .feature-tx .line{margin:20px 0 0;font-size:clamp(1.1rem,1.4vw,1.28rem);line-height:1.9;max-width:26em}
-.feature-tx dl{margin:30px 0 0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 28px;max-width:30em;padding:20px 24px;border-radius:12px;background:var(--grain),var(--sheet);box-shadow:var(--lift)}
+.feature-tx dl{margin:30px 0 0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 28px;max-width:30em;padding:20px 24px;border-radius:10px;background:var(--grain),var(--sheet);background-blend-mode:soft-light,normal;box-shadow:var(--lift)}
 .feature-tx dt{font-weight:700;font-size:16px;white-space:nowrap}
 .feature-tx dd{margin:0;color:var(--sub);font-size:17px}
 
-.shelf-head{margin-top:clamp(80px,8vw,128px);display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 32px}
-.shelf-head h3{margin:0;font-size:clamp(1.9rem,3.2vw,2.8rem);line-height:1.2;font-weight:900}
+.shelf-head{margin-top:clamp(72px,8vw,120px);display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 32px}
+.shelf-head h3{margin:0;font-size:clamp(1.9rem,3.2vw,2.8rem);line-height:1.2}
 .shelf-head p{margin:0;color:var(--sub);font-size:17px}
-/* 서가 한 칸 = 크림 색지 한 장에 작은 창 */
+/* 서가 한 칸 = 밝은 크림 조각 한 장에 작은 창 */
 .tales{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:28px 22px}
-.tales li{margin:0;padding:10px 10px 12px;border-radius:12px;background:var(--grain),var(--sheet);box-shadow:var(--lift)}
-.tales .tw{display:block;border-radius:8px;line-height:0}
+.tales li{margin:0;padding:10px 10px 12px;border-radius:10px;background:var(--grain),var(--sheet);background-blend-mode:soft-light,normal;box-shadow:var(--lift)}
+.tales li:nth-child(3n+1){transform:rotate(-.6deg)}
+.tales li:nth-child(3n+2){transform:rotate(.5deg)}
+.tales .tw{display:block;border-radius:6px;line-height:0}
 .tales img{width:100%;aspect-ratio:4/3}
-.tales li > span:not(.tw){display:block;margin-top:10px;padding:0 4px;font-size:16px;font-weight:600;line-height:1.45;letter-spacing:.02em}
-
-.foot-sheet{z-index:1}
-
-/* 등장·스크롤·마우스 움직임은 assets/motion.js(GSAP)가 맡는다 */
+.tales li > span:not(.tw){display:block;margin-top:10px;padding:0 4px;font-size:16px;font-weight:700;line-height:1.45;letter-spacing:.02em}
 
 @media (max-width:1240px){
   .s-night{grid-template-columns:minmax(0,1fr)}
@@ -132,32 +125,29 @@ html[lang=en] .home [data-l=en]{font-family:var(--sc);font-weight:500;font-size:
 }
 @media (max-width:1000px){
   .app-grid,.feature{grid-template-columns:minmax(0,1fr)}
-  .feature .poster{max-width:500px;margin-left:14px}
+  .feature .poster{max-width:480px}
   .tales{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
+@media (max-width:760px){
+  .hero{grid-template-columns:minmax(0,1fr)}
+  .arch{aspect-ratio:1/1}
+}
 @media (max-width:640px){
-  .hero h1{font-size:clamp(1.8rem,8.2vw,2.15rem)}
+  .hero h1{font-size:clamp(1.8rem,8vw,2.15rem)}
   .hero h1 .ln{display:inline}
   .ctas{width:100%}
-  .arch{aspect-ratio:4/3.4;border-radius:50% 50% 16px 16px / 30% 30% 16px 16px}
-  .arch .pampas-l{width:34%}.arch .pampas-r{width:28%}.arch .pine{width:44%}
-  .stage figcaption{right:12px;font-size:14px}
-  .stage .star.a{--s:26px;left:-8px}
+  .arch .pampas-l{width:36%}.arch .pampas-r{width:30%}.arch .pine{width:44%}
+  .arch-cap{right:12px;font-size:14px}
+  .stage .star.a{--s:24px;left:-6px}
   .app-id img{width:76px;height:76px;border-radius:18px}
   .app-id h2{font-size:1.85rem}
-  .sheet{--r:20px;--ux:7px;--uy:8px;padding:22px 20px}
+  .sheet{--r:14px;padding:22px 20px}
   .sheet p{font-size:16.5px}
-  .s-night{grid-template-columns:minmax(0,1fr)}
-  .s-night .win{max-width:240px;justify-self:center}
-  .s-night .star{display:none}
-  .promise{--ux:-6px;--uy:6px;padding:20px;margin-left:6px}
-  .sheet{margin-right:8px}
-  .poster{box-shadow:var(--lift),-9px 9px 0 var(--pine),-9px 12px 6px -1px rgba(var(--sh),.28)}
-  .feature .poster{margin-left:9px}
+  .promise{padding:20px}
   .feature-tx dl{grid-template-columns:minmax(0,1fr);gap:2px}
   .feature-tx dd{margin-bottom:10px}
   /* 폰: 서가를 두 줄 가로 선반으로 */
-  .tales{grid-template-columns:none;grid-auto-flow:column;grid-template-rows:auto auto;grid-auto-columns:46%;gap:16px 12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-left:calc(-1 * var(--gutter));margin-right:calc(-1 * var(--gutter));padding:6px var(--gutter) 16px;scroll-padding-left:var(--gutter);scrollbar-width:thin}
+  .tales{grid-template-columns:none;grid-auto-flow:column;grid-template-rows:auto auto;grid-auto-columns:46%;gap:16px 12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-left:calc(-1 * var(--gutter));margin-right:calc(-1 * var(--gutter));padding:8px var(--gutter) 16px;scroll-padding-left:var(--gutter);scrollbar-width:thin}
   .tales li{scroll-snap-align:start;padding:8px 8px 10px}
   .tales li > span:not(.tw){font-size:14.5px;margin-top:8px}
 }
@@ -166,30 +156,29 @@ html[lang=en] .home [data-l=en]{font-family:var(--sc);font-weight:500;font-size:
 <body>
 <a class="skip" href="#app"><span data-l="ko">본문으로 건너뛰기</span><span data-l="en" lang="en">Skip to content</span></a>
 
-<div class="ply night head">
-  <header class="wrap top">
-    <a class="home" href="../"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M11 3.5 5.5 9l5.5 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-l="ko">또이다은 스튜디오</span><span data-l="en" lang="en">ddoystory</span></a>
+<div class="top-sheet paper" data-intro><header class="wrap top">
+    <a class="tag home" href="../"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M11 3.5 5.5 9l5.5 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-l="ko">또이다은 스튜디오</span><span data-l="en" lang="en">ddoystory</span></a>
     <nav aria-label="Site">
-      <a class="nl" href="./support/#ko" data-href="./support/"><span data-l="ko">고객 지원</span><span data-l="en" lang="en">Support</span></a>
-      <a class="nl" href="#contact"><span data-l="ko">문의</span><span data-l="en" lang="en">Contact</span></a>
+      <a class="tag nl" href="./support/#ko" data-href="./support/"><span data-l="ko">고객 지원</span><span data-l="en" lang="en">Support</span></a>
+      <a class="tag nl" href="#contact"><span data-l="ko">문의</span><span data-l="en" lang="en">Contact</span></a>
       <div class="lang" role="group" aria-label="Language">
-        <a href="#ko" data-set="ko" lang="ko">한</a><a href="#en" data-set="en" lang="en">En</a>
+        <a class="tag" href="#ko" data-set="ko" lang="ko">한</a><a class="tag" href="#en" data-set="en" lang="en">En</a>
       </div>
     </nav>
-  </header>
+</header></div>
 
-  <section class="wrap hero" aria-labelledby="hero-title">
-    <h1 id="hero-title" class="cutout"><span data-l="ko"><span class="ln">톡톡 동화극장은</span> <span class="ln">종이를 오려 만든 동화 앱입니다.</span></span><span data-l="en" lang="en"><span class="ln">Toki Toki Tale is a storybook app</span> <span class="ln">made of cut paper.</span></span></h1>
-    <div class="hero-row">
-      <p><span data-l="ko">2~5세 아이가 전래동화, 이솝 우화, 세계 명작을 보고 듣습니다. iPhone과 iPad에서 쓸 수 있습니다.</span><span data-l="en" lang="en">Children aged 2 to 5 watch and listen to folktales, Aesop’s fables and world classics, on iPhone and iPad.</span></p>
-      <div class="ctas">
+  <section class="wrap hero" aria-labelledby="hero-title" data-intro>
+    <div class="intro-tx">
+    <h1 id="hero-title" class="cutletters"><span data-l="ko"><span class="ln">톡톡 동화극장은</span> <span class="ln">종이를 오려 만든 동화 앱입니다.</span></span><span data-l="en" lang="en"><span class="ln">Toki Toki Tale is a storybook app</span> <span class="ln">made of cut paper.</span></span></h1>
+    <p><span data-l="ko">2~5세 아이가 전래동화, 이솝 우화, 세계 명작을 보고 듣습니다. iPhone과 iPad에서 쓸 수 있습니다.</span><span data-l="en" lang="en">Children aged 2 to 5 watch and listen to folktales, Aesop’s fables and world classics, on iPhone and iPad.</span></p>
+    <div class="ctas">
         <a class="store" data-appstore href="https://apps.apple.com/"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v10M5.5 8.5 10 13l4.5-4.5M4 16.5h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-l="ko">App Store에서 받기</span><span data-l="en" lang="en">Download on the App Store</span></a>
         <a class="more" href="#app"><span data-l="ko">톡톡 동화극장 둘러보기</span><span data-l="en" lang="en">Take a look inside</span></a>
-      </div>
+    </div>
     </div>
     <figure class="stage">
       <div class="arch hole">
-        <img src="../assets/hero-sunmoon-1600.webp" srcset="../assets/hero-sunmoon-900.webp 900w, ../assets/hero-sunmoon-1600.webp 1600w" sizes="(max-width:1400px) 100vw, 1300px" width="1600" height="900" fetchpriority="high"
+        <img class="scene" src="../assets/hero-sunmoon-1600.webp" srcset="../assets/hero-sunmoon-900.webp 900w, ../assets/hero-sunmoon-1600.webp 1600w" sizes="(max-width:760px) 100vw, 720px" width="1600" height="900" fetchpriority="high"
              alt="종이를 오려 만든 「해와 달이 된 오누이」 장면. 보름달 뜬 밤, 오누이가 초가집 툇마루에 앉아 웃고 있습니다."
              data-alt-en="A cut-paper scene from The Sun and the Moon: on a full-moon night, a brother and sister sit smiling on the porch of a thatched house.">
         <img class="lyr pine" src="../assets/layers/pine-night.webp" width="480" height="456" alt="">
@@ -198,16 +187,13 @@ html[lang=en] .home [data-l=en]{font-family:var(--sc);font-weight:500;font-size:
       </div>
       <svg class="star a" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg>
       <svg class="star b" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg>
-      <svg class="star c" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg>
-      <figcaption><span data-l="ko">「해와 달이 된 오누이」</span><span data-l="en" lang="en">The Sun and the Moon</span></figcaption>
+      <figcaption class="arch-cap piece"><span data-l="ko">「해와 달이 된 오누이」</span><span data-l="en" lang="en">The Sun and the Moon</span></figcaption>
     </figure>
   </section>
-  <div class="cut ridge" aria-hidden="true"></div>
-</div>
 
 <main id="app">
   <article aria-labelledby="tokitoki-title">
-    <div class="ply app-sheet"><div class="wrap app"><div class="app-grid">
+    <div class="wrap app"><div class="app-grid">
       <div class="col-l">
       <div class="app-info">
         <div class="app-id">
@@ -228,7 +214,7 @@ html[lang=en] .home [data-l=en]{font-family:var(--sc);font-weight:500;font-size:
           <li><span data-l="ko">iOS 15.0 이상</span><span data-l="en" lang="en">iOS 15.0 or later</span></li>
         </ul>
         <div><a class="store" data-appstore href="https://apps.apple.com/"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v10M5.5 8.5 10 13l4.5-4.5M4 16.5h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-l="ko">App Store에서 받기</span><span data-l="en" lang="en">Download on the App Store</span></a></div>
-        <div class="promise piece stack">
+        <div class="promise piece">
           <h3><span data-l="ko">광고도, 로그인도 없이</span><span data-l="en" lang="en">No ads, no sign-in</span></h3>
           <p><span data-l="ko">아이에게 보이는 구매 버튼이 없고, 구매와 기기 연결 앞에는 어른 확인이 있습니다. 인터넷이 없어도 동화를 볼 수 있습니다.</span><span data-l="en" lang="en">No purchase buttons are shown to children, and a grown-up check comes before purchases and linking devices. Tales play without an internet connection.</span></p>
         </div>
@@ -237,7 +223,7 @@ html[lang=en] .home [data-l=en]{font-family:var(--sc);font-weight:500;font-size:
           <li><a href="./privacy/#ko" data-href="./privacy/"><span><span class="t"><span data-l="ko">개인정보 처리방침</span><span data-l="en" lang="en">Privacy policy</span></span><small><span data-l="ko">앱이 쓰는 정보와 지우는 방법</span><span data-l="en" lang="en">What data the app uses and how to delete it</span></small></span><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M2 11h16M12 5l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
         </ul>
       </div>
-        <section class="sheet piece stack s-night">
+        <section class="sheet piece s-night">
           <div>
             <h3><span data-l="ko">화면을 꺼도 읽어 주는 잠자리 동화</span><span data-l="en" lang="en">Bedtime, with the screen off</span></h3>
             <p><span data-l="ko">읽어 주기를 고르면 처음부터 끝까지 소리 내어 읽고, 화면을 꺼도 멈추지 않습니다. 한 편이 끝나면 다음 동화로 이어집니다.</span><span data-l="en" lang="en">Read-aloud mode reads every tale from start to finish and keeps going with the screen off, then moves on to the next tale.</span></p>
@@ -252,7 +238,7 @@ html[lang=en] .home [data-l=en]{font-family:var(--sc);font-weight:500;font-size:
       </div>
 
       <div class="col-r">
-        <section class="sheet piece stack s-play">
+        <section class="sheet piece s-play">
           <h3><span data-l="ko">누르고 고르며 잇는 이야기</span><span data-l="en" lang="en">Tap, choose, put in order</span></h3>
           <p><span data-l="ko">화면을 누르고, 고르고, 순서대로 놓으며 이야기를 이어 갑니다. 크기 비교, 같은 색 짝 맞추기, 소리 듣고 고르기, 마음 헤아리기처럼 이야기 속에서 배웁니다. 틀려도 벌이 없습니다.</span><span data-l="en" lang="en">Children move the story on by tapping, choosing and putting things in order: comparing sizes, matching colors, listening and choosing, understanding feelings. There is no penalty for a wrong answer.</span></p>
           <div class="win hole">
@@ -263,7 +249,7 @@ html[lang=en] .home [data-l=en]{font-family:var(--sc);font-weight:500;font-size:
 
 
 
-        <section class="sheet piece stack s-lang">
+        <section class="sheet piece s-lang">
           <h3><span data-l="ko">한국어와 영어로</span><span data-l="en" lang="en">In Korean and English</span></h3>
           <p><span data-l="ko">모든 동화를 한국어와 영어로 들을 수 있습니다. 같은 목소리가 천천히 읽고, 화면에 글자가 함께 나옵니다.</span><span data-l="en" lang="en">Every tale can be heard in Korean and in English, read slowly by the same voice with the words shown on screen.</span></p>
           <div class="win hole">
@@ -272,9 +258,9 @@ html[lang=en] .home [data-l=en]{font-family:var(--sc);font-weight:500;font-size:
           </div>
         </section>
       </div>
-    </div></div><div class="cut hill" aria-hidden="true"></div></div>
+    </div></div>
 
-    <section class="ply library" aria-labelledby="shelf-title">
+    <section class="library" aria-labelledby="shelf-title">
       <div class="wrap">
         <div class="feature">
           <figure class="poster">
@@ -332,12 +318,13 @@ html[lang=en] .home [data-l=en]{font-family:var(--sc);font-weight:500;font-size:
           <li><span class="tw hole"><img src="../assets/tales/sleeping_beauty.webp" width="320" height="240" loading="lazy" decoding="async" alt=""></span><span><span data-l="ko">잠자는 숲속의 공주</span><span data-l="en" lang="en">The Sleeping Beauty</span></span></li>
         </ul>
       </div>
-      <div class="cut ridge" aria-hidden="true"></div>
     </section>
   </article>
 </main>
 
-<footer class="ply night foot-sheet" id="contact">
+<footer class="ground" id="contact">
+  <img class="ridge" src="../assets/paper/ridge-green.webp" width="1800" height="177" alt="">
+  <div class="soil paper">
   <div class="wrap contact">
     <div>
       <h2><span data-l="ko">문의</span><span data-l="en" lang="en">Contact</span></h2>
@@ -349,6 +336,8 @@ html[lang=en] .home [data-l=en]{font-family:var(--sc);font-weight:500;font-size:
     <a href="../" aria-label="ddoystory"><img src="../assets/ddoystory-logo-dark.webp" width="112" height="31" alt="ddoystory"></a>
     <p><span data-l="ko">© 2026 또이다은 스튜디오</span><span data-l="en" lang="en">© 2026 ddoystory</span></p>
   </div></div>
+  </div>
+  <div class="gold paper" style="--tone:var(--green)" aria-hidden="true"><img src="../assets/paper/ridge-gold.webp" width="1800" height="177" alt=""></div>
 </footer>
 
 <script>
