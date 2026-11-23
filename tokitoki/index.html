@@ -15,8 +15,10 @@
 <link rel="apple-touch-icon" href="../assets/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600;700&family=Noto+Serif+KR:wght@400;600;700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="../assets/paper.css">
+<script>/* 움직임 준비: 움직임 줄이기가 꺼져 있을 때만 첫 화면을 잠깐 숨긴다(늦어도 2.5초 뒤 걷힘). assets/motion.js 참고 */
+(function(d){if(window.matchMedia&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('mo');setTimeout(function(){d.classList.remove('mo');},2500);}})(document.documentElement);</script>
 <style>
 /* 톡톡 동화극장: 밤 종이(머리·아치 무대) → 크림 종이(앱 소개) → 크래프트 종이(동화 서가) → 밤 종이(문의).
    위 장의 아래 가장자리를 오려 다음 장 위에 얹는다. */
@@ -26,7 +28,7 @@
 .home svg{width:18px;height:18px;flex:none;transition:transform .25s var(--ease)}
 .home:hover{color:var(--on-night)}
 .home:hover svg{transform:translateX(-3px)}
-html[lang=en] .home [data-l=en]{font-family:var(--sc);font-size:19px;letter-spacing:.06em}
+html[lang=en] .home [data-l=en]{font-family:var(--sc);font-weight:500;font-size:17px;letter-spacing:.03em}
 
 .hero{padding-top:clamp(24px,4vw,56px);padding-bottom:clamp(36px,4vw,56px)}
 .hero h1{margin:0;font-weight:900;font-size:clamp(2.1rem,4.2vw,4.1rem);line-height:1.3;letter-spacing:.03em}
@@ -58,7 +60,7 @@ html[lang=en] .home [data-l=en]{font-family:var(--sc);font-size:19px;letter-spac
 .app-id{display:flex;align-items:center;gap:20px}
 .app-id img{width:96px;height:96px;border-radius:22px;box-shadow:var(--lift)}
 .app-id h2{margin:0;font-size:clamp(2rem,3vw,2.7rem);line-height:1.2;font-weight:900}
-.app-id p{margin:2px 0 0;color:var(--sub);font-family:var(--sc);font-weight:600;font-size:21px;letter-spacing:.07em}
+.app-id p{margin:2px 0 0;color:var(--sub);font-family:var(--sc);font-weight:500;font-size:19px;letter-spacing:.03em}
 .app-id p [data-l=en]{font-family:var(--serif);font-size:16px;letter-spacing:.02em}
 .lede{margin:0;font-size:clamp(1.08rem,1.35vw,1.22rem);line-height:1.9}
 /* 꼬리표: 크래프트 종이 조각 */
@@ -116,15 +118,7 @@ html[lang=en] .home [data-l=en]{font-family:var(--sc);font-size:19px;letter-spac
 
 .foot-sheet{z-index:1}
 
-/* 한 번의 등장: 아치 속 장면이 내려앉고, 앞 억새가 뒤따른다 */
-@media (prefers-reduced-motion:no-preference){
-  .arch > img{animation:rise 1.4s var(--ease) .1s both}
-  .arch .pampas-l{animation:grow .9s var(--ease) .6s both}
-  .arch .pampas-r{animation:grow-r .9s var(--ease) .72s both}
-  @keyframes rise{from{transform:translateY(6%) scale(1.05)}to{transform:none}}
-  @keyframes grow{from{transform:translateY(30%)}to{transform:none}}
-  @keyframes grow-r{from{transform:scaleX(-1) translateY(30%)}to{transform:scaleX(-1)}}
-}
+/* 등장·스크롤·마우스 움직임은 assets/motion.js(GSAP)가 맡는다 */
 
 @media (max-width:1240px){
   .s-night{grid-template-columns:minmax(0,1fr)}
@@ -374,5 +368,8 @@ var APP_STORE_URL = 'https://apps.apple.com/';
   window.addEventListener('hashchange',function(){ if(location.hash==='#en'||location.hash==='#ko') set(pick()); });
 })();
 </script>
+<script src="../assets/vendor/gsap/gsap.min.js" onerror="document.documentElement.classList.remove('mo')"></script>
+<script src="../assets/vendor/gsap/ScrollTrigger.min.js"></script>
+<script src="../assets/motion.js"></script>
 </body>
 </html>

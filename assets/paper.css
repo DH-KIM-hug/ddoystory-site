@@ -2,7 +2,7 @@
    재료: 모든 면은 색지 한 장. 조각 하나 = 한 색. 그라데이션·광택·윤곽선·흰 테두리 없음.
    결: 아래 --grain(SVG feTurbulence) 한 장을 모든 종이 면에 깐다. 외부 이미지 없음.
    그림자: 광원은 위쪽 하나. 위 조각이 아래 조각에 좁고 부드러운 웜 다크(#2E241C) 그림자를 드리운다.
-   글꼴: 본문·제목 모두 Noto Serif KR(굵기로만 위계). 영어 작은 대문자 꼬리표만 Cormorant SC.
+   글꼴: 제목 Jua(영어 Fredoka), 본문 Noto Sans KR(영어 Nunito). 제목은 굵기 400 하나(가짜 굵게 금지).
    네 페이지(/, /tokitoki/, /tokitoki/support/, /tokitoki/privacy/)가 함께 쓴다. */
 
 :root{
@@ -39,8 +39,10 @@
   /* 종이 결: 고운 섬유 점 + 가로로 흐르는 옅은 섬유 */
   --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='b' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .18 0 0 0 0 .14 0 0 0 0 .11 1.25 0 0 0 -.62'/%3E%3C/filter%3E%3Cfilter id='c' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.03125 .5' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 .96 .9 0 0 0 -.54'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23b)'/%3E%3Crect width='256' height='256' filter='url(%23c)'/%3E%3C/svg%3E");
   /* 글꼴 */
-  --serif:'Noto Serif KR','Apple SD Gothic Neo',ui-serif,serif;
-  --sc:'Cormorant SC','Noto Serif KR',ui-serif,serif;
+  --serif:'Nunito','Noto Sans KR','Apple SD Gothic Neo',sans-serif;   /* 본문: 영어 Nunito, 한국어 Noto Sans KR */
+  --head:'Fredoka','Jua','Apple SD Gothic Neo',sans-serif;            /* 제목: 영어 Fredoka, 한국어 Jua */
+  --head-w:400;                                                       /* Jua 는 굵기가 하나뿐: 가짜 굵게를 막으려 400 */
+  --sc:'Fredoka','Jua',sans-serif;                                    /* 영어 꼬리표(브랜드, En, 영어 바닥글) */
   /* 배치 */
   --gutter:clamp(16px,4.5vw,72px);
   --max:1360px;
@@ -73,24 +75,24 @@
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--grain),var(--cream);color:var(--ink);font-family:var(--serif);font-weight:400;font-size:18px;line-height:1.85;letter-spacing:.01em;overflow-x:hidden;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--grain),var(--cream);color:var(--ink);font-family:var(--serif);font-weight:400;font-size:18px;line-height:1.85;letter-spacing:.01em;overflow-x:hidden;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased;font-synthesis:none}
 img{display:block;max-width:100%;height:auto}
 p,h1,h2,h3,h4{text-wrap:pretty}
-h1,h2,h3,h4{font-weight:700;letter-spacing:.015em}
+h1,h2,h3,h4{font-family:var(--head);font-weight:var(--head-w)!important;letter-spacing:.02em}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--straw);outline-offset:3px;border-radius:6px}
 html[lang=ko] [data-l=en],html[lang=en] [data-l=ko]{display:none!important}
 .wrap{max-width:var(--max);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
 .skip{position:absolute;left:-9999px}
 .skip:focus{left:16px;top:12px;background:var(--sheet);color:var(--ink);padding:8px 12px;z-index:20;border-radius:8px}
-.sc{font-family:var(--sc);font-weight:600;letter-spacing:.06em}
+.sc{font-family:var(--sc);font-weight:500;letter-spacing:.04em}
 
 /* ── 종이 한 장(구역) ───────────────────────────────
    .ply 는 색지 한 장. --tone 으로 색을 받고, 아래 가장자리 .cut 을 손으로 오린 모양으로 내려
    다음 장 위에 얹는다(그림자는 아래 장에 떨어진다). 위 장일수록 z-index 가 크다. */
 .ply{position:relative;background:var(--grain),var(--tone,var(--cream))}
 .ply.night{--tone:var(--night);color:var(--on-night)}
-.cut{position:absolute;left:0;right:0;top:calc(100% - 1px);height:var(--ch,52px);pointer-events:none;filter:var(--edge-shadow);z-index:1}
+.cut{position:absolute;left:0;right:0;top:calc(100% - 1px);height:var(--ch,52px);pointer-events:none;filter:var(--edge-shadow);clip-path:inset(0 0 -60px 0);z-index:1}
 .cut::before{content:"";position:absolute;inset:0;background:var(--grain),var(--tone,var(--cream));-webkit-mask:var(--shape) 0 0/100% 100% no-repeat;mask:var(--shape) 0 0/100% 100% no-repeat}
 /* 산 능선: 직선 가위질 */
 .cut.ridge{--shape:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V20L1350 40L1262 14L1150 46L1040 22L930 44L818 10L690 38L590 20L470 50L360 18L236 42L130 22L0 40Z'/%3E%3C/svg%3E")}
@@ -131,12 +133,16 @@ html[lang=ko] [data-l=en],html[lang=en] [data-l=ko]{display:none!important}
 /* 한/En: 남색 종이에 파인 홈 속, 고른 쪽만 크림 조각이 올라온다 */
 .lang{display:flex;gap:2px;padding:4px;border-radius:999px;background:var(--grain),var(--night-deep);box-shadow:inset 0 2px 3px rgba(var(--sh),.55),inset 0 -1px 0 rgba(255,244,222,.12)}
 .lang a{min-width:44px;min-height:40px;padding:0 10px;display:inline-grid;place-items:center;border-radius:999px;text-decoration:none;font-size:15px;font-weight:600;color:var(--on-night-sub)}
-.lang a[lang=en]{font-family:var(--sc);font-size:17px;letter-spacing:.06em}
+.lang a[lang=en]{font-family:var(--sc);font-weight:500;font-size:16px;letter-spacing:.03em}
 .lang a[aria-current]{background:var(--grain),#F6ECD8;color:#1F2A56;box-shadow:0 1px 1px rgba(var(--sh),.5),0 2px 4px rgba(var(--sh),.35)}
 
 /* 종이를 오려 얹은 글자: 글자 아래로 좁은 그림자 한 겹 */
 .cutout{text-shadow:0 1px 0 rgba(var(--sh),.55),0 2px 3px rgba(var(--sh),.45)}
 .ply:not(.night) .cutout,.on-cream .cutout{text-shadow:0 1px 0 rgba(var(--sh),.14),0 2px 3px rgba(var(--sh),.16)}
+
+/* 움직임(assets/motion.js): <head> 스크립트가 붙인 html.mo 동안만 첫 화면을 숨긴다.
+   motion.js 가 첫 프레임을 잡은 뒤, GSAP 를 못 불러오면 곧바로, 늦어도 2.5초 뒤에는 걷힌다. */
+.mo .head > :not(.cut){opacity:0}
 
 /* 별 조각(짚 금색 색지) */
 .star{position:absolute;color:var(--straw);width:var(--s);height:var(--s);filter:var(--piece-shadow)}
@@ -156,7 +162,7 @@ footer .contact p{margin:12px 0 0;color:var(--on-night-sub);max-width:28em}
 .foot ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 20px}
 .foot ul a{color:var(--on-night-sub);text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
 .foot ul a:hover{color:var(--on-night);text-decoration:underline;text-underline-offset:.25em}
-html[lang=en] .foot p{font-family:var(--sc);font-size:17px;letter-spacing:.06em}
+html[lang=en] .foot p{font-family:var(--sc);font-weight:500;font-size:16px;letter-spacing:.03em}
 
 @media (max-width:1000px){footer .contact{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:640px){

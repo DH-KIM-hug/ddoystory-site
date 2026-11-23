@@ -25,5 +25,10 @@
 ## 디자인 규칙
 
 - 모든 면은 색지 한 장입니다. 조각 하나는 한 색이고 그라데이션, 광택, 윤곽선을 쓰지 않습니다. 그림자는 위쪽 빛에서 떨어지는 웜 다크(`#2E241C`)만 씁니다.
-- 글꼴은 Noto Serif KR 하나로 제목과 본문을 쓰고, 영어 작은 대문자 꼬리표에만 Cormorant SC를 씁니다.
+- 글꼴은 제목 Jua(영어 Fredoka), 본문 Noto Sans KR(영어 Nunito)입니다. Jua는 굵기가 하나뿐이라 제목은 굵기 400으로 둡니다.
 - 감빛 App Store 단추는 한 화면에 하나만 둡니다.
+- 움직임은 `assets/motion.js`가 맡습니다. 2D 이동, ±3도 이내 회전, 투명도, 그림자 변화만 쓰고, 움직임 줄이기를 켜면 모두 끕니다.
+
+## 외부 코드
+
+- GSAP 3.15.1 (`gsap.min.js`, `ScrollTrigger.min.js`): npm `gsap@3.15.1`의 dist 파일을 그대로 `assets/vendor/gsap/`에 둡니다. GreenSock Standard 'no charge' License, https://gsap.com/standard-license

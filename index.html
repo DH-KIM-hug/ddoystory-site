@@ -15,8 +15,10 @@
 <link rel="apple-touch-icon" href="assets/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600;700&family=Noto+Serif+KR:wght@400;600;700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="assets/paper.css">
+<script>/* 움직임 준비: 움직임 줄이기가 꺼져 있을 때만 첫 화면을 잠깐 숨긴다(늦어도 2.5초 뒤 걷힘). assets/motion.js 참고 */
+(function(d){if(window.matchMedia&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('mo');setTimeout(function(){d.classList.remove('mo');},2500);}})(document.documentElement);</script>
 <style>
 /* 스튜디오 홈: 밤 종이(머리) → 크림 종이(만든 것들) → 밤 종이(문의).
    위 장의 아래 가장자리를 오려 다음 장 위에 얹는다. */
@@ -59,7 +61,7 @@
 .work-id{display:flex;align-items:center;gap:16px}
 .work-id img{width:72px;height:72px;border-radius:17px;box-shadow:var(--lift);flex:none}
 .work h3{margin:0;font-size:clamp(1.6rem,2.3vw,2.2rem);line-height:1.25;font-weight:900}
-.work-id p{margin:0;font-family:var(--sc);font-weight:600;font-size:19px;letter-spacing:.06em;color:var(--sub)}
+.work-id p{margin:0;font-family:var(--sc);font-weight:500;font-size:18px;letter-spacing:.03em;color:var(--sub)}
 .work-id p [data-l=en]{font-family:var(--serif);font-size:15px;letter-spacing:.02em}
 .work-link{text-decoration:none}
 .work-link::after{content:"";position:absolute;inset:0;border-radius:28px;z-index:1}
@@ -85,14 +87,7 @@
 
 .foot-sheet{z-index:1}
 
-/* 한 번의 등장: 달 구멍 안 층이 차례로 내려앉는다 */
-@media (prefers-reduced-motion:no-preference){
-  .moon .rg,.moon .fly,.moon .sprig{animation:settle .9s var(--ease) both}
-  .moon .r1{animation-delay:.1s}.moon .r2{animation-delay:.22s}.moon .r3{animation-delay:.34s}
-  .moon .fly{animation-delay:.55s}.moon .sprig{animation-delay:.7s;animation-name:settle-r}
-  @keyframes settle{from{transform:translateY(14%);opacity:0}to{transform:none;opacity:1}}
-  @keyframes settle-r{from{transform:translate(-6%,-10%) rotate(-8deg);opacity:0}to{transform:rotate(-8deg);opacity:1}}
-}
+/* 등장·스크롤·마우스 움직임은 assets/motion.js(GSAP)가 맡는다 */
 
 @media (max-width:1000px){
   .work.wide{grid-template-columns:minmax(0,1fr)}
@@ -227,5 +222,8 @@ var APP_STORE_URL = 'https://apps.apple.com/';
   window.addEventListener('hashchange',function(){ if(location.hash==='#en'||location.hash==='#ko') set(pick()); });
 })();
 </script>
+<script src="assets/vendor/gsap/gsap.min.js" onerror="document.documentElement.classList.remove('mo')"></script>
+<script src="assets/vendor/gsap/ScrollTrigger.min.js"></script>
+<script src="assets/motion.js"></script>
 </body>
 </html>

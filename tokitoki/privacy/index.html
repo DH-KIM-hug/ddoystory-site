@@ -10,8 +10,10 @@
 <link rel="apple-touch-icon" href="../../assets/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600;700&family=Noto+Serif+KR:wght@400;600;700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="../../assets/paper.css">
+<script>/* 움직임 준비: 움직임 줄이기가 꺼져 있을 때만 첫 화면을 잠깐 숨긴다(늦어도 2.5초 뒤 걷힘). assets/motion.js 참고 */
+(function(d){if(window.matchMedia&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('mo');setTimeout(function(){d.classList.remove('mo');},2500);}})(document.documentElement);</script>
 <style>
 /* 읽는 페이지: 종이는 머리(밤 종이 띠)·구역 색지·가장자리에만. 본문은 폭 720px 안에서 넉넉하게. */
 .head{z-index:3}
@@ -171,5 +173,8 @@
   window.addEventListener('hashchange',function(){set(location.hash==='#en'?'en':'ko');});
 })();
 </script>
+<script src="../../assets/vendor/gsap/gsap.min.js" onerror="document.documentElement.classList.remove('mo')"></script>
+<script src="../../assets/vendor/gsap/ScrollTrigger.min.js"></script>
+<script src="../../assets/motion.js"></script>
 </body>
 </html>
