@@ -42,13 +42,13 @@
 .ctas{margin-top:clamp(20px,2vw,28px);display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
 
 /* 장면 상자 = 언덕 그림의 비율. 해·토끼·거북이·감나무는 이 상자 안 % 자리. */
-.scene{position:relative;align-self:end;width:100%;aspect-ratio:1536/862;margin-top:clamp(250px,20vw,300px)}
+.scene{position:relative;align-self:end;width:100%;aspect-ratio:1536/863;margin-top:clamp(250px,20vw,300px)}
 .scene > img{position:absolute;pointer-events:none}
-.scene .sun{width:28%;left:56%;top:-23%;filter:drop-shadow(0 2px 2px rgba(var(--sh),.16)) drop-shadow(0 8px 14px rgba(var(--sh),.08))}
+.scene .sun{width:21%;left:46%;top:3%;filter:drop-shadow(0 2px 2px rgba(var(--sh),.16)) drop-shadow(0 8px 14px rgba(var(--sh),.08))}
 .scene .hills-art{width:100%;left:0;bottom:0;filter:drop-shadow(0 -1px 2px rgba(var(--sh),.18))}
-.scene .rabbit{width:36%;left:27%;top:22%;filter:var(--piece-shadow)}
-.scene .turtle{width:28.8%;left:60%;top:42%;filter:var(--piece-shadow)}
-.scene .persimmon{width:27%;left:-1%;top:66%;filter:var(--piece-shadow)}
+.scene .rabbit{width:30%;left:17%;top:25.7%;filter:var(--piece-shadow)}
+.scene .turtle{width:24%;left:47%;top:36.9%;filter:var(--piece-shadow)}
+.scene .persimmon{width:23%;left:-1%;top:74%;filter:var(--piece-shadow)}
 .hero-rule{margin-top:clamp(28px,3vw,44px)}
 
 /* ── 앱 소개 ── */
@@ -135,7 +135,7 @@
 @media (max-width:1100px){
   .thero > *{grid-area:auto}
   .hero-tx{max-width:none;padding-right:var(--gutter)}
-  .scene{margin-top:clamp(56px,14.5vw,160px)}
+  .scene{margin-top:clamp(20px,4vw,48px)}
   .app-grid,.feature{grid-template-columns:minmax(0,1fr)}
   .feature .poster{max-width:460px}
   .tales{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -147,8 +147,8 @@
 @media (max-width:640px){
   .thero h1{font-size:clamp(1.75rem,7.6vw,2.1rem)}
   .thero h1 .ln{display:inline;white-space:normal}
-  .scene{width:130%;margin-left:-30%;margin-top:19vw}
-  .scene .persimmon{left:22%;width:30%}
+  .scene{width:115%;margin-left:-15%;margin-top:8vw}
+  .scene .persimmon{left:13%;width:27%}
   .ctas{width:100%}
   .app-id img{width:72px;height:72px;border-radius:17px}
   .app-id h2{font-size:1.8rem}
@@ -188,11 +188,11 @@
     </div>
   </div>
   <div class="scene" data-art="toki" aria-hidden="true">
-    <img class="sun" src="../assets/paper/sun.webp" width="760" height="764" alt="">
-    <img class="hills-art" src="../assets/paper/toki-hills.webp" width="1536" height="862" alt="" fetchpriority="high">
-    <img class="persimmon" src="../assets/paper/persimmon.webp" width="1000" height="618" alt="">
-    <img class="turtle" src="../assets/paper/turtle.webp" width="760" height="447" alt="">
-    <img class="rabbit" src="../assets/paper/rabbit.webp" width="900" height="774" alt="">
+    <img class="sun" src="../assets/paper/sun.webp" width="760" height="772" alt="">
+    <img class="hills-art" src="../assets/paper/toki-hills.webp" width="1536" height="863" alt="" fetchpriority="high">
+    <img class="persimmon" src="../assets/paper/persimmon.webp" width="1000" height="641" alt="">
+    <img class="turtle" src="../assets/paper/turtle.webp" width="760" height="518" alt="">
+    <img class="rabbit" src="../assets/paper/rabbit.webp" width="876" height="924" alt="">
   </div>
 </section>
 <div class="wrap hero-rule" data-intro><span class="rule"></span></div>
