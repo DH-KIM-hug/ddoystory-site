@@ -83,20 +83,25 @@
   }
 
   if(kind==='home'){
-    var moon=$('.moon',art),pine=$('.pine',art),bird=$('.magpie',art);
+    var frame=$('.frame',art),back=$('.backdrop',art),fox=$('.fox',art),bun=$('.bunny',art),plane=$('.plane',art),trail=$('.trail',art),fsh=$('.floor-sh',art);
     if(intro){
-      drop(tl,moon,.05,{y:-26,sh:true,d:.7});
-      tl.fromTo(pine,{x:30,y:-26,rotation:-2,opacity:0,filter:SH_UP},{x:0,y:0,rotation:0,opacity:1,filter:SH_DOWN,duration:.75,ease:'power3.out',clearProps:'filter,opacity,transform'},.32);
-      /* 까치: 위 왼쪽에서 비스듬히 내려와 가지에 앉고, 한 번 살짝 출렁인다 */
-      tl.fromTo(bird,{x:-70,y:-90,rotation:-3,opacity:0},{x:0,y:0,rotation:0,opacity:1,duration:.7,ease:'power2.out'},.78)
-        .to(bird,{y:4,rotation:1,duration:.12,ease:'sine.out'},1.48)
-        .to(bird,{y:0,rotation:0,duration:.2,ease:'sine.inOut',clearProps:'opacity,transform'},1.6);
-      fade(tl,$('.hero .kicker'),.2,{x:-12});
-      drop(tl,strips,.3,{y:-16,r:-1.5,st:.15,d:.6,ease:'back.out(1.3)'});
-      drop(tl,$('.hero-tx > p:not(.kicker)'),.66,{y:-8,d:.55});
-      fade(tl,$('.hero-rule .rule'),.9,{x:-40,d:.8});
+      /* 무대 틀이 내려앉고 → 배경이 열리고(아래에서 위로 드러남) → 여우가 튀어 오르고 토끼가 손을 흔들고 → 종이비행기가 점선을 따라 왼쪽 위로 */
+      tl.fromTo(frame,{y:-26,opacity:0,filter:SH_UP},{y:0,opacity:1,filter:'drop-shadow(0px 2px 2px rgba(46,36,28,0.2)) drop-shadow(0px 10px 14px rgba(46,36,28,0.14))',duration:.6,ease:'power3.out',clearProps:'filter,opacity,transform'},.02);
+      tl.fromTo(back,{clipPath:'inset(100% 0% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:.5,ease:'power2.inOut',clearProps:'clipPath'},.3);
+      tl.fromTo(fox,{y:60,rotation:-3,opacity:0},{y:-14,rotation:2,opacity:1,duration:.42,ease:'power2.out'},.72)
+        .to(fox,{y:0,rotation:0,duration:.32,ease:'bounce.out',clearProps:'opacity,transform'},1.14);
+      tl.fromTo(fsh,{opacity:0},{opacity:1,duration:.3,clearProps:'opacity'},1.1);
+      tl.fromTo(bun,{x:26,opacity:0},{x:0,opacity:1,duration:.4,ease:'power2.out'},.82)
+        .to(bun,{rotation:3,duration:.14,ease:'sine.inOut',yoyo:true,repeat:3,transformOrigin:'50% 90%'},1.2)
+        .set(bun,{clearProps:'opacity,transform'},1.8);
+      /* 점선은 여우 쪽에서 왼쪽으로 그려지고(잘라 보이기, 늘리지 않음), 비행기는 그 끝을 따라 날아간다 */
+      tl.fromTo(trail,{clipPath:'inset(0% 0% 0% 100%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:.7,ease:'power1.inOut',clearProps:'clipPath'},1.2);
+      tl.fromTo(plane,{xPercent:320,yPercent:190,rotation:4,opacity:0},{keyframes:[{xPercent:230,yPercent:120,opacity:1,duration:.22},{xPercent:120,yPercent:70,rotation:-2,duration:.25},{xPercent:0,yPercent:0,rotation:0,duration:.33}],ease:'none',clearProps:'opacity,transform'},1.2);
+      fade(tl,$('.hero .kicker'),.15,{x:-12});
+      drop(tl,strips,.25,{y:-16,r:-1.5,st:.15,d:.6,ease:'back.out(1.3)'});
+      fade(tl,$$('.hero-foot .tail'),.7,{x:-10,st:.1});
     }
-    layers=[[moon,4],[pine,9],[bird,12]];
+    layers=[[back,2],[frame,4],[fox,9],[plane,12]];
   } else if(kind==='toki'){
     var sun=$('.sun',art),hills=$('.hills-art',art),pers=$('.persimmon'),rab=$('.rabbit',art),tur=$('.turtle',art);
     if(intro){
@@ -113,13 +118,13 @@
     }
     layers=[[sun,3],[hills,6],[rab,10],[tur,9]];
   } else if(kind==='doc'){
-    var dm=$('.moon',art),dp=$('.pine',art);
+    var piece=$('.head-piece',art)||art;
     if(intro){
-      drop(tl,dm,.05,{y:-20,sh:true,d:.6});
-      tl.fromTo(dp,{x:24,y:-20,rotation:-2,opacity:0,filter:SH_UP},{x:0,y:0,rotation:0,opacity:1,filter:SH_DOWN,duration:.7,ease:'power3.out',clearProps:'filter,opacity,transform'},.22);
+      /* 봉투·자물쇠: 제자리 기울기는 그대로 두고 살짝 위에서 내려앉는다 */
+      tl.from(piece,{y:-24,opacity:0,duration:.7,ease:'back.out(1.6)',clearProps:'opacity,transform'},.1);
       drop(tl,$$('.title .intro-tx > *, .title > img'),.2,{y:-10,st:.1,d:.55});
     }
-    layers=[[dm,3],[dp,7]];
+    layers=[[piece,5]];
   }
 
   /* 카드·서가 칸은 화면에 들어올 때 놓이므로, 숨김 클래스를 걷기 전에 미리 숨겨 둔다(ScrollTrigger 가 있을 때만) */

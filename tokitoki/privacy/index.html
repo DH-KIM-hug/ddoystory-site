@@ -21,39 +21,58 @@
 <script defer fetchpriority="high" src="../../assets/vendor/gsap/ScrollTrigger.min.js"></script>
 <script defer fetchpriority="high" src="../../assets/motion.js"></script>
 <style>
-/* 읽는 페이지(v12): 흰 종이 위 본문(720px). 머리 = 꼬리 글자 머리 + 오른쪽 위 달과 솔가지 한 조각. 바닥 = 얇은 언덕 띠. */
-.dochead{position:relative}
-.head-art{position:absolute;right:0;top:-8px;width:clamp(180px,24vw,340px);aspect-ratio:1400/959;pointer-events:none;z-index:0}
-.head-art img{position:absolute}
-.head-art .moon{width:46%;left:30%;top:-16%;filter:drop-shadow(0 2px 2px rgba(var(--sh),.16)) drop-shadow(0 6px 10px rgba(var(--sh),.08))}
-.head-art .pine{width:100%;left:0;top:0;filter:var(--piece-shadow)}
-.title{position:relative;z-index:1;display:flex;align-items:center;gap:18px;max-width:calc(720px + 2 * var(--gutter));padding-top:clamp(28px,5vw,72px);padding-bottom:clamp(28px,3.4vw,48px)}
-.title > img{width:64px;height:64px;border-radius:15px;box-shadow:var(--lift);flex:none}
-.title h1{margin:0;font-size:clamp(1.8rem,3.2vw,2.4rem);line-height:1.25;letter-spacing:.02em}
-.title p{margin:4px 0 0;color:var(--sub);font-size:15.5px;line-height:1.6}
-.col{max-width:calc(720px + 2 * var(--gutter));margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
-.doc .col > .rule{margin-bottom:clamp(24px,3vw,36px)}
+/* 읽는 페이지(v14): 매끈한 색 카드지. 넓은 화면 = 왼쪽 제목 칸 + 오른쪽 본문 칸(카드). 머리 조각 하나(봉투·자물쇠), 바닥 = 얇은 언덕 띠. */
+.docgrid{position:relative;display:grid;grid-template-columns:minmax(0,3.2fr) minmax(0,6.8fr);gap:clamp(28px,4vw,72px);align-items:start;padding-top:clamp(32px,4vw,60px)}
+.dochead{position:sticky;top:28px}
+.docgrid .title{display:flex;align-items:center;gap:16px;padding:0;margin:0;max-width:none}
+.title > img{width:60px;height:60px;border-radius:14px;box-shadow:var(--lift);flex:none}
+.title h1{margin:0;font-size:clamp(1.6rem,2.4vw,2.2rem);line-height:1.25;letter-spacing:.02em}
+.title p{margin:4px 0 0;color:var(--sub);font-size:15px;line-height:1.6}
+.head-piece{position:absolute;pointer-events:none;z-index:4;filter:drop-shadow(0 2px 2px rgba(var(--sh),.22)) drop-shadow(0 8px 10px rgba(var(--sh),.14))}
+.doc{min-width:0}
+.doc .col{max-width:760px;padding:0;margin:0}
 .doc a{color:var(--link);text-underline-offset:.22em}
-.doc h2{margin:0 0 12px;font-size:1.32rem;line-height:1.45}
+.doc h2{margin:0 0 12px;font-size:1.3rem;line-height:1.45}
 .doc p{margin:0 0 10px}
-.land.thin{margin-top:clamp(36px,5vw,72px)}
-.land.thin .hills > img{height:clamp(70px,8vw,130px);min-height:0;object-fit:cover;object-position:50% 0}
+.tail-row{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:clamp(48px,6vw,96px);padding-top:14px}
+.tail-row::before{content:"";position:absolute;left:var(--gutter);right:var(--gutter);top:0;height:1px;background:var(--gold)}
+.land.thin{margin-top:clamp(12px,2vw,24px)}
+.land.thin .hills > img{height:clamp(60px,7vw,120px);min-height:0;object-fit:cover;object-position:50% 0}
 .land.thin .soil{margin-top:clamp(-40px,-2.6vw,-24px)}
+@media (max-width:900px){
+  .docgrid{grid-template-columns:minmax(0,1fr)}
+  .dochead{position:relative;top:auto}
+}
 @media (max-width:640px){
-  .head-art{position:relative;right:auto;top:auto;width:min(56vw,230px);margin:-6px 0 8px auto}
-  .title{gap:14px;padding-top:0}
   .title > img{width:52px;height:52px;border-radius:12px}
-  .crumbs .brand{font-size:18px}
+  .crumbs .brand{font-size:17px;letter-spacing:.14em}
+  .tail-row .mid{display:none}
 }
 
-/* 처리방침: 바탕 종이에 바로 놓인 한 편의 글(밑장 없음) */
-.sheetdoc h1{margin:0 0 6px;font-size:clamp(1.6rem,3vw,2.1rem);line-height:1.35}
-.sheetdoc h1 + p{color:var(--sub);font-size:15.5px;padding-bottom:18px;border-bottom:1px solid var(--gold);margin-bottom:6px}
-.sheetdoc h2{margin-top:36px}
+.head-piece.lock{width:clamp(64px,6.4vw,100px);right:calc(var(--gutter) + clamp(30px,4vw,60px));top:clamp(4px,1vw,14px);transform:rotate(6deg)}
+/* 처리방침 = 하늘색 받침 위 긴 흰 문서 한 장 + 오른쪽 가장자리 색 책갈피(항목마다 하나, 누르면 그 항목으로) */
+.sheetdoc{--back:var(--sky);--bo:20px;position:relative;background:var(--card);border-radius:3px;margin:0 calc(var(--bo) + 24px) calc(var(--bo) * 2.4) var(--bo);padding:clamp(28px,4vw,56px) clamp(22px,4vw,56px) clamp(24px,3vw,44px);color:#33261B;
+  box-shadow:0 1px 1px rgba(var(--sh),.14),0 3px 6px -2px rgba(var(--sh),.2),0 calc(var(--bo) * .9) 0 var(--bo) var(--back),0 calc(var(--bo) * .9 + 1px) 1px var(--bo) rgba(var(--sh),.2),0 calc(var(--bo) * .9 + 8px) 18px calc(var(--bo) - 4px) rgba(var(--sh),.14)}
+.sheetdoc h1{margin:0 0 6px;font-size:clamp(1.6rem,3vw,2.1rem);line-height:1.35;color:#4A3424}
+.sheetdoc h2{color:#4A3424;margin-top:36px;scroll-margin-top:24px}
+.sheetdoc h1 + p{color:#6E5A4A;font-size:15.5px;padding-bottom:18px;border-bottom:1px solid var(--gold);margin-bottom:6px}
+.sheetdoc a{color:#A8441A}
 .sheetdoc ul{margin:0 0 12px;padding-left:1.3em}
 .sheetdoc li{margin:0 0 6px}
 .sheetdoc li::marker{color:var(--gold-ink)}
 .sheetdoc b{font-weight:700}
+.marks{position:absolute;top:0;right:0;width:0;height:100%}
+.mark{position:absolute;left:calc(var(--bo) - 6px);width:58px;height:44px;display:block;--c:var(--persimmon)}
+.mark::before{content:"";position:absolute;left:0;top:7px;width:100%;height:30px;background:var(--c);clip-path:polygon(0 0,100% 0,78% 50%,100% 100%,0 100%);filter:drop-shadow(0 1px 1px rgba(46,36,28,.3))}
+.mark:hover::before,.mark:focus-visible::before{transform:translateX(4px)}
+.mark:nth-child(5n+2){--c:var(--leaf)}
+.mark:nth-child(5n+3){--c:var(--straw)}
+.mark:nth-child(5n+4){--c:var(--blush)}
+.mark:nth-child(5n+5){--c:var(--pine)}
+@media (max-width:640px){
+  .sheetdoc{--bo:12px;margin-right:calc(var(--bo) + 18px)}
+  .mark{width:40px}
+}
 </style>
 </head>
 <body>
@@ -67,7 +86,9 @@
   <span class="rule" aria-hidden="true"></span>
   <div class="tails"><nav class="lang" aria-label="Language"><a href="#ko" data-set="ko" lang="ko">KO</a><span class="sl" aria-hidden="true">/</span><a href="#en" data-set="en" lang="en">EN</a></nav></div>
 </header>
-<div class="dochead" data-intro aria-hidden="true"><div class="head-art" data-art="doc" aria-hidden="true"><img class="moon" src="../../assets/paper/moon.webp" width="820" height="828" alt=""><img class="pine" src="../../assets/paper/pine.webp" width="1400" height="959" alt=""></div><div class="wrap title"><img src="../../assets/icon-256.webp" width="64" height="64" alt=""></div></div>
+<div class="wrap docgrid">
+<img class="head-piece lock" data-art="doc" src="../../assets/paper/lock.webp" width="360" height="340" alt="" aria-hidden="true">
+<div class="dochead" data-intro aria-hidden="true"><div class="title"><img src="../../assets/icon-256.webp" width="60" height="60" alt=""><span class="tail" lang="en">Privacy Policy</span></div></div>
 <main id="main" class="doc"><div class="col"><div class="sheetdoc">
 <div data-l="ko">
 <h1>톡톡 동화극장 개인정보 처리방침</h1>
@@ -153,8 +174,10 @@
 </section>
 </div></div>
 </main>
+</div>
+<div class="wrap tail-row" aria-hidden="true"><span class="tail" lang="en">No. 01</span><span class="tail mid" lang="en">Apps &amp; Games</span><span class="tail" lang="en">Toki Toki Tale</span></div>
 <footer class="land thin">
-  <div class="hills"><img src="../../assets/paper/hills.webp" width="2172" height="380" alt="" loading="lazy" decoding="async"></div>
+  <div class="hills"><img src="../../assets/paper/hills-b.webp" width="2172" height="414" alt="" loading="lazy" decoding="async"></div>
   <div class="soil-sh"><div class="soil">
     <div class="wrap foot">
       <span class="tail" lang="en" aria-hidden="true">Paper Theater</span>
@@ -175,6 +198,27 @@
   var l=location.hash==='#en'?'en':location.hash==='#ko'?'ko':((navigator.language||'').toLowerCase().indexOf('ko')===0?'ko':'en');
   set(l);
   window.addEventListener('hashchange',function(){set(location.hash==='#en'?'en':'ko');});
+})();
+
+/* 처리방침 책갈피: 보이는 언어의 항목 제목(h2)마다 문서 오른쪽 가장자리에 하나씩, 누르면 그 항목으로 간다 */
+(function(){
+  var doc=document.querySelector('.sheetdoc'); if(!doc) return;
+  var box=document.createElement('div'); box.className='marks'; doc.appendChild(box);
+  function place(){
+    box.innerHTML='';
+    var hs=doc.querySelectorAll('h2'), top=doc.getBoundingClientRect().top;
+    for(var i=0;i<hs.length;i++){
+      var h=hs[i]; if(!h.offsetParent) continue;
+      if(!h.id) h.id='p-'+(h.closest('[data-l]')||doc).getAttribute('data-l')+'-'+(i+1);
+      var a=document.createElement('a'); a.className='mark'; a.href='#'+h.id; a.setAttribute('aria-label',h.textContent);
+      a.style.top=(h.getBoundingClientRect().top-top-8)+'px'; box.appendChild(a);
+    }
+  }
+  place();
+  window.addEventListener('resize',place);
+  window.addEventListener('hashchange',function(){ setTimeout(place,0); });
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(place);
+  window.addEventListener('load',place);
 })();
 </script>
 </body>

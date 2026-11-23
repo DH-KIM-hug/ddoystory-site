@@ -22,43 +22,66 @@
 <script defer fetchpriority="high" src="../../assets/vendor/gsap/ScrollTrigger.min.js"></script>
 <script defer fetchpriority="high" src="../../assets/motion.js"></script>
 <style>
-/* 읽는 페이지(v12): 흰 종이 위 본문(720px). 머리 = 꼬리 글자 머리 + 오른쪽 위 달과 솔가지 한 조각. 바닥 = 얇은 언덕 띠. */
-.dochead{position:relative}
-.head-art{position:absolute;right:0;top:-8px;width:clamp(180px,24vw,340px);aspect-ratio:1400/959;pointer-events:none;z-index:0}
-.head-art img{position:absolute}
-.head-art .moon{width:46%;left:30%;top:-16%;filter:drop-shadow(0 2px 2px rgba(var(--sh),.16)) drop-shadow(0 6px 10px rgba(var(--sh),.08))}
-.head-art .pine{width:100%;left:0;top:0;filter:var(--piece-shadow)}
-.title{position:relative;z-index:1;display:flex;align-items:center;gap:18px;max-width:calc(720px + 2 * var(--gutter));padding-top:clamp(28px,5vw,72px);padding-bottom:clamp(28px,3.4vw,48px)}
-.title > img{width:64px;height:64px;border-radius:15px;box-shadow:var(--lift);flex:none}
-.title h1{margin:0;font-size:clamp(1.8rem,3.2vw,2.4rem);line-height:1.25;letter-spacing:.02em}
-.title p{margin:4px 0 0;color:var(--sub);font-size:15.5px;line-height:1.6}
-.col{max-width:calc(720px + 2 * var(--gutter));margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
-.doc .col > .rule{margin-bottom:clamp(24px,3vw,36px)}
+/* 읽는 페이지(v14): 매끈한 색 카드지. 넓은 화면 = 왼쪽 제목 칸 + 오른쪽 본문 칸(카드). 머리 조각 하나(봉투·자물쇠), 바닥 = 얇은 언덕 띠. */
+.docgrid{position:relative;display:grid;grid-template-columns:minmax(0,3.2fr) minmax(0,6.8fr);gap:clamp(28px,4vw,72px);align-items:start;padding-top:clamp(32px,4vw,60px)}
+.dochead{position:sticky;top:28px}
+.docgrid .title{display:flex;align-items:center;gap:16px;padding:0;margin:0;max-width:none}
+.title > img{width:60px;height:60px;border-radius:14px;box-shadow:var(--lift);flex:none}
+.title h1{margin:0;font-size:clamp(1.6rem,2.4vw,2.2rem);line-height:1.25;letter-spacing:.02em}
+.title p{margin:4px 0 0;color:var(--sub);font-size:15px;line-height:1.6}
+.head-piece{position:absolute;pointer-events:none;z-index:4;filter:drop-shadow(0 2px 2px rgba(var(--sh),.22)) drop-shadow(0 8px 10px rgba(var(--sh),.14))}
+.doc{min-width:0}
+.doc .col{max-width:760px;padding:0;margin:0}
 .doc a{color:var(--link);text-underline-offset:.22em}
-.doc h2{margin:0 0 12px;font-size:1.32rem;line-height:1.45}
+.doc h2{margin:0 0 12px;font-size:1.3rem;line-height:1.45}
 .doc p{margin:0 0 10px}
-.land.thin{margin-top:clamp(36px,5vw,72px)}
-.land.thin .hills > img{height:clamp(70px,8vw,130px);min-height:0;object-fit:cover;object-position:50% 0}
+.tail-row{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:clamp(48px,6vw,96px);padding-top:14px}
+.tail-row::before{content:"";position:absolute;left:var(--gutter);right:var(--gutter);top:0;height:1px;background:var(--gold)}
+.land.thin{margin-top:clamp(12px,2vw,24px)}
+.land.thin .hills > img{height:clamp(60px,7vw,120px);min-height:0;object-fit:cover;object-position:50% 0}
 .land.thin .soil{margin-top:clamp(-40px,-2.6vw,-24px)}
+@media (max-width:900px){
+  .docgrid{grid-template-columns:minmax(0,1fr)}
+  .dochead{position:relative;top:auto}
+}
 @media (max-width:640px){
-  .head-art{position:relative;right:auto;top:auto;width:min(56vw,230px);margin:-6px 0 8px auto}
-  .title{gap:14px;padding-top:0}
   .title > img{width:52px;height:52px;border-radius:12px}
-  .crumbs .brand{font-size:18px}
+  .crumbs .brand{font-size:17px;letter-spacing:.14em}
+  .tail-row .mid{display:none}
 }
 
 html[lang=ko] h1 .en,html[lang=en] h1 .ko{display:none}
-/* 구역: 금색 가는 선으로 나눈다(밑장 없음) */
-.doc section{padding:clamp(24px,3vw,34px) 0;border-bottom:1px solid var(--gold)}
-.doc section:first-child{padding-top:0}
-.doc section:last-child{border-bottom:0}
-.doc .contact{margin:0 0 14px}
-.doc .contact a{display:inline-flex;align-items:center;gap:12px;min-height:48px;padding:8px 24px;border-radius:999px;background:var(--grain),var(--act);background-blend-mode:soft-light,normal;color:#FFF8EE;text-decoration:none;font-weight:700;font-size:1.05rem;letter-spacing:.03em;box-shadow:0 1px 1px rgba(var(--sh),.25),-3px 5px 0 var(--act-under),-3px 7px 6px -2px rgba(var(--sh),.3);overflow-wrap:anywhere;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.head-piece.env{width:clamp(150px,15vw,230px);right:calc(var(--gutter) - 8px);top:clamp(4px,1.4vw,20px);transform:rotate(-8deg)}
+.doc .col{padding-top:clamp(80px,7vw,120px)}
+/* 문의 = 흰 카드 + 연두 밑장, 왼쪽 위 분홍 봉투 조각 */
+.doc [data-l] > section:first-child{--back:var(--leaf);--bo:16px;position:relative;background:var(--card);border-radius:3px;margin:0 var(--bo) calc(var(--bo) * 3.2);padding:clamp(76px,6vw,92px) clamp(22px,3vw,40px) clamp(22px,3vw,34px);color:#33261B;
+  box-shadow:0 1px 1px rgba(var(--sh),.14),0 3px 6px -2px rgba(var(--sh),.2),0 calc(var(--bo) * 1.3) 0 var(--bo) var(--back),0 calc(var(--bo) * 1.3 + 1px) 1px var(--bo) rgba(var(--sh),.2),0 calc(var(--bo) * 1.3 + 8px) 16px calc(var(--bo) - 4px) rgba(var(--sh),.14)}
+.doc [data-l] > section:first-child::before{content:"";position:absolute;left:clamp(22px,3vw,40px);top:clamp(24px,2.4vw,32px);width:56px;height:40px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 40'%3E%3Crect x='1' y='1' width='54' height='38' rx='3' fill='%23F2B8A8'/%3E%3Cpath d='M3 4l25 19L53 4' fill='none' stroke='%23E39A88' stroke-width='2.4' stroke-linejoin='round'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;filter:drop-shadow(0 1px 1px rgba(46,36,28,.25)) drop-shadow(0 3px 3px rgba(46,36,28,.12))}
+.doc [data-l] > section:first-child h2{color:#4A3424}
+.doc [data-l] > section:first-child a:not(.x){color:#A8441A}
+.doc .contact{margin:0 0 16px}
+.doc .contact a{display:inline-flex;align-items:center;gap:12px;min-height:48px;padding:8px 24px;border-radius:999px;background:var(--act);color:#FFF8EE!important;text-decoration:none;font-weight:700;font-size:1.05rem;letter-spacing:.03em;box-shadow:0 1px 1px rgba(var(--sh),.25),-3px 4px 0 var(--act-under),-3px 6px 6px -2px rgba(var(--sh),.28);overflow-wrap:anywhere;transition:transform .2s var(--ease)}
 .doc .contact a:hover{transform:translate(1px,-2px)}
-.doc dl{margin:0}
-.doc dt{font-weight:700;margin-top:20px;line-height:1.6}
-.doc dt:first-child{margin-top:0}
-.doc dd{margin:4px 0 0;color:var(--sub)}
+.doc [data-l] > section + section{padding-top:clamp(8px,1vw,16px)}
+.doc [data-l] > section:last-child{padding-top:clamp(28px,3vw,40px);margin-top:clamp(20px,2vw,32px);border-top:1px solid var(--gold)}
+/* 자주 묻는 질문 = 왼쪽 위에 색 꼬리표가 달린 흰 카드 목록 */
+.doc dl{margin:0;display:flex;flex-direction:column;gap:clamp(26px,2.6vw,34px);padding:18px 0 0 22px}
+.doc dl > div{--tab:var(--persimmon);position:relative;background:var(--card);border-radius:3px;padding:20px clamp(20px,2.6vw,32px) 22px;color:#33261B;box-shadow:0 1px 1px rgba(var(--sh),.14),0 4px 9px -3px rgba(var(--sh),.2)}
+.doc dl > div::before{content:"";position:absolute;z-index:-1;left:-22px;top:-14px;width:96px;height:76px;background:var(--tab);border-radius:4px 26px 0 4px;box-shadow:0 1px 1px rgba(var(--sh),.2),0 3px 5px -2px rgba(var(--sh),.2)}
+.doc dl > div:nth-child(6n+2){--tab:var(--leaf)}
+.doc dl > div:nth-child(6n+3){--tab:var(--straw)}
+.doc dl > div:nth-child(6n+4){--tab:var(--sky)}
+.doc dl > div:nth-child(6n+6){--tab:var(--leaf)}
+.doc dt{font-weight:700;line-height:1.6}
+.doc dd{margin:6px 0 0;color:#6E5A4A}
+@media (max-width:900px){
+  .doc .col{padding-top:24px}
+  .head-piece.env{width:clamp(110px,30vw,170px);top:clamp(70px,16vw,110px)}
+}
+@media (max-width:640px){
+  .doc .col{padding-top:64px}
+  .head-piece.env{top:126px}
+}
 </style>
 </head>
 <body>
@@ -72,8 +95,10 @@ html[lang=ko] h1 .en,html[lang=en] h1 .ko{display:none}
   <span class="rule" aria-hidden="true"></span>
   <div class="tails"><nav class="lang" aria-label="Language"><a href="#ko" data-set="ko" lang="ko">KO</a><span class="sl" aria-hidden="true">/</span><a href="#en" data-set="en" lang="en">EN</a></nav></div>
 </header>
-<div class="dochead" data-intro><div class="head-art" data-art="doc" aria-hidden="true"><img class="moon" src="../../assets/paper/moon.webp" width="820" height="828" alt=""><img class="pine" src="../../assets/paper/pine.webp" width="1400" height="959" alt=""></div>
-<div class="wrap title">
+<div class="wrap docgrid">
+<img class="head-piece env" data-art="doc" src="../../assets/paper/envelope.webp" width="520" height="354" alt="" aria-hidden="true">
+<div class="dochead" data-intro>
+<div class="title">
   <img src="../../assets/icon-256.webp" width="72" height="72" alt="">
   <div class="intro-tx">
     <h1><span class="ko">톡톡 동화극장</span><span class="en">Toki Toki Tale</span></h1>
@@ -82,7 +107,7 @@ html[lang=ko] h1 .en,html[lang=en] h1 .ko{display:none}
   </div>
   </div>
 </div>
-<main id="main" class="doc"><div class="col"><span class="rule" aria-hidden="true"></span>
+<main id="main" class="doc"><div class="col">
 
 <div data-l="ko">
 <section>
@@ -94,18 +119,12 @@ html[lang=ko] h1 .en,html[lang=en] h1 .ko{display:none}
 <section>
   <h2>자주 묻는 질문</h2>
   <dl>
-    <dt>보호자 메뉴는 어떻게 여나요?</dt>
-    <dd>홈 오른쪽 위 톱니를 1초 동안 길게 누르세요. 구매·복원·기기 연결 같은 기능 앞에서는 어른 확인을 한 번 더 합니다.</dd>
-    <dt>기기를 바꿨는데 구매한 것이 사라졌어요.</dt>
-    <dd>같은 Apple 계정으로 로그인한 뒤 보호자 메뉴 › 이용권 › 구매 복원을 누르세요.</dd>
-    <dt>다른 기기와 진행 상황을 이어 쓰고 싶어요.</dt>
-    <dd>보호자 메뉴 › 기기 연결에서 연결 코드를 만들고, 다른 기기에서 그 코드를 넣으세요. 로그인이나 개인정보는 필요 없습니다.</dd>
-    <dt>인터넷이 없어도 되나요?</dt>
-    <dd>동화는 인터넷 없이 볼 수 있습니다. 인터넷은 기기 연결, 구매 확인, 아이 이름 녹음, 공지 받기에만 씁니다.</dd>
-    <dt>광고가 있나요?</dt>
-    <dd>광고, 외부 분석, 추적은 없습니다.</dd>
-    <dt>기록을 지우고 싶어요.</dt>
-    <dd>기기 안의 기록은 보호자 메뉴 › 기록에서 지울 수 있습니다. 서버의 연결 기록 삭제는 메일로 요청해 주세요.</dd>
+    <div><dt>보호자 메뉴는 어떻게 여나요?</dt><dd>홈 오른쪽 위 톱니를 1초 동안 길게 누르세요. 구매·복원·기기 연결 같은 기능 앞에서는 어른 확인을 한 번 더 합니다.</dd></div>
+    <div><dt>기기를 바꿨는데 구매한 것이 사라졌어요.</dt><dd>같은 Apple 계정으로 로그인한 뒤 보호자 메뉴 › 이용권 › 구매 복원을 누르세요.</dd></div>
+    <div><dt>다른 기기와 진행 상황을 이어 쓰고 싶어요.</dt><dd>보호자 메뉴 › 기기 연결에서 연결 코드를 만들고, 다른 기기에서 그 코드를 넣으세요. 로그인이나 개인정보는 필요 없습니다.</dd></div>
+    <div><dt>인터넷이 없어도 되나요?</dt><dd>동화는 인터넷 없이 볼 수 있습니다. 인터넷은 기기 연결, 구매 확인, 아이 이름 녹음, 공지 받기에만 씁니다.</dd></div>
+    <div><dt>광고가 있나요?</dt><dd>광고, 외부 분석, 추적은 없습니다.</dd></div>
+    <div><dt>기록을 지우고 싶어요.</dt><dd>기기 안의 기록은 보호자 메뉴 › 기록에서 지울 수 있습니다. 서버의 연결 기록 삭제는 메일로 요청해 주세요.</dd></div>
   </dl>
 </section>
 <section>
@@ -124,18 +143,12 @@ html[lang=ko] h1 .en,html[lang=en] h1 .ko{display:none}
 <section>
   <h2>Frequently asked questions</h2>
   <dl>
-    <dt>How do I open the parent menu?</dt>
-    <dd>Press and hold the gear at the top right of the home screen for 1 second. A grown-up check comes before buying, restoring and linking devices.</dd>
-    <dt>I changed devices and my purchase is gone.</dt>
-    <dd>Sign in with the same Apple Account, then tap Parent menu › Access › Restore purchase.</dd>
-    <dt>Can I continue on another device?</dt>
-    <dd>Create a link code in Parent menu › Link devices and enter it on the other device. No sign-in or personal information is needed.</dd>
-    <dt>Does it work offline?</dt>
-    <dd>Yes, every tale plays offline. The internet is used only for linking devices, checking purchases, recording a child's name and receiving notices.</dd>
-    <dt>Are there ads?</dt>
-    <dd>No ads, no third-party analytics and no tracking.</dd>
-    <dt>How do I delete my records?</dt>
-    <dd>Records on the device can be cleared in Parent menu › Records. To delete link records on our server, email us.</dd>
+    <div><dt>How do I open the parent menu?</dt><dd>Press and hold the gear at the top right of the home screen for 1 second. A grown-up check comes before buying, restoring and linking devices.</dd></div>
+    <div><dt>I changed devices and my purchase is gone.</dt><dd>Sign in with the same Apple Account, then tap Parent menu › Access › Restore purchase.</dd></div>
+    <div><dt>Can I continue on another device?</dt><dd>Create a link code in Parent menu › Link devices and enter it on the other device. No sign-in or personal information is needed.</dd></div>
+    <div><dt>Does it work offline?</dt><dd>Yes, every tale plays offline. The internet is used only for linking devices, checking purchases, recording a child's name and receiving notices.</dd></div>
+    <div><dt>Are there ads?</dt><dd>No ads, no third-party analytics and no tracking.</dd></div>
+    <div><dt>How do I delete my records?</dt><dd>Records on the device can be cleared in Parent menu › Records. To delete link records on our server, email us.</dd></div>
   </dl>
 </section>
 <section>
@@ -145,8 +158,10 @@ html[lang=ko] h1 .en,html[lang=en] h1 .ko{display:none}
 </div>
 </div>
 </main>
+</div>
+<div class="wrap tail-row" aria-hidden="true"><span class="tail" lang="en">No. 01</span><span class="tail mid" lang="en">Apps &amp; Games</span><span class="tail" lang="en">Toki Toki Tale</span></div>
 <footer class="land thin">
-  <div class="hills"><img src="../../assets/paper/hills.webp" width="2172" height="380" alt="" loading="lazy" decoding="async"></div>
+  <div class="hills"><img src="../../assets/paper/hills-a.webp" width="2172" height="363" alt="" loading="lazy" decoding="async"></div>
   <div class="soil-sh"><div class="soil">
     <div class="wrap foot">
       <span class="tail" lang="en" aria-hidden="true">Paper Theater</span>

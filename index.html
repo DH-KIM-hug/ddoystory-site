@@ -26,27 +26,31 @@
 <script defer fetchpriority="high" src="assets/vendor/gsap/ScrollTrigger.min.js"></script>
 <script defer fetchpriority="high" src="assets/motion.js"></script>
 <style>
-/* 스튜디오 홈(v12): 흰 종이 위 편집 디자인.
-   첫 화면 = 왼쪽 제목 + 오른쪽 보름달 앞 솔가지 위 까치(화면 오른쪽 끝까지).
-   금색 가는 선 아래 = 흰 종이 + 크래프트 밑장 카드(세로 꼬리 글자, 둥근 창, 감빛 단추).
-   맨 아래 = 여러 겹 언덕 띠 위 종이 꼬리표(메일), 앞 땅에 바닥글. */
+/* 스튜디오 홈(v14): 매끈한 색 카드지.
+   첫 화면 = 왼쪽 제목 + 오른쪽 종이 무대(아치 틀·감빛 커튼, 하늘 배경, 뛰는 여우, 손 흔드는 토끼), 종이비행기와 금색 점선 궤적.
+   위아래 금색 가는 선과 꼬리 글자. 만든 것들 = 흰 카드 + 연두 밑장. 맨 아래 = 언덕 띠 위 흰 꼬리표(메일). */
 
 /* ── 첫 화면 ── */
-.hero{display:grid;grid-template-columns:minmax(0,3.7fr) minmax(0,6.3fr);overflow-x:clip;padding-top:clamp(48px,7vw,110px);align-items:center;gap:0 clamp(24px,3vw,48px);padding-left:max(var(--gutter),calc((100% - var(--max)) / 2 + var(--gutter)))}
-.hero-tx{padding:0 0 clamp(40px,6vw,96px)}
+.hero{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);align-items:center;gap:0 clamp(24px,3vw,56px);padding-top:clamp(36px,4.6vw,72px);padding-bottom:clamp(20px,2.6vw,40px)}
 .hero-tx .kicker{display:flex;align-items:center;gap:14px;margin:0 0 clamp(20px,2.4vw,32px)}
 .hero-tx .kicker .rule{width:36px}
 .hero h1{margin:0;font-size:clamp(1.8rem,3.2vw,3.3rem);line-height:1.36;letter-spacing:.02em}
 .hero h1 .ln{display:block;white-space:nowrap}
 
-/* 그림 상자 = 솔가지 그림의 비율. 솔가지는 오른쪽 끝에 붙는다. */
-.art{position:relative;width:116%;aspect-ratio:1400/959;margin-left:-14%}
-.art > img{position:absolute;pointer-events:none}
-.art .moon{width:54%;left:30%;top:-12%;filter:drop-shadow(0 2px 2px rgba(var(--sh),.16)) drop-shadow(0 8px 14px rgba(var(--sh),.08))}
-.art .pine{width:100%;left:0;bottom:0;filter:var(--piece-shadow)}
-.art .magpie{width:40%;left:55.8%;top:-8.8%;filter:var(--piece-shadow)}
-
-.hero-rule{margin-top:-1px}
+/* 무대 상자 = 무대 틀 그림 비율(1119:975). 안의 조각은 이 상자 % 자리. */
+.stage-wrap{position:relative;padding-left:clamp(40px,12%,150px)}
+.stage{position:relative;aspect-ratio:1119/975}
+.stage > *{position:absolute;pointer-events:none}
+.stage .backdrop{left:9.6%;right:9.8%;top:10.6%;bottom:10%;overflow:hidden;border-radius:50% 50% 0 0 / 50% 50% 0 0}
+.stage .backdrop img{width:100%;height:100%;object-fit:cover;object-position:50% 100%}
+.stage .frame{inset:0;width:100%;height:100%;filter:drop-shadow(0 2px 2px rgba(var(--sh),.2)) drop-shadow(0 10px 14px rgba(var(--sh),.14))}
+.stage .bunny{width:18.5%;left:73.5%;top:33%;filter:var(--piece-shadow)}
+.stage .fox{width:40%;left:33%;top:26%;filter:var(--piece-shadow)}
+.stage .floor-sh{left:38%;width:26%;top:83.2%;height:3.4%;border-radius:50%;background:rgba(var(--sh),.2)}
+.stage .trail{left:-28%;top:0;width:88%;overflow:visible}
+.stage .plane{width:19%;left:-26%;top:4%;filter:drop-shadow(0 2px 2px rgba(var(--sh),.22)) drop-shadow(0 8px 10px rgba(var(--sh),.12))}
+.hero-foot{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:14px}
+.hero-foot::before{content:"";position:absolute;left:var(--gutter);right:var(--gutter);top:0;height:1px;background:var(--gold)}
 
 /* ── 만든 것들 ── */
 .works{padding-top:clamp(44px,5.6vw,88px)}
@@ -54,11 +58,11 @@
 .works-head h2{margin:0;font-size:clamp(1.5rem,2vw,1.9rem);line-height:1.3}
 .works-head .rule{flex:1 1 auto;align-self:center}
 
-.card{max-width:1120px;margin:0 auto}
-.card-in{display:grid;grid-template-columns:auto minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,3vw,48px);align-items:center;padding:clamp(18px,2.6vw,40px) clamp(14px,2.4vw,36px) clamp(18px,2.6vw,40px) 0}
+.card{width:calc(100% - 2 * var(--bo));max-width:1090px;margin:0 auto calc(var(--bo) * 2.4)}
+.card-in{display:grid;grid-template-columns:auto minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,3vw,48px);align-items:center;padding:clamp(22px,3vw,44px) clamp(22px,3vw,44px) clamp(22px,3vw,44px) clamp(14px,1.6vw,22px)}
 .vtail{writing-mode:vertical-rl;display:flex;align-items:center;gap:16px;align-self:stretch;justify-content:flex-start;padding-top:6px}
 .vtail .vrule{width:1px;height:36px;background:var(--gold)}
-.vtail .tail{color:#6E5A4A;font-size:13px;letter-spacing:.3em}
+.vtail .tail{color:#9A7330;font-size:13px;letter-spacing:.3em}
 .win{margin:0;aspect-ratio:16/10.5;border-radius:36% 64% 58% 42% / 46% 38% 62% 54%}
 .win img{object-position:50% 50%}
 .card-tx{display:flex;flex-direction:column;gap:18px;min-width:0;color:#33261B}
@@ -76,7 +80,7 @@
 .card-act{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:4px}
 .card-act .more{color:#33261B}
 
-.next{display:flex;align-items:center;gap:16px;max-width:1120px;margin:clamp(28px,3vw,44px) auto 0;color:var(--sub);font-size:16px}
+.next{display:flex;align-items:center;gap:16px;max-width:1120px;margin:clamp(56px,5vw,72px) auto 0;color:var(--sub);font-size:16px}
 .next .rule{width:48px;flex:none}
 .next p{margin:0}
 
@@ -86,31 +90,28 @@
 .contact .tail .rule{width:36px}
 .contact h2{margin:12px 0 0;font-size:clamp(1.5rem,2vw,1.9rem);line-height:1.3}
 .contact p{margin:10px 0 0;color:var(--sub);max-width:30em;font-size:16.5px}
-.land .tagnote{width:clamp(250px,25vw,380px);right:max(var(--gutter),calc((100% - var(--max)) / 2 + var(--gutter)));bottom:-8%}
+.land .tagnote{right:max(calc(var(--gutter) + 8px),calc((100% - var(--max)) / 2 + var(--gutter) + 8px));bottom:12%}
 
-@media (max-width:1100px){
-  .art{width:112%;margin-left:-10%}
-}
 @media (max-width:1000px){
   .card-in{grid-template-columns:auto minmax(0,1fr)}
   .card-tx{grid-column:2}
   .vtail{grid-row:1 / span 2}
 }
 @media (max-width:760px){
-  .hero{grid-template-columns:minmax(0,1fr);padding-right:0;padding-top:clamp(40px,12vw,90px)}
-  .hero-tx{order:2;padding:clamp(20px,5vw,36px) var(--gutter) 36px 0}
-  .art{order:1;width:115%;margin-left:-13%}
+  .hero{grid-template-columns:minmax(0,1fr);padding-top:clamp(24px,7vw,48px)}
+  .hero-tx{order:2;padding-top:clamp(24px,6vw,40px)}
+  .stage-wrap{order:1;padding-left:20%}
 }
 @media (max-width:640px){
   .hero h1{font-size:clamp(1.7rem,8.2vw,2.3rem)}
-  .card-in{grid-template-columns:minmax(0,1fr);padding:12px 4px 16px 0;gap:18px}
+  .card-in{grid-template-columns:minmax(0,1fr);padding:18px 16px 22px;gap:18px}
   .vtail{writing-mode:horizontal-tb;grid-row:auto;padding-top:0}
   .vtail .vrule{width:28px;height:1px}
   .card-tx{grid-column:auto}
   .win{aspect-ratio:4/3.2}
-  .paper-card{border-width:16px 24px 22px 22px;border-image-width:16px 24px 22px 22px}
+  .paper-card{--bo:10px}
   .app-id img{width:54px;height:54px;border-radius:13px}
-  .land .tagnote{width:min(62vw,250px);bottom:-14%}
+  .land .tagnote{bottom:18%}
 }
 </style>
 </head>
@@ -127,18 +128,24 @@
   </div>
 </header>
 
-<section class="hero" aria-labelledby="hero-title" data-intro>
+<section class="wrap hero" aria-labelledby="hero-title" data-intro>
   <div class="hero-tx">
     <p class="kicker tail" aria-hidden="true"><span class="rule"></span><span lang="en">ddoystory studio</span></p>
     <h1 id="hero-title"><span data-l="ko"><span class="ln">또이다은 스튜디오는</span> <span class="ln">앱과 게임을 만듭니다.</span></span><span data-l="en" lang="en"><span class="ln">ddoystory makes</span> <span class="ln">apps and games.</span></span></h1>
   </div>
-  <div class="art" data-art="home" aria-hidden="true">
-    <img class="moon" src="assets/paper/moon.webp" width="820" height="828" alt="">
-    <img class="pine" src="assets/paper/pine.webp" width="1400" height="959" alt="" fetchpriority="high">
-    <img class="magpie" src="assets/paper/magpie.webp" width="620" height="747" alt="">
+  <div class="stage-wrap" aria-hidden="true">
+    <div class="stage" data-art="home">
+      <div class="backdrop"><img src="assets/paper/backdrop.webp" width="1100" height="825" alt="" fetchpriority="high"></div>
+      <img class="bunny" src="assets/paper/bunny.webp" width="340" height="592" alt="">
+      <img class="frame" src="assets/paper/stage.webp" width="1119" height="975" alt="">
+      <span class="floor-sh"></span>
+      <img class="fox" src="assets/paper/fox.webp" width="620" height="727" alt="">
+      <svg class="trail" viewBox="0 0 880 440"><path d="M752 296C716 300 694 262 668 246C640 230 606 236 612 262C618 290 664 280 664 250C664 222 626 206 580 206C500 206 430 214 360 204C300 196 250 182 196 168" fill="none" stroke="#D9A94E" stroke-width="5" stroke-linecap="round" stroke-dasharray="15 13"/></svg>
+      <img class="plane" src="assets/paper/plane.webp" width="420" height="283" alt="">
+    </div>
   </div>
 </section>
-<div class="wrap hero-rule" data-intro><span class="rule"></span></div>
+<div class="wrap hero-foot" data-intro aria-hidden="true"><span class="tail" lang="en">No. 01</span><span class="tail" lang="en">Apps &amp; Games</span></div>
 
 <main id="works" class="wrap works" aria-labelledby="works-title">
   <div class="works-head">
@@ -146,7 +153,7 @@
     <span class="rule" aria-hidden="true"></span>
   </div>
   <!-- 작품 하나 = article.card 하나. 새 작품은 이 article 을 복사해 아래에 붙이고 번호·링크·그림·글을 바꾼다. -->
-  <article class="card paper-card" data-piece aria-labelledby="w1-title">
+  <article class="card paper-card" style="--back:var(--leaf)" data-piece aria-labelledby="w1-title">
     <div class="card-in">
       <p class="vtail" aria-hidden="true" style="margin:0"><span class="tail" lang="en">No. 01</span><span class="vrule"></span><span class="tail" lang="en">Toki Toki Tale</span></p>
       <figure class="win hole">
@@ -186,8 +193,8 @@
     </div>
   </div>
   <div class="hills">
-    <img src="assets/paper/hills.webp" width="2172" height="380" alt="" loading="lazy" decoding="async">
-    <a class="tagnote" href="mailto:hello@ddoystory.com"><img src="assets/paper/tag.webp" width="720" height="317" alt="" loading="lazy" decoding="async"><span>hello@ddoystory.com</span></a>
+    <img src="assets/paper/hills-a.webp" width="2172" height="363" alt="" loading="lazy" decoding="async">
+    <a class="tagnote" href="mailto:hello@ddoystory.com"><svg viewBox="0 0 56 40" aria-hidden="true"><path d="M52 30C40 30 30 18 18 20S4 34 2 38M52 30C42 26 34 10 22 8" fill="none" stroke="#E8703A" stroke-width="2.4" stroke-linecap="round"/></svg><span class="tg">hello@ddoystory.com</span></a>
   </div>
   <div class="soil-sh"><div class="soil">
     <div class="wrap foot">

@@ -88,8 +88,10 @@
 .feat-tx .tail .rule{width:36px}
 .feat h3{margin:14px 0 0;font-size:clamp(1.45rem,2vw,1.9rem);line-height:1.38}
 .feat p{margin:14px 0 0;font-size:17px;line-height:1.9;color:var(--sub);max-width:32em}
-.feat .paper-card{transform:rotate(-.6deg)}
-.feat.flip .paper-card{transform:rotate(.5deg)}
+.feat .paper-card{--back:var(--persimmon)}
+.feat.flip .paper-card{--back:var(--straw)}
+.feat.tall .paper-card{--back:var(--sky)}
+.feat .paper-card,.poster.paper-card{padding:clamp(10px,1.2vw,16px)}
 .feat .shot{margin:0;border-radius:8px;aspect-ratio:1200/788}
 .feat.tall{grid-template-columns:minmax(0,6fr) minmax(0,4fr)}
 .feat.tall .paper-card{justify-self:center;width:min(100%,330px)}
@@ -98,7 +100,7 @@
 /* ── 포스터 특집 + 서가 ── */
 .library{padding-top:clamp(72px,8vw,140px)}
 .feature{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(36px,6vw,112px);align-items:center}
-.poster{margin:0;transform:rotate(-1deg)}
+.poster{margin:0 14px 34px;--back:var(--leaf)}
 .poster img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:2px;box-shadow:0 1px 2px rgba(var(--sh),.35)}
 .feature-tx .from{margin:0;display:flex;align-items:center;gap:14px;color:var(--sub);font-size:15.5px;font-weight:600;letter-spacing:.03em}
 .feature-tx .from .rule{width:36px;flex:none}
@@ -116,7 +118,7 @@
 /* 서가 한 칸 = 흰 종이 테두리 인화지 한 장 + 그 아래 바탕 종이에 이름 */
 .tales{list-style:none;margin:34px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:34px 26px}
 .tales li{margin:0}
-.tales .tw{display:block;padding:7px;background:var(--grain),#FFFDF8;background-blend-mode:soft-light,normal;border-radius:3px;box-shadow:0 1px 1px rgba(var(--sh),.2),0 5px 9px -3px rgba(var(--sh),.22);line-height:0}
+.tales .tw{display:block;padding:7px;background:var(--card);border-radius:3px;box-shadow:0 1px 1px rgba(var(--sh),.2),0 5px 9px -3px rgba(var(--sh),.22);line-height:0}
 .tales li:nth-child(3n+1) .tw{transform:rotate(-.8deg)}
 .tales li:nth-child(3n+2) .tw{transform:rotate(.6deg)}
 .tales img{width:100%;aspect-ratio:4/3;border-radius:1px}
@@ -128,7 +130,7 @@
 .contact .tail .rule{width:36px}
 .contact h2{margin:12px 0 0;font-size:clamp(1.5rem,2vw,1.9rem);line-height:1.3}
 .contact p{margin:10px 0 0;color:var(--sub);max-width:30em;font-size:16.5px}
-.land .tagnote{width:clamp(250px,24vw,370px);right:max(var(--gutter),calc((100% - var(--max)) / 2 + var(--gutter)));bottom:-6%}
+.land .tagnote{right:max(calc(var(--gutter) + 8px),calc((100% - var(--max)) / 2 + var(--gutter) + 8px));bottom:12%}
 
 @media (max-width:1100px){
   .thero > *{grid-area:auto}
@@ -150,7 +152,6 @@
   .ctas{width:100%}
   .app-id img{width:72px;height:72px;border-radius:17px}
   .app-id h2{font-size:1.8rem}
-  .paper-card{border-width:16px 24px 22px 22px;border-image-width:16px 24px 22px 22px}
   .feat p{font-size:16.5px}
   .feature-tx dl{grid-template-columns:minmax(0,1fr)}
   .feature-tx dt{border-bottom:0;padding-bottom:0}
@@ -158,7 +159,8 @@
   .tales{grid-template-columns:none;grid-auto-flow:column;grid-template-rows:auto auto;grid-auto-columns:44%;gap:22px 14px;overflow-x:auto;scroll-snap-type:x mandatory;margin-left:calc(-1 * var(--gutter));margin-right:calc(-1 * var(--gutter));padding:8px var(--gutter) 16px;scroll-padding-left:var(--gutter);scrollbar-width:thin}
   .tales li{scroll-snap-align:start}
   .tales li > span:not(.tw){font-size:14.5px;margin-top:10px}
-  .land .tagnote{width:min(62vw,250px);bottom:-12%}
+  .land .tagnote{bottom:18%}
+  .paper-card{--bo:10px}
 }
 </style>
 </head>
@@ -347,8 +349,8 @@
     </div>
   </div>
   <div class="hills">
-    <img src="../assets/paper/field.webp" width="2115" height="456" alt="" loading="lazy" decoding="async">
-    <a class="tagnote" href="mailto:hello@ddoystory.com"><img src="../assets/paper/tag.webp" width="720" height="317" alt="" loading="lazy" decoding="async"><span>hello@ddoystory.com</span></a>
+    <img src="../assets/paper/hills-a.webp" width="2172" height="363" alt="" loading="lazy" decoding="async">
+    <a class="tagnote" href="mailto:hello@ddoystory.com"><svg viewBox="0 0 56 40" aria-hidden="true"><path d="M52 30C40 30 30 18 18 20S4 34 2 38M52 30C42 26 34 10 22 8" fill="none" stroke="#E8703A" stroke-width="2.4" stroke-linecap="round"/></svg><span class="tg">hello@ddoystory.com</span></a>
   </div>
   <div class="soil-sh"><div class="soil">
     <div class="wrap foot">
