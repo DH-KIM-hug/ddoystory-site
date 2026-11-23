@@ -6,48 +6,76 @@
 <title>톡톡 동화극장 · 고객 지원 | Toki Toki Tale Support</title>
 <meta name="description" content="톡톡 동화극장(Toki Toki Tale) 앱 고객 지원·문의·개인정보 처리방침 안내">
 <link rel="icon" href="../../assets/favicon-32.png">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#1F2A56">
+<link rel="apple-touch-icon" href="../../assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600;700&family=Noto+Serif+KR:wght@400;600;700;900&display=swap">
+<link rel="stylesheet" href="../../assets/paper.css">
 <style>
-:root{--bg:#F3F3F1;--card:#FFFFFF;--ink:#2B2520;--sub:#6E655D;--line:#E4E1DC;--accent:#D9622F;--link:#A8441A}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;line-height:1.65;-webkit-text-size-adjust:100%}
-main{max-width:720px;margin:0 auto;padding:32px 16px 56px}
-header{display:flex;align-items:center;gap:14px;margin-bottom:24px}
-header img{width:64px;height:64px;border-radius:15px;border:1px solid var(--line)}
-h1{font-size:1.45rem;margin:0;letter-spacing:.01em}
-header p{margin:2px 0 0;color:var(--sub);font-size:.95rem}
-.lang{margin-left:auto;display:flex;gap:4px}
-.lang a{font-size:.85rem;color:var(--sub);text-decoration:none;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
-.lang a[aria-current]{color:#fff;background:var(--link);border-color:var(--link)}
-section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-h2{font-size:1.05rem;margin:0 0 10px}
-p{margin:0 0 8px}
-.contact{font-size:1.1rem;font-weight:600}
-.contact a{color:var(--link);text-decoration:none}
-dl{margin:0}
-dt{font-weight:600;margin-top:12px}
-dt:first-child{margin-top:0}
-dd{margin:2px 0 0;color:var(--sub)}
-a{color:var(--link)}
-footer{color:var(--sub);font-size:.85rem;text-align:center;margin-top:24px}
-[data-l]{display:none}
-html[lang=ko] [data-l=ko],html[lang=en] [data-l=en]{display:block}
+/* 읽는 페이지: 종이는 머리(밤 종이 띠)·구역 색지·가장자리에만. 본문은 폭 720px 안에서 넉넉하게. */
+.head{z-index:3}
+.top{padding-bottom:8px}
+.title{display:flex;align-items:center;gap:18px;max-width:calc(720px + 2 * var(--gutter));padding-top:clamp(16px,3vw,40px);padding-bottom:clamp(36px,4vw,56px)}
+.title img{width:72px;height:72px;border-radius:17px;box-shadow:0 1px 1px rgba(var(--sh),.5),0 4px 8px -2px rgba(var(--sh),.5);flex:none}
+.title h1{margin:0;font-size:clamp(1.7rem,3.4vw,2.4rem);line-height:1.25;font-weight:900;letter-spacing:.03em}
+.title p{margin:4px 0 0;color:var(--on-night-sub);font-size:16px;line-height:1.6}
+.lang a{font-size:15px}
+.lang a[lang=en]{font-size:17px}
+.doc{z-index:2;padding-top:clamp(72px,7vw,104px);padding-bottom:clamp(48px,5vw,72px)}
+.col{max-width:calc(720px + 2 * var(--gutter));margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+.doc a{color:var(--link);text-underline-offset:.22em}
+.doc h2{margin:0 0 12px;font-size:1.3rem;line-height:1.45;font-weight:900}
+.doc p{margin:0 0 10px}
+.foot-sheet{z-index:1}
+.foot-sheet .foot{border-top:0;padding-top:clamp(72px,7vw,96px)}
+@media (max-width:640px){
+  .title{gap:14px}
+  .title img{width:60px;height:60px;border-radius:14px}
+  .top .lang a{padding:0 8px}
+  .top{flex-wrap:wrap;row-gap:4px}
+  .top .lang{order:1;margin-left:auto}
+  .crumbs{order:2;width:100%;flex-wrap:nowrap}
+  .crumbs a{font-size:15px}
+}
+
 html[lang=ko] h1 .en,html[lang=en] h1 .ko{display:none}
-@media (max-width:420px){header{flex-wrap:wrap}.lang{margin-left:0}}
+/* 구역 = 크림 색지 한 장 */
+.doc section{background:var(--grain),var(--sheet);border-radius:16px;box-shadow:var(--lift);padding:clamp(22px,3vw,32px) clamp(20px,3vw,34px);margin-bottom:22px}
+.doc .contact{margin:0 0 12px}
+.doc .contact a{display:inline-flex;align-items:center;gap:12px;padding:10px 20px 10px 16px;border-radius:999px;background:var(--grain),var(--act);color:#FFF6E8;text-decoration:none;font-weight:700;font-size:1.08rem;letter-spacing:.04em;box-shadow:0 3px 0 var(--act-under),0 5px 8px -2px rgba(var(--sh),.35);overflow-wrap:anywhere;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.doc .contact a:hover{transform:translateY(-2px);box-shadow:0 5px 0 var(--act-under),0 10px 14px -4px rgba(var(--sh),.4)}
+.doc dl{margin:0}
+.doc dt{font-weight:700;margin-top:18px;line-height:1.6}
+.doc dt:first-child{margin-top:0}
+.doc dd{margin:4px 0 0;color:var(--sub)}
 </style>
 </head>
 <body>
-<main>
-<header>
-  <img src="../../assets/icon.png" alt="">
+<a class="skip" href="#main"><span data-l="ko">본문으로 건너뛰기</span><span data-l="en" lang="en">Skip to content</span></a>
+<div class="ply night head">
+  <header class="wrap top">
+    <nav class="crumbs" aria-label="Site">
+      <a href="../../#ko" data-href="../../"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M11 3.5 5.5 9l5.5 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-l="ko">또이다은 스튜디오</span><span data-l="en" lang="en">ddoystory</span></a>
+      <span class="sep" aria-hidden="true">/</span>
+      <a href="../#ko" data-href="../"><span data-l="ko">톡톡 동화극장</span><span data-l="en" lang="en">Toki Toki Tale</span></a>
+    </nav>
+    <nav class="lang" aria-label="Language">
+    <a href="#ko" data-set="ko" lang="ko">한국어</a><a href="#en" data-set="en" lang="en">English</a>
+    </nav>
+  </header>
+  <div class="wrap title">
+  <img src="../../assets/icon-256.webp" width="72" height="72" alt="">
   <div>
     <h1><span class="ko">톡톡 동화극장</span><span class="en">Toki Toki Tale</span></h1>
     <p data-l="ko">2~5세를 위한 종이 동화 앱 · 고객 지원</p>
     <p data-l="en">Paper-cut story app for ages 2–5 · Support</p>
   </div>
-  <nav class="lang" aria-label="Language">
-    <a href="#ko" data-set="ko">한국어</a><a href="#en" data-set="en">English</a>
-  </nav>
-</header>
+  </div>
+  <div class="cut ridge" aria-hidden="true"></div>
+</div>
+<main id="main" class="ply doc"><div class="col">
 
 <div data-l="ko">
 <section>
@@ -108,13 +136,23 @@ html[lang=ko] h1 .en,html[lang=en] h1 .ko{display:none}
   <p><a href="../privacy/">Read the privacy policy</a></p>
 </section>
 </div>
-
-<footer>© 2026 DH-KIM-hug · Toki Toki Tale</footer>
+</div>
+<div class="cut hill" aria-hidden="true"></div>
 </main>
+<footer class="ply night foot-sheet">
+  <div class="wrap"><div class="foot">
+    <a href="../../#ko" data-href="../../" aria-label="ddoystory"><img src="../../assets/ddoystory-logo-dark.webp" width="112" height="31" alt="ddoystory"></a>
+    <p><span data-l="ko">© 2026 또이다은 스튜디오</span><span data-l="en" lang="en">© 2026 ddoystory</span></p>
+  </div></div>
+</footer>
 <script>
 (function(){
   var h=document.documentElement;
-  function set(l){h.lang=l;var as=document.querySelectorAll('.lang a');for(var i=0;i<as.length;i++){if(as[i].getAttribute('data-set')===l)as[i].setAttribute('aria-current','true');else as[i].removeAttribute('aria-current');}}
+  function set(l){
+    h.lang=l;
+    var as=document.querySelectorAll('.lang a');for(var i=0;i<as.length;i++){if(as[i].getAttribute('data-set')===l)as[i].setAttribute('aria-current','true');else as[i].removeAttribute('aria-current');}
+    var ls=document.querySelectorAll('a[data-href]');for(var j=0;j<ls.length;j++){ls[j].setAttribute('href',ls[j].getAttribute('data-href')+'#'+l);}
+  }
   var l=location.hash==='#en'?'en':location.hash==='#ko'?'ko':((navigator.language||'').toLowerCase().indexOf('ko')===0?'ko':'en');
   set(l);
   window.addEventListener('hashchange',function(){set(location.hash==='#en'?'en':'ko');});

@@ -5,17 +5,69 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>개인정보 처리방침 · 톡톡 동화극장</title>
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#1F2A56">
+<link rel="apple-touch-icon" href="../../assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600;700&family=Noto+Serif+KR:wght@400;600;700;900&display=swap">
+<link rel="stylesheet" href="../../assets/paper.css">
 <style>
-  body { margin: 0; background: #fbf6ea; color: #3a2e22; font: 17px/1.7 -apple-system, "Pretendard", "Apple SD Gothic Neo", sans-serif; }
-  main { max-width: 680px; margin: 0 auto; padding: 32px 20px 64px; }
-  h1 { font-size: 26px; line-height: 1.3; }
-  h2 { font-size: 19px; margin-top: 32px; }
-  a { color: #b4541b; }
-  .en { border-top: 2px dashed #d9c9a8; margin-top: 48px; padding-top: 8px; }
+/* 읽는 페이지: 종이는 머리(밤 종이 띠)·구역 색지·가장자리에만. 본문은 폭 720px 안에서 넉넉하게. */
+.head{z-index:3}
+.top{padding-bottom:8px}
+.title{display:flex;align-items:center;gap:18px;max-width:calc(720px + 2 * var(--gutter));padding-top:clamp(16px,3vw,40px);padding-bottom:clamp(36px,4vw,56px)}
+.title img{width:72px;height:72px;border-radius:17px;box-shadow:0 1px 1px rgba(var(--sh),.5),0 4px 8px -2px rgba(var(--sh),.5);flex:none}
+.title h1{margin:0;font-size:clamp(1.7rem,3.4vw,2.4rem);line-height:1.25;font-weight:900;letter-spacing:.03em}
+.title p{margin:4px 0 0;color:var(--on-night-sub);font-size:16px;line-height:1.6}
+.lang a{font-size:15px}
+.lang a[lang=en]{font-size:17px}
+.doc{z-index:2;padding-top:clamp(72px,7vw,104px);padding-bottom:clamp(48px,5vw,72px)}
+.col{max-width:calc(720px + 2 * var(--gutter));margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+.doc a{color:var(--link);text-underline-offset:.22em}
+.doc h2{margin:0 0 12px;font-size:1.3rem;line-height:1.45;font-weight:900}
+.doc p{margin:0 0 10px}
+.foot-sheet{z-index:1}
+.foot-sheet .foot{border-top:0;padding-top:clamp(72px,7vw,96px)}
+@media (max-width:640px){
+  .title{gap:14px}
+  .title img{width:60px;height:60px;border-radius:14px}
+  .top .lang a{padding:0 8px}
+  .top{flex-wrap:wrap;row-gap:4px}
+  .top .lang{order:1;margin-left:auto}
+  .crumbs{order:2;width:100%;flex-wrap:nowrap}
+  .crumbs a{font-size:15px}
+}
+
+/* 처리방침 한 장 = 크림 색지 한 장 */
+.sheetdoc{background:var(--grain),var(--sheet);border-radius:16px;box-shadow:var(--lift);padding:clamp(24px,4vw,52px) clamp(20px,4vw,52px) clamp(20px,3vw,40px)}
+.sheetdoc h1{margin:0 0 6px;font-size:clamp(1.55rem,3vw,2rem);line-height:1.35;font-weight:900}
+.sheetdoc h1 + p{color:var(--sub);font-size:16px}
+.sheetdoc h2{margin-top:36px}
+.sheetdoc ul{margin:0 0 12px;padding-left:1.3em}
+.sheetdoc li{margin:0 0 6px}
+.sheetdoc b{font-weight:700}
+.title{min-height:0}
 </style>
 </head>
 <body>
-<main>
+<a class="skip" href="#main"><span data-l="ko">본문으로 건너뛰기</span><span data-l="en" lang="en">Skip to content</span></a>
+<div class="ply night head">
+  <header class="wrap top">
+    <nav class="crumbs" aria-label="Site">
+      <a href="../../#ko" data-href="../../"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M11 3.5 5.5 9l5.5 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-l="ko">또이다은 스튜디오</span><span data-l="en" lang="en">ddoystory</span></a>
+      <span class="sep" aria-hidden="true">/</span>
+      <a href="../#ko" data-href="../"><span data-l="ko">톡톡 동화극장</span><span data-l="en" lang="en">Toki Toki Tale</span></a>
+    </nav>
+    <nav class="lang" aria-label="Language">
+      <a href="#ko" data-set="ko" lang="ko">한국어</a><a href="#en" data-set="en" lang="en">English</a>
+    </nav>
+  </header>
+  <div class="wrap title" aria-hidden="true"><img src="../../assets/icon-256.webp" width="72" height="72" alt=""></div>
+  <div class="cut ridge" aria-hidden="true"></div>
+</div>
+<main id="main" class="ply doc"><div class="col"><div class="sheetdoc">
+<div data-l="ko">
 <h1>톡톡 동화극장 개인정보 처리방침</h1>
 <p>시행일: 2026년 11월 13일</p>
 
@@ -61,8 +113,8 @@
 
 <h2>문의</h2>
 <p>문의와 기록 삭제 요청: <a href="mailto:hello@ddoystory.com">hello@ddoystory.com</a></p>
-
-<section class="en" lang="en">
+</div>
+<section class="en" lang="en" data-l="en">
 <h1>Toki Toki Tale — Privacy Policy</h1>
 <p>Effective: November 13, 2026</p>
 <h2>What we collect</h2>
@@ -97,6 +149,27 @@
 <h2>Contact</h2>
 <p>Questions and deletion requests: <a href="mailto:hello@ddoystory.com">hello@ddoystory.com</a></p>
 </section>
+</div></div>
+<div class="cut hill" aria-hidden="true"></div>
 </main>
+<footer class="ply night foot-sheet">
+  <div class="wrap"><div class="foot">
+    <a href="../../#ko" data-href="../../" aria-label="ddoystory"><img src="../../assets/ddoystory-logo-dark.webp" width="112" height="31" alt="ddoystory"></a>
+    <p><span data-l="ko">© 2026 또이다은 스튜디오</span><span data-l="en" lang="en">© 2026 ddoystory</span></p>
+  </div></div>
+</footer>
+<script>
+(function(){
+  var h=document.documentElement;
+  function set(l){
+    h.lang=l;
+    var as=document.querySelectorAll('.lang a');for(var i=0;i<as.length;i++){if(as[i].getAttribute('data-set')===l)as[i].setAttribute('aria-current','true');else as[i].removeAttribute('aria-current');}
+    var ls=document.querySelectorAll('a[data-href]');for(var j=0;j<ls.length;j++){ls[j].setAttribute('href',ls[j].getAttribute('data-href')+'#'+l);}
+  }
+  var l=location.hash==='#en'?'en':location.hash==='#ko'?'ko':((navigator.language||'').toLowerCase().indexOf('ko')===0?'ko':'en');
+  set(l);
+  window.addEventListener('hashchange',function(){set(location.hash==='#en'?'en':'ko');});
+})();
+</script>
 </body>
 </html>

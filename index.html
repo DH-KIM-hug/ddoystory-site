@@ -10,183 +10,117 @@
 <meta property="og:title" content="ddoystory">
 <meta property="og:description" content="또이다은 스튜디오(ddoystory)는 앱과 게임을 만듭니다.">
 <meta property="og:url" content="https://ddoystory.com/">
-<meta property="og:image" content="https://ddoystory.com/assets/hero-sunmoon-1600.webp">
+<meta property="og:image" content="https://ddoystory.com/assets/magpie-1600.webp">
 <link rel="icon" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Gowun+Dodum&family=Hahmlet:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600;700&family=Noto+Serif+KR:wght@400;600;700;900&display=swap">
+<link rel="stylesheet" href="assets/paper.css">
 <style>
-/* ── 토큰 ─────────────────────────────────────────────
-   톡톡 동화극장 페이지(tokitoki/)와 같은 토큰. 밤 남색이 회사의 바탕색이고,
-   작품마다 색지 한 장(--tone)을 깔고 그 위에 아치 창을 뚫어 대표 그림을 보인다.
-   글꼴: 굵은 둥근 글꼴(Bagel Fat One)은 첫머리 한 줄에만, 제목은 함렛(Hahmlet), 본문은 고운돋움. */
-:root{
-  --night:#1F2A56;
-  --night-ink:#FFF6E6;
-  --night-sub:#C9D0EA;
-  --mint:#5DB7AE;
-  --persimmon:#F27D48;
-  --gold:#F2C14E;
-  --page:#FFFFFF;
-  --mist:#EEF1F8;
-  --ink:#1F2A56;
-  --sub:#4A5378;
-  --line:#D8DDEC;
-  --on-sheet:#18214A;
-  --lift:0 1px 0 rgba(24,20,40,.06),0 24px 44px -28px rgba(24,20,40,.55);
-  --hole:inset 0 10px 18px -8px rgba(15,12,30,.45),inset 0 0 0 1px rgba(15,12,30,.12);
-  --display:'Bagel Fat One','Gowun Dodum',system-ui,sans-serif;
-  --head:'Hahmlet','Gowun Dodum',ui-serif,serif;
-  --body:'Gowun Dodum',-apple-system,'Apple SD Gothic Neo',system-ui,sans-serif;
-  --max:1520px;
-  --stage:min(calc(100vw - 2 * var(--gutter)),1760px);
-  --gutter:clamp(16px,4.5vw,72px);
-  --ease:cubic-bezier(.2,.8,.2,1);
-  color-scheme:light;
-}
-@media (prefers-color-scheme:dark){
-  :root{
-    --night:#0E1434;--night-sub:#B7BFE0;
-    --page:#151C3E;--mist:#1B2350;--ink:#EEF0F8;--sub:#B3BAD9;--line:#2D376A;
-    --lift:0 1px 0 rgba(0,0,0,.25),0 24px 44px -26px rgba(0,0,0,.8);
-    color-scheme:dark;
-  }
-}
-*,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--page);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.75;overflow-x:hidden;word-break:keep-all;overflow-wrap:break-word}
-img{display:block;max-width:100%;height:auto}
-p,h1,h2,h3,h4{text-wrap:pretty}
-a{color:inherit}
-:focus-visible{outline:3px solid var(--mint);outline-offset:3px;border-radius:6px}
-html[lang=ko] [data-l=en],html[lang=en] [data-l=ko]{display:none!important}
-.wrap{max-width:var(--max);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
-.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.skip{position:absolute;left:-9999px}
-.skip:focus{left:16px;top:12px;background:var(--page);color:var(--ink);padding:8px 12px;z-index:9;border-radius:8px}
-h2,h3,h4{font-family:var(--head);font-weight:700;letter-spacing:-.01em}
+/* 스튜디오 홈: 밤 종이(머리) → 크림 종이(만든 것들) → 밤 종이(문의).
+   위 장의 아래 가장자리를 오려 다음 장 위에 얹는다. */
 
-/* App Store 단추 (1차 행동). 애플 로고 없이 글자만. 주소는 맨 아래 스크립트의 APP_STORE_URL 한 곳. */
-.store{display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:0 26px 0 22px;border-radius:999px;text-decoration:none;font-size:17px;font-weight:400;white-space:nowrap;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
-.store svg{width:20px;height:20px;flex:none}
-.store:hover{transform:translateY(-2px)}
-.store.on-night{background:var(--night-ink);color:#1F2A56;box-shadow:0 4px 0 rgba(0,0,0,.28)}
-.store.on-page{background:#1F2A56;color:#FFF6E6;box-shadow:0 4px 0 rgba(10,14,40,.25)}
-@media (prefers-color-scheme:dark){.store.on-page{background:var(--night-ink);color:#1F2A56}}
-
-/* ── 밤 띠 (머리 + 첫머리) ─────────────────────────── */
-.night{background:var(--night);color:var(--night-ink)}
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:22px;padding-bottom:22px}
-.brand{display:block;line-height:0;flex:none}
-.brand img{width:150px}
-.top nav{display:flex;align-items:center;gap:clamp(4px,2vw,24px)}
-.top nav > a{color:var(--night-sub);text-decoration:none;font-size:16px;padding:10px 6px;min-height:44px;display:inline-flex;align-items:center}
-.top nav > a:hover{color:var(--night-ink)}
-.lang{display:flex;gap:2px;padding:4px;border-radius:999px;background:rgba(255,255,255,.08)}
-.lang a{min-width:44px;min-height:40px;display:inline-grid;place-items:center;border-radius:999px;text-decoration:none;font-size:15px;color:var(--night-sub)}
-.lang a[aria-current]{background:var(--night-ink);color:#1F2A56}
-
-.hero{position:relative;padding-top:clamp(40px,7vw,112px);padding-bottom:clamp(40px,5vw,72px)}
-.hero h1{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(2.3rem,5.4vw,5.5rem);line-height:1.14;letter-spacing:0;text-shadow:0 3px 0 rgba(0,0,0,.28)}
+/* ── 첫머리: 밤 종이 + 보름달 모양 구멍 ─────────────── */
+.head{z-index:3}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:32px clamp(32px,5vw,96px);padding-top:clamp(24px,4vw,64px);padding-bottom:clamp(48px,5vw,80px)}
+.hero h1{margin:0;font-weight:900;font-size:clamp(2.2rem,4.6vw,4.4rem);line-height:1.28;letter-spacing:.03em}
 .hero h1 .ln{display:block}
-.hero p{margin:clamp(20px,2.4vw,32px) 0 0;font-size:clamp(1.05rem,1.35vw,1.25rem);color:var(--night-sub);max-width:34em}
-.star{position:absolute;color:var(--mint);width:var(--s);height:var(--s)}
-.hero .star.a{--s:48px;right:calc(var(--gutter) + 9%);top:42%}
-.hero .star.b{--s:24px;right:calc(var(--gutter) + 19%);top:28%;color:var(--gold)}
-.hero .star.c{--s:18px;right:calc(var(--gutter) + 2%);top:66%}
+.hero p{margin:clamp(20px,2.4vw,32px) 0 0;font-size:clamp(1.05rem,1.3vw,1.22rem);line-height:1.85;color:var(--on-night-sub);max-width:30em}
 
-/* ── 만든 것들 ──────────────────────────────────────
-   밤 띠가 제목 뒤와 카드 윗부분까지 이어지고, 카드는 그 경계에 걸친다. */
-.works{position:relative;padding-bottom:clamp(72px,8vw,128px)}
-.works::before{content:"";position:absolute;left:0;right:0;top:0;height:clamp(240px,24vw,380px);background:var(--night)}
-.works .wrap{position:relative}
-.works h2{margin:0;color:var(--night-ink);font-size:clamp(1.6rem,2.4vw,2.1rem);line-height:1.3}
-.grid{list-style:none;margin:clamp(20px,2.4vw,32px) 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,48px)}
+/* 달 구멍 안의 층: 달빛 종이(맨 뒤) → 먼 능선 → 소나무 언덕 → 앞 언덕 → 까치 → 솔가지(맨 앞) */
+.moon{--d:clamp(280px,34vw,500px);position:relative;width:var(--d);height:var(--d);margin:0;flex:none}
+.moon .hole{width:100%;height:100%;border-radius:50%;background:var(--grain),#F3DFB4}
+.moon .rg{position:absolute;left:-2%;right:-2%;bottom:-1px;filter:var(--piece-shadow)}
+.moon .rg i{display:block;height:100%;background:var(--grain),var(--c)}
+.moon .r1{height:46%;--c:#B9AED6}
+.moon .r1 i{clip-path:polygon(0 38%,12% 18%,22% 32%,36% 4%,50% 28%,62% 14%,76% 34%,88% 10%,100% 30%,100% 100%,0 100%)}
+.moon .r2{height:34%;--c:var(--pine)}
+.moon .r2 i{clip-path:polygon(0 30%,18% 12%,34% 36%,52% 6%,70% 30%,84% 14%,100% 26%,100% 100%,0 100%)}
+.moon .r3{height:20%;--c:#2C4A3A}
+.moon .r3 i{clip-path:polygon(0 18%,26% 44%,48% 20%,70% 46%,100% 8%,100% 100%,0 100%)}
+.moon .fly{position:absolute;width:30%;left:44%;top:30%;filter:var(--piece-shadow);z-index:2}
+.moon .sprig{position:absolute;width:46%;left:-8%;top:-10%;transform:rotate(-8deg);filter:var(--piece-shadow);z-index:3}
+.moon .star.a{--s:28px;right:-6%;top:6%}
+.moon .star.b{--s:16px;right:4%;top:-4%;color:#F6ECD8}
+.moon .star.c{--s:20px;left:-10%;bottom:16%}
 
-/* 작품 카드 한 장 = 색지 한 장 + 아치 창. 카드 전체가 작품 페이지로 가는 링크(.work-link 의 ::after). */
-.work{position:relative;display:flex;flex-direction:column;gap:clamp(20px,2.4vw,32px);background:var(--tone,var(--mist));color:var(--on-sheet);border-radius:32px;padding:clamp(20px,2.6vw,40px);box-shadow:var(--lift)}
-.work-win{position:relative;margin:0;overflow:hidden;aspect-ratio:16/10;border-radius:50% 50% 20px 20px / 30% 30% 20px 20px;background:#16204A}
-.work-win img{width:100%;height:100%;object-fit:cover;object-position:50% 60%;transition:transform .6s var(--ease)}
-.work-win::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--hole);pointer-events:none}
-.work:hover .work-win img{transform:scale(1.035)}
+/* ── 만든 것들: 크림 종이 ──────────────────────────── */
+.works{z-index:2;padding-top:clamp(84px,8vw,128px);padding-bottom:clamp(40px,4vw,64px)}
+.works h2{margin:0;font-size:clamp(1.7rem,2.6vw,2.3rem);line-height:1.3;font-weight:900}
+.grid{list-style:none;margin:clamp(24px,2.6vw,36px) 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,3vw,48px)}
+
+/* 작품 카드 = 크림 색지 한 장 + 감빛 밑장 + 아치 창. 카드 전체가 링크(.work-link::after). */
+.work{--tone:var(--sheet);--under:var(--persimmon);--r:28px;--ux:12px;--uy:12px;display:flex;flex-direction:column;gap:clamp(20px,2.4vw,32px);padding:clamp(18px,2.4vw,36px)}
+
+.work-win{margin:0;align-self:center;width:100%;aspect-ratio:16/10;border-radius:50% 50% 14px 14px / 34% 34% 14px 14px;background:#16204A}
+.work-win img{width:100%;height:100%;object-fit:cover;object-position:50% 50%}
 .work-tx{display:flex;flex-direction:column;gap:18px;min-width:0}
 .work-id{display:flex;align-items:center;gap:16px}
-.work-id img{width:72px;height:72px;border-radius:17px;box-shadow:0 8px 18px -10px rgba(24,20,40,.55);flex:none}
-.work h3{margin:0;font-size:clamp(1.6rem,2.4vw,2.3rem);line-height:1.2}
+.work-id img{width:72px;height:72px;border-radius:17px;box-shadow:var(--lift);flex:none}
+.work h3{margin:0;font-size:clamp(1.6rem,2.3vw,2.2rem);line-height:1.25;font-weight:900}
+.work-id p{margin:0;font-family:var(--sc);font-weight:600;font-size:19px;letter-spacing:.06em;color:var(--sub)}
+.work-id p [data-l=en]{font-family:var(--serif);font-size:15px;letter-spacing:.02em}
 .work-link{text-decoration:none}
-.work-link::after{content:"";position:absolute;inset:0;border-radius:32px;z-index:1}
+.work-link::after{content:"";position:absolute;inset:0;border-radius:28px;z-index:1}
 .work-link:focus-visible{outline:none}
-.work-link:focus-visible::after{outline:3px solid var(--night);outline-offset:4px}
-.work-id p{margin:2px 0 0;font-size:15px;opacity:.78}
-.work-line{margin:0;font-size:clamp(1.05rem,1.3vw,1.2rem);line-height:1.75;max-width:30em}
-.work-meta{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.work-meta li{padding:5px 14px;border-radius:999px;background:rgba(24,33,74,.12);font-size:15px;white-space:nowrap}
-.work-act{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:auto;padding-top:4px}
-.work-act .store{position:relative;z-index:2;min-height:48px;padding:0 20px 0 18px;font-size:16px;background:#1F2A56;color:#FFF6E6;box-shadow:0 3px 0 rgba(10,14,40,.25)}
-.work-act .go{display:inline-flex;align-items:center;gap:10px;font-family:var(--head);font-weight:600;font-size:1.05rem}
+.work-link:focus-visible::after{outline:3px solid var(--act);outline-offset:4px}
+.work-line{margin:0;font-size:clamp(1.05rem,1.3vw,1.18rem);max-width:30em}
+/* 작은 꼬리표: 크래프트 종이 조각 */
+.work-meta{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.work-meta li{padding:4px 14px;border-radius:6px;background:var(--grain),var(--kraft);box-shadow:0 1px 1px rgba(var(--sh),.25),0 2px 3px rgba(var(--sh),.12);font-size:15px;white-space:nowrap}
+.work-act{display:flex;flex-wrap:wrap;align-items:center;gap:16px 26px;margin-top:auto;padding-top:6px}
+.work-act .store{position:relative;z-index:2}
+.work-act .go{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:1.02rem;letter-spacing:.03em}
 .work-act .go svg{width:20px;height:20px;transition:transform .3s var(--ease)}
 .work:hover .go svg{transform:translateX(4px)}
-.work:hover .go span{text-decoration:underline;text-underline-offset:.25em}
-
-/* 넓은 대표 카드: 두 칸을 다 쓰고, 그림과 글을 옆으로 놓는다 */
+.work:hover .go span{text-decoration:underline;text-underline-offset:.3em}
 .work.wide{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:stretch;gap:clamp(28px,3.4vw,56px)}
 .work.wide .work-tx{justify-content:center;gap:22px;padding:clamp(4px,1vw,16px) 0}
-.work.wide .work-act{margin-top:12px}
 
-.next{grid-column:1 / -1;display:flex;align-items:center;gap:12px;color:var(--sub);font-size:17px}
+/* 다음 작품: 크래프트 쪽지 한 장 */
+.next{grid-column:1 / -1;justify-self:start;display:flex;align-items:center;gap:12px;margin-top:8px;padding:10px 20px 10px 16px;border-radius:8px;background:var(--grain),var(--kraft);box-shadow:var(--lift);color:var(--sub);font-size:17px}
 .next p{margin:0}
-.next .star{position:static;--s:16px;flex:none}
+.next .star{position:static;--s:18px;flex:none}
 
-/* ── 문의 + 꼬리 (밤 띠) ────────────────────────────── */
-.contact{padding-top:clamp(64px,8vw,120px);padding-bottom:clamp(40px,5vw,64px);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px clamp(40px,5vw,88px);align-items:end}
-.contact h2{margin:0;font-size:clamp(2rem,3.2vw,2.75rem);line-height:1.2}
-.contact p{margin:12px 0 0;color:var(--night-sub);max-width:28em}
-.mail{display:inline-block;font-family:var(--head);font-weight:600;font-size:clamp(1.6rem,3.8vw,3.25rem);line-height:1.25;letter-spacing:-.01em;text-decoration:none;color:var(--night-ink);overflow-wrap:anywhere;border-bottom:3px solid var(--mint);padding-bottom:6px}
-.mail:hover{color:var(--mint)}
-.foot{border-top:1px solid rgba(201,208,234,.25);padding-top:24px;padding-bottom:36px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;font-size:15px;color:var(--night-sub)}
-.foot p{margin:0}
-.foot img{width:112px}
-.foot ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 20px}
-.foot ul a{color:var(--night-sub);text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
-.foot ul a:hover{color:var(--night-ink);text-decoration:underline;text-underline-offset:.25em}
+.foot-sheet{z-index:1}
 
-/* 한 번의 등장: 첫 작품의 그림이 아치 창 안으로 오른다 */
+/* 한 번의 등장: 달 구멍 안 층이 차례로 내려앉는다 */
 @media (prefers-reduced-motion:no-preference){
-  .work.wide .work-win img{animation:rise 1.4s var(--ease) .15s both}
-  @keyframes rise{from{transform:translateY(8%) scale(1.06)}to{transform:none}}
+  .moon .rg,.moon .fly,.moon .sprig{animation:settle .9s var(--ease) both}
+  .moon .r1{animation-delay:.1s}.moon .r2{animation-delay:.22s}.moon .r3{animation-delay:.34s}
+  .moon .fly{animation-delay:.55s}.moon .sprig{animation-delay:.7s;animation-name:settle-r}
+  @keyframes settle{from{transform:translateY(14%);opacity:0}to{transform:none;opacity:1}}
+  @keyframes settle-r{from{transform:translate(-6%,-10%) rotate(-8deg);opacity:0}to{transform:rotate(-8deg);opacity:1}}
 }
-@media (prefers-reduced-motion:reduce){.store,.work-win img,.go svg{transition:none}.store:hover{transform:none}.work:hover .work-win img{transform:none}}
 
-/* ── 좁은 화면 ─────────────────────────────────────── */
 @media (max-width:1000px){
   .work.wide{grid-template-columns:minmax(0,1fr)}
-  .contact{grid-template-columns:minmax(0,1fr)}
-  .hero .star{display:none}
+}
+@media (max-width:760px){
+  .hero{grid-template-columns:minmax(0,1fr)}
+  .moon{--d:min(78vw,340px);justify-self:center}
 }
 @media (max-width:640px){
-  body{font-size:16.5px}
-  .brand img{width:118px}
-  .top .nl{display:none}
-  .hero h1{font-size:clamp(1.75rem,8.6vw,2.15rem)}
+  .hero h1{font-size:clamp(1.8rem,8.4vw,2.2rem)}
   .grid{grid-template-columns:minmax(0,1fr)}
-  .work{border-radius:24px;padding:18px 18px 22px}
-  .work-link::after{border-radius:24px}
-  .work-win{aspect-ratio:4/3.3;border-radius:50% 50% 14px 14px / 30% 30% 14px 14px}
+  .work{--r:22px;--ux:7px;--uy:8px;padding:16px 16px 22px}
+  .work{margin-right:8px}
+  .work-link::after{border-radius:22px}
+  .work-win{aspect-ratio:4/3.3;border-radius:50% 50% 12px 12px / 30% 30% 12px 12px}
   .work-id img{width:60px;height:60px;border-radius:14px}
   .work h3{font-size:1.6rem}
-  .work-act .store{width:100%;justify-content:center}
-  .mail{font-size:1.6rem}
+  .moon .star.c{left:-4%}
 }
 </style>
 </head>
 <body>
 <a class="skip" href="#works"><span data-l="ko">본문으로 건너뛰기</span><span data-l="en" lang="en">Skip to content</span></a>
 
-<div class="night">
+<div class="ply night head">
   <header class="wrap top">
     <a class="brand" href="./" aria-label="ddoystory">
-      <img src="assets/ddoystory-logo-dark.webp" width="150" height="41" alt="ddoystory">
+      <img src="assets/ddoystory-logo-dark.webp" width="148" height="40" alt="ddoystory">
     </a>
     <nav aria-label="Site">
       <a class="nl" href="#works"><span data-l="ko">만든 것들</span><span data-l="en" lang="en">Works</span></a>
@@ -198,22 +132,36 @@ h2,h3,h4{font-family:var(--head);font-weight:700;letter-spacing:-.01em}
   </header>
 
   <section class="wrap hero" aria-labelledby="hero-title">
-    <h1 id="hero-title"><span data-l="ko"><span class="ln">또이다은 스튜디오는</span> <span class="ln">앱과 게임을 만듭니다.</span></span><span data-l="en" lang="en"><span class="ln">ddoystory makes</span> <span class="ln">apps and games.</span></span></h1>
-    <p><span data-l="ko">첫 작품은 iPhone과 iPad에서 보는 동화 앱, 톡톡 동화극장입니다.</span><span data-l="en" lang="en">Our first work is Toki Toki Tale, a storybook app for iPhone and iPad.</span></p>
-    <svg class="star a" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg><svg class="star b" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg><svg class="star c" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg>
+    <div>
+      <h1 id="hero-title" class="cutout"><span data-l="ko"><span class="ln">또이다은 스튜디오는</span> <span class="ln">앱과 게임을 만듭니다.</span></span><span data-l="en" lang="en"><span class="ln">ddoystory makes</span> <span class="ln">apps and games.</span></span></h1>
+      <p><span data-l="ko">첫 작품은 iPhone과 iPad에서 보는 동화 앱, 톡톡 동화극장입니다.</span><span data-l="en" lang="en">Our first work is Toki Toki Tale, a storybook app for iPhone and iPad.</span></p>
+    </div>
+    <figure class="moon" aria-hidden="true">
+      <div class="hole">
+        <span class="rg r1"><i></i></span>
+        <img class="fly" src="assets/layers/magpie-fly.webp" width="436" height="362" alt="">
+        <span class="rg r2"><i></i></span>
+        <span class="rg r3"><i></i></span>
+        <img class="sprig" src="assets/layers/pine-sprig.webp" width="420" height="421" alt="">
+      </div>
+      <svg class="star a" viewBox="0 0 20 20"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg>
+      <svg class="star b" viewBox="0 0 20 20"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg>
+      <svg class="star c" viewBox="0 0 20 20"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg>
+    </figure>
   </section>
+  <div class="cut ridge" aria-hidden="true"></div>
 </div>
 
-<main id="works" class="works" aria-labelledby="works-title">
+<main id="works" class="ply works" aria-labelledby="works-title">
   <div class="wrap">
-    <h2 id="works-title"><span data-l="ko">만든 것들</span><span data-l="en" lang="en">Works</span></h2>
+    <h2 id="works-title" class="cutout"><span data-l="ko">만든 것들</span><span data-l="en" lang="en">Works</span></h2>
     <ul class="grid">
-      <!-- 작품 하나 = li.work 하나. 새 작품은 이 li 를 복사해 아래에 붙이고 링크·그림·글·--tone(색지 색)을 바꾼다. 대표 작품만 class="work wide". -->
-      <li class="work wide" style="--tone:#F27D48">
-        <figure class="work-win">
-          <img src="assets/hero-sunmoon-1600.webp" srcset="assets/hero-sunmoon-900.webp 900w, assets/hero-sunmoon-1600.webp 1600w" sizes="(max-width:1000px) 100vw, 800px" width="1600" height="900" fetchpriority="high"
-               alt="종이를 오려 만든 「해와 달이 된 오누이」 장면. 보름달 뜬 밤, 오누이가 초가집 툇마루에 앉아 웃고 있습니다."
-               data-alt-en="A cut-paper scene from The Sun and the Moon: on a full-moon night, a brother and sister sit smiling on the porch of a thatched house.">
+      <!-- 작품 하나 = li.work 하나. 새 작품은 이 li 를 복사해 아래에 붙이고 링크·그림·글·--under(밑장 색지)를 바꾼다. 대표 작품만 class="... wide". -->
+      <li class="work wide piece stack liftable">
+        <figure class="work-win hole">
+          <img src="assets/magpie-1600.webp" srcset="assets/magpie-900.webp 900w, assets/magpie-1600.webp 1600w" sizes="(max-width:1000px) 100vw, 760px" width="1600" height="900" fetchpriority="high"
+               alt="종이를 오려 만든 「은혜 갚은 까치」 장면. 보름달 뜬 밤, 산길을 걷던 선비가 소나무 가지 위 까치 가족을 바라봅니다."
+               data-alt-en="A cut-paper scene from The Grateful Magpie: on a full-moon night, a young scholar on a mountain path looks up at a magpie family in a pine tree.">
         </figure>
         <div class="work-tx">
           <div class="work-id">
@@ -234,24 +182,25 @@ h2,h3,h4{font-family:var(--head);font-weight:700;letter-spacing:-.01em}
           </div>
         </div>
       </li>
-      <li class="next"><svg class="star " viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg><p><span data-l="ko">다음 작품을 만들고 있습니다.</span><span data-l="en" lang="en">The next one is in the works.</span></p></li>
+      <li class="next"><svg class="star" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg><p><span data-l="ko">다음 작품을 만들고 있습니다.</span><span data-l="en" lang="en">The next one is in the works.</span></p></li>
     </ul>
   </div>
+  <div class="cut hill" aria-hidden="true"></div>
 </main>
 
-<footer class="night" id="contact">
+<footer class="ply night foot-sheet" id="contact">
   <div class="wrap contact">
     <div>
-      <h2><span data-l="ko">문의</span><span data-l="en" lang="en">Contact</span></h2>
+      <h2 class="cutout"><span data-l="ko">문의</span><span data-l="en" lang="en">Contact</span></h2>
       <p><span data-l="ko">작품 사용, 결제, 기록 삭제 요청과 그 밖의 문의는 메일로 받습니다.</span><span data-l="en" lang="en">For help with our apps, purchases, deleting your records or anything else, write to us.</span></p>
     </div>
-    <div><a class="mail" href="mailto:hello@ddoystory.com">hello@ddoystory.com</a></div>
+    <div><a class="mail" href="mailto:hello@ddoystory.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 6.5h17v11h-17zM3.5 7l8.5 6.5L20.5 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>hello@ddoystory.com</a></div>
   </div>
   <div class="wrap"><div class="foot">
     <img src="assets/ddoystory-logo-dark.webp" width="112" height="31" alt="ddoystory">
     <ul aria-label="Toki Toki Tale">
       <li><a href="tokitoki/support/#ko" data-href="tokitoki/support/"><span data-l="ko">톡톡 동화극장 고객 지원</span><span data-l="en" lang="en">Toki Toki Tale support</span></a></li>
-      <li><a href="tokitoki/privacy/"><span data-l="ko">개인정보 처리방침</span><span data-l="en" lang="en">Privacy policy</span></a></li>
+      <li><a href="tokitoki/privacy/#ko" data-href="tokitoki/privacy/"><span data-l="ko">개인정보 처리방침</span><span data-l="en" lang="en">Privacy policy</span></a></li>
     </ul>
     <p><span data-l="ko">© 2026 또이다은 스튜디오</span><span data-l="en" lang="en">© 2026 ddoystory</span></p>
   </div></div>
