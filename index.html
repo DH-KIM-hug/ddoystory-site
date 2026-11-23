@@ -11,7 +11,7 @@
 <meta property="og:title" content="ddoystory">
 <meta property="og:description" content="또이다은 스튜디오(ddoystory)는 앱과 게임을 만듭니다.">
 <meta property="og:url" content="https://ddoystory.com/">
-<meta property="og:image" content="https://ddoystory.com/assets/magpie-1600.webp">
+<meta property="og:image" content="https://ddoystory.com/assets/lion-mouse-1600.webp">
 <link rel="icon" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,18 +32,17 @@
    맨 아래 = 여러 겹 언덕 띠 위 종이 꼬리표(메일), 앞 땅에 바닥글. */
 
 /* ── 첫 화면 ── */
-.hero{display:grid;grid-template-columns:minmax(0,4.3fr) minmax(0,7.7fr);padding-top:clamp(40px,6vw,96px);align-items:center;gap:0 clamp(24px,3vw,48px);padding-left:max(var(--gutter),calc((100% - var(--max)) / 2 + var(--gutter)))}
-.hero-tx{padding:clamp(24px,4vw,64px) 0}
+.hero{display:grid;grid-template-columns:minmax(0,3.7fr) minmax(0,6.3fr);overflow-x:clip;padding-top:clamp(48px,7vw,110px);align-items:center;gap:0 clamp(24px,3vw,48px);padding-left:max(var(--gutter),calc((100% - var(--max)) / 2 + var(--gutter)))}
+.hero-tx{padding:0 0 clamp(40px,6vw,96px)}
 .hero-tx .kicker{display:flex;align-items:center;gap:14px;margin:0 0 clamp(20px,2.4vw,32px)}
 .hero-tx .kicker .rule{width:36px}
-.hero h1{margin:0;font-size:clamp(2rem,3.25vw,3.4rem);line-height:1.32;letter-spacing:.02em}
-.hero h1 .ln{display:block}
-.hero-tx > p:not(.kicker){margin:clamp(18px,2vw,28px) 0 0;font-size:clamp(1.02rem,1.25vw,1.16rem);line-height:1.9;color:var(--sub);max-width:26em}
+.hero h1{margin:0;font-size:clamp(1.8rem,3.2vw,3.3rem);line-height:1.36;letter-spacing:.02em}
+.hero h1 .ln{display:block;white-space:nowrap}
 
 /* 그림 상자 = 솔가지 그림의 비율. 솔가지는 오른쪽 끝에 붙는다. */
-.art{position:relative;aspect-ratio:1400/959;margin-top:clamp(8px,2vw,24px)}
+.art{position:relative;width:116%;aspect-ratio:1400/959;margin-left:-14%}
 .art > img{position:absolute;pointer-events:none}
-.art .moon{width:56%;left:34%;top:-9%;filter:drop-shadow(0 2px 2px rgba(var(--sh),.16)) drop-shadow(0 8px 14px rgba(var(--sh),.08))}
+.art .moon{width:54%;left:30%;top:-12%;filter:drop-shadow(0 2px 2px rgba(var(--sh),.16)) drop-shadow(0 8px 14px rgba(var(--sh),.08))}
 .art .pine{width:100%;left:0;bottom:0;filter:var(--piece-shadow)}
 .art .magpie{width:40%;left:55.8%;top:-8.8%;filter:var(--piece-shadow)}
 
@@ -89,18 +88,21 @@
 .contact p{margin:10px 0 0;color:var(--sub);max-width:30em;font-size:16.5px}
 .land .tagnote{width:clamp(250px,25vw,380px);right:max(var(--gutter),calc((100% - var(--max)) / 2 + var(--gutter)));bottom:-8%}
 
+@media (max-width:1100px){
+  .art{width:112%;margin-left:-10%}
+}
 @media (max-width:1000px){
   .card-in{grid-template-columns:auto minmax(0,1fr)}
   .card-tx{grid-column:2}
   .vtail{grid-row:1 / span 2}
 }
 @media (max-width:760px){
-  .hero{grid-template-columns:minmax(0,1fr);padding-right:0}
-  .hero-tx{order:2;padding:8px var(--gutter) 28px 0}
-  .art{order:1;margin-left:18%;margin-top:0}
+  .hero{grid-template-columns:minmax(0,1fr);padding-right:0;padding-top:clamp(40px,12vw,90px)}
+  .hero-tx{order:2;padding:clamp(20px,5vw,36px) var(--gutter) 36px 0}
+  .art{order:1;width:115%;margin-left:-13%}
 }
 @media (max-width:640px){
-  .hero h1{font-size:clamp(1.85rem,8.4vw,2.3rem)}
+  .hero h1{font-size:clamp(1.7rem,8.2vw,2.3rem)}
   .card-in{grid-template-columns:minmax(0,1fr);padding:12px 4px 16px 0;gap:18px}
   .vtail{writing-mode:horizontal-tb;grid-row:auto;padding-top:0}
   .vtail .vrule{width:28px;height:1px}
@@ -129,7 +131,6 @@
   <div class="hero-tx">
     <p class="kicker tail" aria-hidden="true"><span class="rule"></span><span lang="en">ddoystory studio</span></p>
     <h1 id="hero-title"><span data-l="ko"><span class="ln">또이다은 스튜디오는</span> <span class="ln">앱과 게임을 만듭니다.</span></span><span data-l="en" lang="en"><span class="ln">ddoystory makes</span> <span class="ln">apps and games.</span></span></h1>
-    <p><span data-l="ko">첫 작품은 iPhone과 iPad에서 보는 동화 앱, 톡톡 동화극장입니다.</span><span data-l="en" lang="en">Our first work is Toki Toki Tale, a storybook app for iPhone and iPad.</span></p>
   </div>
   <div class="art" data-art="home" aria-hidden="true">
     <img class="moon" src="assets/paper/moon.webp" width="820" height="828" alt="">
@@ -149,9 +150,9 @@
     <div class="card-in">
       <p class="vtail" aria-hidden="true" style="margin:0"><span class="tail" lang="en">No. 01</span><span class="vrule"></span><span class="tail" lang="en">Toki Toki Tale</span></p>
       <figure class="win hole">
-        <img src="assets/magpie-1600.webp" srcset="assets/magpie-900.webp 900w, assets/magpie-1600.webp 1600w" sizes="(max-width:1000px) 100vw, 640px" width="1600" height="900" loading="lazy" decoding="async"
-             alt="종이를 오려 만든 「은혜 갚은 까치」 장면. 보름달 뜬 밤, 산길을 걷던 선비가 소나무 가지 위 까치 가족을 바라봅니다."
-             data-alt-en="A cut-paper scene from The Grateful Magpie: on a full-moon night, a young scholar on a mountain path looks up at a magpie family in a pine tree.">
+        <img src="assets/lion-mouse-1600.webp" srcset="assets/lion-mouse-900.webp 900w, assets/lion-mouse-1600.webp 1600w" sizes="(max-width:1000px) 100vw, 640px" width="1600" height="900" loading="lazy" decoding="async"
+             alt="종이를 오려 만든 「사자와 생쥐」 장면. 해가 뜬 초원의 나무 그늘에서 사자가 잠들어 있고, 그 곁으로 생쥐가 다가옵니다."
+             data-alt-en="A cut-paper scene from The Lion and the Mouse: on a sunny savanna, a lion sleeps in the shade of a tree as a little mouse comes near.">
       </figure>
       <div class="card-tx">
         <div class="app-id">

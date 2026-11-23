@@ -33,18 +33,18 @@
 /* ── 첫 화면: 글과 장면이 한 칸에 겹친다(넓은 화면). 장면은 화면 좌우 끝까지. ── */
 .thero{display:grid;position:relative;overflow:hidden}
 .thero > *{grid-area:1 / 1}
-.hero-tx{align-self:start;position:relative;z-index:3;padding-left:max(var(--gutter),calc((100% - var(--max)) / 2 + var(--gutter)));padding-top:clamp(16px,2.4vw,40px);max-width:calc(max(var(--gutter),(100% - var(--max)) / 2 + var(--gutter)) + 520px)}
+.hero-tx{align-self:start;position:relative;z-index:3;padding-left:max(var(--gutter),calc((100% - var(--max)) / 2 + var(--gutter)));padding-top:clamp(16px,2.4vw,40px);max-width:calc(max(var(--gutter),(100% - var(--max)) / 2 + var(--gutter)) + 700px)}
 .hero-tx .kicker{display:flex;align-items:center;gap:14px;margin:0 0 clamp(18px,2vw,28px)}
 .hero-tx .kicker .rule{width:36px}
-.thero h1{margin:0;font-size:clamp(2rem,3.3vw,3.3rem);line-height:1.32;letter-spacing:.02em}
-.thero h1 .ln{display:block}
+.thero h1{margin:0;font-size:clamp(1.8rem,2.85vw,2.9rem);line-height:1.36;letter-spacing:.02em}
+.thero h1 .ln{display:block;white-space:nowrap}
 .hero-tx > p:not(.kicker){margin:clamp(14px,1.6vw,22px) 0 0;font-size:clamp(1rem,1.2vw,1.12rem);line-height:1.85;color:var(--sub);max-width:28em}
 .ctas{margin-top:clamp(20px,2vw,28px);display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
 
 /* 장면 상자 = 언덕 그림의 비율. 해·토끼·거북이·감나무는 이 상자 안 % 자리. */
 .scene{position:relative;align-self:end;width:100%;aspect-ratio:1536/862;margin-top:clamp(250px,20vw,300px)}
 .scene > img{position:absolute;pointer-events:none}
-.scene .sun{width:29%;left:49%;top:-23%;filter:drop-shadow(0 2px 2px rgba(var(--sh),.16)) drop-shadow(0 8px 14px rgba(var(--sh),.08))}
+.scene .sun{width:28%;left:56%;top:-23%;filter:drop-shadow(0 2px 2px rgba(var(--sh),.16)) drop-shadow(0 8px 14px rgba(var(--sh),.08))}
 .scene .hills-art{width:100%;left:0;bottom:0;filter:drop-shadow(0 -1px 2px rgba(var(--sh),.18))}
 .scene .rabbit{width:36%;left:27%;top:22%;filter:var(--piece-shadow)}
 .scene .turtle{width:28.8%;left:60%;top:42%;filter:var(--piece-shadow)}
@@ -144,7 +144,7 @@
 }
 @media (max-width:640px){
   .thero h1{font-size:clamp(1.75rem,7.6vw,2.1rem)}
-  .thero h1 .ln{display:inline}
+  .thero h1 .ln{display:inline;white-space:normal}
   .scene{width:130%;margin-left:-30%;margin-top:19vw}
   .scene .persimmon{left:22%;width:30%}
   .ctas{width:100%}
