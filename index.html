@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ddoystory</title>
-<meta name="description" content="또이다은 스튜디오(ddoystory)가 만든 앱 — 톡톡 동화극장(Toki Toki Tale), 2~5세를 위한 종이 오림 동화 앱">
+<meta name="description" content="또이다은 스튜디오(ddoystory)는 앱과 게임을 만듭니다. 첫 작품은 톡톡 동화극장(Toki Toki Tale)입니다.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#1F2A56">
 <meta property="og:title" content="ddoystory">
-<meta property="og:description" content="톡톡 동화극장(Toki Toki Tale) — 2~5세를 위한 종이 오림 동화 앱">
+<meta property="og:description" content="또이다은 스튜디오(ddoystory)는 앱과 게임을 만듭니다.">
+<meta property="og:url" content="https://ddoystory.com/">
 <meta property="og:image" content="https://ddoystory.com/assets/hero-sunmoon-1600.webp">
 <link rel="icon" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/icon.png">
@@ -17,8 +18,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Gowun+Dodum&family=Hahmlet:wght@500;600;700&display=swap">
 <style>
 /* ── 토큰 ─────────────────────────────────────────────
-   밤 남색(잠자리 동화의 하늘)이 회사의 바탕색이고, 앱 그림의 색지(감, 볏짚 금색)를
-   조각처럼 올린다. 로고의 민트 별만 장식으로 쓴다.
+   톡톡 동화극장 페이지(tokitoki/)와 같은 토큰. 밤 남색이 회사의 바탕색이고,
+   작품마다 색지 한 장(--tone)을 깔고 그 위에 아치 창을 뚫어 대표 그림을 보인다.
    글꼴: 굵은 둥근 글꼴(Bagel Fat One)은 첫머리 한 줄에만, 제목은 함렛(Hahmlet), 본문은 고운돋움. */
 :root{
   --night:#1F2A56;
@@ -86,87 +87,56 @@ h2,h3,h4{font-family:var(--head);font-weight:700;letter-spacing:-.01em}
 .lang a{min-width:44px;min-height:40px;display:inline-grid;place-items:center;border-radius:999px;text-decoration:none;font-size:15px;color:var(--night-sub)}
 .lang a[aria-current]{background:var(--night-ink);color:#1F2A56}
 
-.hero{padding-top:clamp(28px,5vw,72px)}
-.hero h1{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(2.3rem,4.6vw,4.75rem);line-height:1.16;letter-spacing:0;text-shadow:0 3px 0 rgba(0,0,0,.28)}
+.hero{position:relative;padding-top:clamp(40px,7vw,112px);padding-bottom:clamp(40px,5vw,72px)}
+.hero h1{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(2.3rem,5.4vw,5.5rem);line-height:1.14;letter-spacing:0;text-shadow:0 3px 0 rgba(0,0,0,.28)}
 .hero h1 .ln{display:block}
-.hero-row{margin-top:clamp(24px,2.6vw,36px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px 40px}
-.hero-row p{margin:0;font-size:clamp(1.05rem,1.35vw,1.25rem);color:var(--night-sub);max-width:40em}
-.ctas{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px}
-.ctas .more{color:var(--night-ink);text-decoration:underline;text-decoration-color:var(--mint);text-decoration-thickness:2px;text-underline-offset:.35em;font-size:17px;min-height:44px;display:inline-flex;align-items:center}
-
-/* 무대: 남색 종이에 뚫린 넓은 아치. 아래쪽은 흰 바닥으로 걸쳐 내려온다. */
-.stage{position:relative;width:var(--stage);margin:clamp(40px,5vw,64px) 0 calc(-1 * clamp(64px,9vw,160px)) calc((100% - var(--stage)) / 2)}
-.arch{position:relative;border-radius:50% 50% 28px 28px / 34% 34% 28px 28px;overflow:hidden;aspect-ratio:21/9;background:#16204A;box-shadow:0 30px 60px -30px rgba(10,14,40,.6)}
-.arch img{width:100%;height:100%;object-fit:cover;object-position:50% 62%}
-.arch::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 22px 36px -14px rgba(5,8,25,.7),inset 0 0 0 2px rgba(5,8,25,.25);pointer-events:none}
-.stage figcaption{position:absolute;right:28px;bottom:18px;padding:6px 14px;border-radius:999px;background:rgba(14,20,52,.72);color:#FFF6E6;font-size:14px}
+.hero p{margin:clamp(20px,2.4vw,32px) 0 0;font-size:clamp(1.05rem,1.35vw,1.25rem);color:var(--night-sub);max-width:34em}
 .star{position:absolute;color:var(--mint);width:var(--s);height:var(--s)}
-.stage .star.a{--s:40px;left:-14px;top:30%}
-.stage .star.b{--s:24px;right:10%;top:-34px}
-.stage .star.c{--s:16px;left:22%;top:-22px;color:var(--gold)}
+.hero .star.a{--s:48px;right:calc(var(--gutter) + 9%);top:42%}
+.hero .star.b{--s:24px;right:calc(var(--gutter) + 19%);top:28%;color:var(--gold)}
+.hero .star.c{--s:18px;right:calc(var(--gutter) + 2%);top:66%}
 
-/* ── 앱 한 편 ───────────────────────────────────────
-   앱이 늘면 article.app 을 복사해 이어 붙이고 /<앱>/support/, /<앱>/privacy/ 를 연결한다. */
-.app{padding-top:calc(clamp(64px,9vw,160px) + clamp(56px,6vw,96px));padding-bottom:clamp(72px,8vw,128px)}
-.app-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,4.5vw,80px);align-items:start}
-.col-l,.col-r{display:flex;flex-direction:column;gap:clamp(18px,2vw,28px)}
-.col-l{gap:clamp(40px,4vw,56px)}
-.app-info{display:flex;flex-direction:column;gap:28px}
-.app-id{display:flex;align-items:center;gap:20px}
-.app-id img{width:96px;height:96px;border-radius:22px;box-shadow:var(--lift)}
-.app-id h3{margin:0;font-size:clamp(2rem,3vw,2.75rem);line-height:1.15}
-.app-id p{margin:4px 0 0;color:var(--sub);font-size:16px}
-.lede{margin:0;font-size:clamp(1.1rem,1.4vw,1.25rem);line-height:1.8}
-.facts{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.facts li{padding:6px 14px;border-radius:999px;background:var(--mist);font-size:15px;white-space:nowrap}
-.promise{padding-top:24px;border-top:1px solid var(--line)}
-.promise h4{margin:0;font-size:1.2rem;line-height:1.4}
-.promise p{margin:8px 0 0;color:var(--sub);font-size:17px}
-.links{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.links li{border-bottom:1px solid var(--line)}
-.links a{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;text-decoration:none;color:var(--ink)}
-.links .t{font-family:var(--head);font-weight:600;font-size:1.1rem}
-.links small{display:block;font-size:15px;color:var(--sub);line-height:1.5}
-.links svg{width:22px;height:22px;flex:none;transition:transform .3s var(--ease)}
-.links a:hover svg{transform:translateX(4px)}
-.links a:hover .t{text-decoration:underline;text-underline-offset:.25em}
+/* ── 만든 것들 ──────────────────────────────────────
+   밤 띠가 제목 뒤와 카드 윗부분까지 이어지고, 카드는 그 경계에 걸친다. */
+.works{position:relative;padding-bottom:clamp(72px,8vw,128px)}
+.works::before{content:"";position:absolute;left:0;right:0;top:0;height:clamp(240px,24vw,380px);background:var(--night)}
+.works .wrap{position:relative}
+.works h2{margin:0;color:var(--night-ink);font-size:clamp(1.6rem,2.4vw,2.1rem);line-height:1.3}
+.grid{list-style:none;margin:clamp(20px,2.4vw,32px) 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,48px)}
 
-/* 색지 조각 세 장: 누르기(감) · 잠자리(밤) · 두 언어(금) */
-.sheet{border-radius:32px;padding:clamp(24px,3vw,44px);box-shadow:var(--lift)}
-.sheet h4{margin:0;font-size:clamp(1.45rem,2vw,1.9rem);line-height:1.3}
-.sheet p{margin:12px 0 0;font-size:18px;line-height:1.75;max-width:36em}
-.sheet .win{margin-top:28px;border-radius:20px;overflow:hidden;position:relative;background:rgba(0,0,0,.12)}
-.sheet .win::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--hole);pointer-events:none}
-.sheet .win img{width:100%}
-.s-play{background:var(--persimmon);color:var(--on-sheet)}
-.s-lang{background:var(--gold);color:var(--on-sheet)}
-.s-night{background:#1F2A56;color:var(--night-ink);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,240px);gap:24px clamp(24px,3vw,48px);align-items:center;position:relative}
-.s-night p{color:var(--night-sub)}
-.s-night .win{margin-top:0;border-radius:28px}
-.s-night .star{color:var(--gold)}
-.s-night .star.a{--s:20px;left:clamp(24px,3vw,44px);bottom:44px}
-.s-night .star.b{--s:30px;left:calc(clamp(24px,3vw,44px) + 44px);bottom:72px;color:var(--mint)}
-@media (prefers-color-scheme:dark){.s-night{background:#26316B}}
+/* 작품 카드 한 장 = 색지 한 장 + 아치 창. 카드 전체가 작품 페이지로 가는 링크(.work-link 의 ::after). */
+.work{position:relative;display:flex;flex-direction:column;gap:clamp(20px,2.4vw,32px);background:var(--tone,var(--mist));color:var(--on-sheet);border-radius:32px;padding:clamp(20px,2.6vw,40px);box-shadow:var(--lift)}
+.work-win{position:relative;margin:0;overflow:hidden;aspect-ratio:16/10;border-radius:50% 50% 20px 20px / 30% 30% 20px 20px;background:#16204A}
+.work-win img{width:100%;height:100%;object-fit:cover;object-position:50% 60%;transition:transform .6s var(--ease)}
+.work-win::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:var(--hole);pointer-events:none}
+.work:hover .work-win img{transform:scale(1.035)}
+.work-tx{display:flex;flex-direction:column;gap:18px;min-width:0}
+.work-id{display:flex;align-items:center;gap:16px}
+.work-id img{width:72px;height:72px;border-radius:17px;box-shadow:0 8px 18px -10px rgba(24,20,40,.55);flex:none}
+.work h3{margin:0;font-size:clamp(1.6rem,2.4vw,2.3rem);line-height:1.2}
+.work-link{text-decoration:none}
+.work-link::after{content:"";position:absolute;inset:0;border-radius:32px;z-index:1}
+.work-link:focus-visible{outline:none}
+.work-link:focus-visible::after{outline:3px solid var(--night);outline-offset:4px}
+.work-id p{margin:2px 0 0;font-size:15px;opacity:.78}
+.work-line{margin:0;font-size:clamp(1.05rem,1.3vw,1.2rem);line-height:1.75;max-width:30em}
+.work-meta{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.work-meta li{padding:5px 14px;border-radius:999px;background:rgba(24,33,74,.12);font-size:15px;white-space:nowrap}
+.work-act{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:auto;padding-top:4px}
+.work-act .store{position:relative;z-index:2;min-height:48px;padding:0 20px 0 18px;font-size:16px;background:#1F2A56;color:#FFF6E6;box-shadow:0 3px 0 rgba(10,14,40,.25)}
+.work-act .go{display:inline-flex;align-items:center;gap:10px;font-family:var(--head);font-weight:600;font-size:1.05rem}
+.work-act .go svg{width:20px;height:20px;transition:transform .3s var(--ease)}
+.work:hover .go svg{transform:translateX(4px)}
+.work:hover .go span{text-decoration:underline;text-underline-offset:.25em}
 
-/* ── 동화 한 편 + 서가 (안개 띠) ────────────────────── */
-.library{background:var(--mist);padding-top:clamp(64px,8vw,128px);padding-bottom:clamp(64px,8vw,128px)}
-.feature{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,6vw,112px);align-items:center}
-.poster{margin:0;border-radius:24px;overflow:hidden;box-shadow:0 2px 0 rgba(24,20,40,.06),0 40px 70px -40px rgba(24,20,40,.7);background:#F4ECDD}
-.poster img{width:100%;aspect-ratio:3/4;object-fit:cover}
-.feature-tx .from{margin:0;color:var(--sub);font-size:16px}
-.feature-tx h4{margin:8px 0 0;font-size:clamp(2.2rem,4vw,3.6rem);line-height:1.15}
-.feature-tx .line{margin:20px 0 0;font-size:clamp(1.15rem,1.5vw,1.35rem);line-height:1.8;max-width:26em}
-.feature-tx dl{margin:32px 0 0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 28px;max-width:30em;padding-top:24px;border-top:1px solid var(--line)}
-.feature-tx dt{font-family:var(--head);font-weight:600;font-size:16px;white-space:nowrap}
-.feature-tx dd{margin:0;color:var(--sub);font-size:17px}
+/* 넓은 대표 카드: 두 칸을 다 쓰고, 그림과 글을 옆으로 놓는다 */
+.work.wide{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:stretch;gap:clamp(28px,3.4vw,56px)}
+.work.wide .work-tx{justify-content:center;gap:22px;padding:clamp(4px,1vw,16px) 0}
+.work.wide .work-act{margin-top:12px}
 
-.shelf-head{margin-top:clamp(80px,9vw,144px);display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 32px}
-.shelf-head h4{margin:0;font-size:clamp(2rem,3.4vw,3rem);line-height:1.15}
-.shelf-head p{margin:0;color:var(--sub);font-size:17px}
-.tales{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:32px 24px}
-.tales li{margin:0}
-.tales img{width:100%;aspect-ratio:4/3;border-radius:16px;box-shadow:0 14px 24px -18px rgba(24,20,40,.6)}
-.tales span{display:block;margin-top:12px;font-size:16.5px;line-height:1.45}
+.next{grid-column:1 / -1;display:flex;align-items:center;gap:12px;color:var(--sub);font-size:17px}
+.next p{margin:0}
+.next .star{position:static;--s:16px;flex:none}
 
 /* ── 문의 + 꼬리 (밤 띠) ────────────────────────────── */
 .contact{padding-top:clamp(64px,8vw,120px);padding-bottom:clamp(40px,5vw,64px);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px clamp(40px,5vw,88px);align-items:end}
@@ -177,55 +147,41 @@ h2,h3,h4{font-family:var(--head);font-weight:700;letter-spacing:-.01em}
 .foot{border-top:1px solid rgba(201,208,234,.25);padding-top:24px;padding-bottom:36px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;font-size:15px;color:var(--night-sub)}
 .foot p{margin:0}
 .foot img{width:112px}
+.foot ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 20px}
+.foot ul a{color:var(--night-sub);text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.foot ul a:hover{color:var(--night-ink);text-decoration:underline;text-underline-offset:.25em}
 
-/* 한 번의 등장: 아치 속 장면이 무대에 오른다 */
+/* 한 번의 등장: 첫 작품의 그림이 아치 창 안으로 오른다 */
 @media (prefers-reduced-motion:no-preference){
-  .arch img{animation:rise 1.6s var(--ease) .1s both}
-  .stage .star{animation:twinkle .9s var(--ease) both}
-  .stage .star.a{animation-delay:.9s}.stage .star.b{animation-delay:1.05s}.stage .star.c{animation-delay:1.2s}
+  .work.wide .work-win img{animation:rise 1.4s var(--ease) .15s both}
   @keyframes rise{from{transform:translateY(8%) scale(1.06)}to{transform:none}}
-  @keyframes twinkle{from{transform:scale(0) rotate(-45deg);opacity:0}to{transform:none;opacity:1}}
 }
-@media (prefers-reduced-motion:reduce){.store,.links svg{transition:none}.store:hover{transform:none}}
+@media (prefers-reduced-motion:reduce){.store,.work-win img,.go svg{transition:none}.store:hover{transform:none}.work:hover .work-win img{transform:none}}
 
 /* ── 좁은 화면 ─────────────────────────────────────── */
 @media (max-width:1000px){
-  .app-grid,.feature,.contact{grid-template-columns:minmax(0,1fr)}
-  .feature .poster{max-width:520px}
-  .tales{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .work.wide{grid-template-columns:minmax(0,1fr)}
+  .contact{grid-template-columns:minmax(0,1fr)}
+  .hero .star{display:none}
 }
 @media (max-width:640px){
   body{font-size:16.5px}
   .brand img{width:118px}
   .top .nl{display:none}
-  .hero h1{font-size:2.15rem}
-  html[lang=en] .hero h1{font-size:2.1rem}
-  .hero h1 .ln{display:inline}
-  .store{width:100%;justify-content:center}
-  .ctas{width:100%}
-  .arch{aspect-ratio:4/3.3;border-radius:50% 50% 20px 20px / 30% 30% 20px 20px}
-  .stage figcaption{right:12px;bottom:12px;font-size:13px}
-  .stage .star.a{--s:28px;left:-8px}
-  .app-id img{width:76px;height:76px;border-radius:18px}
-  .app-id h3{font-size:1.9rem}
-  .sheet{border-radius:24px;padding:22px}
-  .sheet p{font-size:16.5px}
-  .s-night{grid-template-columns:minmax(0,1fr)}
-  .s-night .win{max-width:250px;justify-self:center}
-  .s-night .star{display:none}
-  .feature-tx dl{grid-template-columns:minmax(0,1fr);gap:2px}
-  .feature-tx dd{margin-bottom:10px}
-  /* 폰: 서가를 두 줄 가로 선반으로 */
-  .tales{grid-template-columns:none;grid-auto-flow:column;grid-template-rows:auto auto;grid-auto-columns:44%;gap:18px 12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-left:calc(-1 * var(--gutter));margin-right:calc(-1 * var(--gutter));padding:4px var(--gutter) 14px;scroll-padding-left:var(--gutter);scrollbar-width:thin}
-  .tales li{scroll-snap-align:start}
-  .tales img{border-radius:12px}
-  .tales span{font-size:14.5px;margin-top:8px}
+  .hero h1{font-size:clamp(1.75rem,8.6vw,2.15rem)}
+  .grid{grid-template-columns:minmax(0,1fr)}
+  .work{border-radius:24px;padding:18px 18px 22px}
+  .work-link::after{border-radius:24px}
+  .work-win{aspect-ratio:4/3.3;border-radius:50% 50% 14px 14px / 30% 30% 14px 14px}
+  .work-id img{width:60px;height:60px;border-radius:14px}
+  .work h3{font-size:1.6rem}
+  .work-act .store{width:100%;justify-content:center}
   .mail{font-size:1.6rem}
 }
 </style>
 </head>
 <body>
-<a class="skip" href="#apps"><span data-l="ko">본문으로 건너뛰기</span><span data-l="en" lang="en">Skip to content</span></a>
+<a class="skip" href="#works"><span data-l="ko">본문으로 건너뛰기</span><span data-l="en" lang="en">Skip to content</span></a>
 
 <div class="night">
   <header class="wrap top">
@@ -233,7 +189,7 @@ h2,h3,h4{font-family:var(--head);font-weight:700;letter-spacing:-.01em}
       <img src="assets/ddoystory-logo-dark.webp" width="150" height="41" alt="ddoystory">
     </a>
     <nav aria-label="Site">
-      <a class="nl" href="#apps"><span data-l="ko">앱</span><span data-l="en" lang="en">Apps</span></a>
+      <a class="nl" href="#works"><span data-l="ko">만든 것들</span><span data-l="en" lang="en">Works</span></a>
       <a class="nl" href="#contact"><span data-l="ko">문의</span><span data-l="en" lang="en">Contact</span></a>
       <div class="lang" role="group" aria-label="Language">
         <a href="#ko" data-set="ko" lang="ko">한</a><a href="#en" data-set="en" lang="en">En</a>
@@ -242,179 +198,66 @@ h2,h3,h4{font-family:var(--head);font-weight:700;letter-spacing:-.01em}
   </header>
 
   <section class="wrap hero" aria-labelledby="hero-title">
-    <!-- 사용자가 고칠 문구: 회사 소개 한 줄 -->
-    <h1 id="hero-title"><span data-l="ko"><span class="ln">또이다은 스튜디오는</span> <span class="ln">아이와 가족을 위한 앱을 만듭니다.</span></span><span data-l="en" lang="en"><span class="ln">ddoystory makes apps</span> <span class="ln">for children and their families.</span></span></h1>
-    <div class="hero-row">
-      <p><span data-l="ko">첫 앱 톡톡 동화극장은 종이를 오려 만든 동화 앱입니다. iPhone과 iPad에서 쓸 수 있습니다.</span><span data-l="en" lang="en">Our first app, Toki Toki Tale, is a storybook app made of cut paper, for iPhone and iPad.</span></p>
-      <div class="ctas">
-        <a class="store on-night" data-appstore href="https://apps.apple.com/"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v10M5.5 8.5 10 13l4.5-4.5M4 16.5h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-l="ko">App Store에서 받기</span><span data-l="en" lang="en">Download on the App Store</span></a>
-        <a class="more" href="#tokitoki"><span data-l="ko">톡톡 동화극장 둘러보기</span><span data-l="en" lang="en">Take a look inside</span></a>
-      </div>
-    </div>
-    <figure class="stage">
-      <div class="arch">
-        <img src="assets/hero-sunmoon-1600.webp" srcset="assets/hero-sunmoon-900.webp 900w, assets/hero-sunmoon-1600.webp 1600w" sizes="(max-width:1400px) 100vw, 1300px" width="1600" height="900" fetchpriority="high"
-             alt="종이를 오려 만든 「해와 달이 된 오누이」 장면. 보름달 뜬 밤, 오누이가 초가집 툇마루에 앉아 웃고 있습니다."
-             data-alt-en="A cut-paper scene from The Sun and the Moon: on a full-moon night, a brother and sister sit smiling on the porch of a thatched house.">
-      </div>
-      <svg class="star a" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg>
-      <svg class="star b" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg>
-      <svg class="star c" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg>
-      <figcaption><span data-l="ko">「해와 달이 된 오누이」</span><span data-l="en" lang="en">The Sun and the Moon</span></figcaption>
-    </figure>
+    <h1 id="hero-title"><span data-l="ko"><span class="ln">또이다은 스튜디오는</span> <span class="ln">앱과 게임을 만듭니다.</span></span><span data-l="en" lang="en"><span class="ln">ddoystory makes</span> <span class="ln">apps and games.</span></span></h1>
+    <p><span data-l="ko">첫 작품은 iPhone과 iPad에서 보는 동화 앱, 톡톡 동화극장입니다.</span><span data-l="en" lang="en">Our first work is Toki Toki Tale, a storybook app for iPhone and iPad.</span></p>
+    <svg class="star a" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg><svg class="star b" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg><svg class="star c" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg>
   </section>
 </div>
 
-<main id="apps">
-  <h2 class="vh"><span data-l="ko">우리가 만든 앱</span><span data-l="en" lang="en">Our apps</span></h2>
-
-  <!-- 앱 하나 = article.app 하나. 새 앱은 이 블록을 복사하고 /<앱>/support/, /<앱>/privacy/ 를 연결한다. -->
-  <article id="tokitoki" aria-labelledby="tokitoki-title">
-    <div class="wrap app"><div class="app-grid">
-      <div class="col-l">
-      <div class="app-info">
-        <div class="app-id">
-          <img src="assets/icon-256.webp" width="96" height="96" alt="">
-          <div>
-            <h3 id="tokitoki-title"><span data-l="ko">톡톡 동화극장</span><span data-l="en" lang="en">Toki Toki Tale</span></h3>
-            <p><span data-l="ko">Toki Toki Tale</span><span data-l="en" lang="en">톡톡 동화극장</span></p>
+<main id="works" class="works" aria-labelledby="works-title">
+  <div class="wrap">
+    <h2 id="works-title"><span data-l="ko">만든 것들</span><span data-l="en" lang="en">Works</span></h2>
+    <ul class="grid">
+      <!-- 작품 하나 = li.work 하나. 새 작품은 이 li 를 복사해 아래에 붙이고 링크·그림·글·--tone(색지 색)을 바꾼다. 대표 작품만 class="work wide". -->
+      <li class="work wide" style="--tone:#F27D48">
+        <figure class="work-win">
+          <img src="assets/hero-sunmoon-1600.webp" srcset="assets/hero-sunmoon-900.webp 900w, assets/hero-sunmoon-1600.webp 1600w" sizes="(max-width:1000px) 100vw, 800px" width="1600" height="900" fetchpriority="high"
+               alt="종이를 오려 만든 「해와 달이 된 오누이」 장면. 보름달 뜬 밤, 오누이가 초가집 툇마루에 앉아 웃고 있습니다."
+               data-alt-en="A cut-paper scene from The Sun and the Moon: on a full-moon night, a brother and sister sit smiling on the porch of a thatched house.">
+        </figure>
+        <div class="work-tx">
+          <div class="work-id">
+            <img src="assets/icon-256.webp" width="72" height="72" alt="">
+            <div>
+              <h3><a class="work-link" href="tokitoki/#ko" data-href="tokitoki/"><span data-l="ko">톡톡 동화극장</span><span data-l="en" lang="en">Toki Toki Tale</span></a></h3>
+              <p><span data-l="ko">Toki Toki Tale</span><span data-l="en" lang="en">톡톡 동화극장</span></p>
+            </div>
+          </div>
+          <p class="work-line"><span data-l="ko">2~5세 아이가 종이를 오려 만든 동화를 보고 듣는 동화 앱입니다.</span><span data-l="en" lang="en">A storybook app made of cut paper, for children aged 2 to 5.</span></p>
+          <ul class="work-meta">
+            <li>iPhone, iPad</li>
+            <li><span data-l="ko">한국어, 영어</span><span data-l="en" lang="en">Korean and English</span></li>
+          </ul>
+          <div class="work-act">
+            <a class="store" data-appstore href="https://apps.apple.com/"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v10M5.5 8.5 10 13l4.5-4.5M4 16.5h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-l="ko">App Store에서 받기</span><span data-l="en" lang="en">Download on the App Store</span></a>
+            <span class="go" aria-hidden="true"><span data-l="ko">자세히 보기</span><span data-l="en" lang="en">See the app</span><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M2 11h16M12 5l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
         </div>
-        <p class="lede">
-          <span data-l="ko">2~5세 아이가 종이를 오려 만든 동화 속으로 들어가 이야기를 함께 이어 가는 동화 앱입니다. 전래동화, 이솝 우화, 세계 명작을 부모님과 함께 읽고 듣습니다.</span>
-          <span data-l="en" lang="en">A storybook app for ages 2 to 5, where children step into hand-cut paper tales and carry the story along. Folktales, Aesop’s fables and world classics, read and heard together with a parent.</span>
-        </p>
-        <ul class="facts">
-          <li><span data-l="ko">2~5세</span><span data-l="en" lang="en">Ages 2–5</span></li>
-          <li>iPhone, iPad</li>
-          <li><span data-l="ko">한국어, 영어</span><span data-l="en" lang="en">Korean and English</span></li>
-          <li><span data-l="ko">iOS 15.0 이상</span><span data-l="en" lang="en">iOS 15.0 or later</span></li>
-        </ul>
-        <div><a class="store on-page" data-appstore href="https://apps.apple.com/"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v10M5.5 8.5 10 13l4.5-4.5M4 16.5h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-l="ko">App Store에서 받기</span><span data-l="en" lang="en">Download on the App Store</span></a></div>
-        <div class="promise">
-          <h4><span data-l="ko">광고도, 로그인도 없이</span><span data-l="en" lang="en">No ads, no sign-in</span></h4>
-          <p><span data-l="ko">아이에게 보이는 구매 버튼이 없고, 구매와 기기 연결 앞에는 어른 확인이 있습니다. 인터넷이 없어도 동화를 볼 수 있습니다.</span><span data-l="en" lang="en">No purchase buttons are shown to children, and a grown-up check comes before purchases and linking devices. Tales play without an internet connection.</span></p>
-        </div>
-        <ul class="links">
-          <li><a href="tokitoki/support/#ko" data-href="tokitoki/support/"><span><span class="t"><span data-l="ko">고객 지원</span><span data-l="en" lang="en">Support</span></span><small><span data-l="ko">자주 묻는 질문과 문의</span><span data-l="en" lang="en">FAQ and contact</span></small></span><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M2 11h16M12 5l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-          <li><a href="tokitoki/privacy/"><span><span class="t"><span data-l="ko">개인정보 처리방침</span><span data-l="en" lang="en">Privacy policy</span></span><small><span data-l="ko">앱이 쓰는 정보와 지우는 방법</span><span data-l="en" lang="en">What data the app uses and how to delete it</span></small></span><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M2 11h16M12 5l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-        </ul>
-      </div>
-        <section class="sheet s-night">
-          <div>
-            <h4><span data-l="ko">화면을 꺼도 읽어 주는 잠자리 동화</span><span data-l="en" lang="en">Bedtime, with the screen off</span></h4>
-            <p><span data-l="ko">읽어 주기를 고르면 처음부터 끝까지 소리 내어 읽고, 화면을 꺼도 멈추지 않습니다. 한 편이 끝나면 다음 동화로 이어집니다.</span><span data-l="en" lang="en">Read-aloud mode reads every tale from start to finish and keeps going with the screen off, then moves on to the next tale.</span></p>
-          </div>
-          <div class="win">
-            <img data-l="ko" src="assets/shot-bedtime-ko.webp" width="560" height="1217" loading="lazy" decoding="async" alt="앱 화면: 잠자리 동화로 「인어공주」를 읽어 주는 중, 일시정지와 다음 동화 단추">
-            <img data-l="en" lang="en" src="assets/shot-bedtime-en.webp" width="560" height="1217" loading="lazy" decoding="async" alt="App screen: The Little Mermaid playing as a bedtime tale, with pause and next-tale buttons">
-          </div>
-          <svg class="star a" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg>
-          <svg class="star b" viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg>
-        </section>
-      </div>
-
-      <div class="col-r">
-        <section class="sheet s-play">
-          <h4><span data-l="ko">누르고 고르며 잇는 이야기</span><span data-l="en" lang="en">Tap, choose, put in order</span></h4>
-          <p><span data-l="ko">화면을 누르고, 고르고, 순서대로 놓으며 이야기를 이어 갑니다. 크기 비교, 같은 색 짝 맞추기, 소리 듣고 고르기, 마음 헤아리기처럼 이야기 속에서 배웁니다. 틀려도 벌이 없습니다.</span><span data-l="en" lang="en">Children move the story on by tapping, choosing and putting things in order: comparing sizes, matching colors, listening and choosing, understanding feelings. There is no penalty for a wrong answer.</span></p>
-          <div class="win">
-            <img src="assets/shot-choose-1200.webp" srcset="assets/shot-choose-720.webp 720w, assets/shot-choose-1200.webp 1200w" sizes="(max-width:1000px) calc(100vw - 80px), 760px" width="1200" height="788" loading="lazy" decoding="async"
-                 alt="앱 화면: 「개구리 왕자」에서 왕자와 공주 사이에 나비, 물고기, 토끼 그림 중 하나를 고르는 문제" data-alt-en="App screen: in The Frog Prince, the child picks one of a butterfly, a fish and a rabbit">
-          </div>
-        </section>
-
-
-
-        <section class="sheet s-lang">
-          <h4><span data-l="ko">한국어와 영어로</span><span data-l="en" lang="en">In Korean and English</span></h4>
-          <p><span data-l="ko">모든 동화를 한국어와 영어로 들을 수 있습니다. 같은 목소리가 천천히 읽고, 화면에 글자가 함께 나옵니다.</span><span data-l="en" lang="en">Every tale can be heard in Korean and in English, read slowly by the same voice with the words shown on screen.</span></p>
-          <div class="win">
-            <img src="assets/shot-english-1200.webp" srcset="assets/shot-english-720.webp 720w, assets/shot-english-1200.webp 1200w" sizes="(max-width:1000px) calc(100vw - 80px), 760px" width="1200" height="788" loading="lazy" decoding="async"
-                 alt="앱 화면: 「아기 돼지 삼형제」를 영어로 읽는 장면, 엄마 돼지의 말이 영어 글자로 나옵니다" data-alt-en="App screen: The Three Little Pigs in English, with Mother Pig’s line shown as English text">
-          </div>
-        </section>
-      </div>
-    </div></div>
-
-    <section class="library" aria-labelledby="shelf-title">
-      <div class="wrap">
-        <div class="feature">
-          <figure class="poster">
-            <img src="assets/poster-rabbit-1080.webp" srcset="assets/poster-rabbit-640.webp 640w, assets/poster-rabbit-1080.webp 1080w" sizes="(max-width:1000px) min(520px, calc(100vw - 32px)), 560px" width="1080" height="1440" loading="lazy" decoding="async"
-                 alt="톡톡 동화극장 「토끼와 거북이」 포스터. 나뭇잎을 덮고 잠든 토끼 곁을 거북이가 지나갑니다."
-                 data-alt-en="Toki Toki Tale poster for The Rabbit and the Turtle: the turtle walks past the hare asleep under a leaf.">
-          </figure>
-          <div class="feature-tx">
-            <p class="from"><span data-l="ko">톡톡 동화극장 속 이솝 우화</span><span data-l="en" lang="en">An Aesop’s fable in Toki Toki Tale</span></p>
-            <h4><span data-l="ko">토끼와 거북이</span><span data-l="en" lang="en">The Rabbit and the Turtle</span></h4>
-            <p class="line"><span data-l="ko">동물 친구들의 울음소리 응원 속에서, 느려도 끝까지 가는 거북이의 달리기를 따라갑니다.</span><span data-l="en" lang="en">A race cheered on by animal calls, where slow and steady wins.</span></p>
-            <dl>
-              <dt><span data-l="ko">배우는 것</span><span data-l="en" lang="en">Learning</span></dt>
-              <dd><span data-l="ko">소리 듣기, 마음과 배려</span><span data-l="en" lang="en">Listening to sounds, feelings and kindness</span></dd>
-              <dt><span data-l="ko">읽어 주기</span><span data-l="en" lang="en">Read-aloud</span></dt>
-              <dd><span data-l="ko">약 7분, 한국어와 영어</span><span data-l="en" lang="en">About 7 minutes, in Korean and English</span></dd>
-            </dl>
-          </div>
-        </div>
-
-        <div class="shelf-head">
-          <h4 id="shelf-title"><span data-l="ko">동화 서가</span><span data-l="en" lang="en">The tale shelf</span></h4>
-          <p><span data-l="ko">톡톡 동화극장에 담긴 전래동화, 이솝 우화, 세계 명작</span><span data-l="en" lang="en">Korean folktales, Aesop’s fables and world classics in Toki Toki Tale</span></p>
-        </div>
-        <ul class="tales" tabindex="0" aria-labelledby="shelf-title">
-          <li><img src="assets/tales/patjuk.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">팥죽할멈과 호랑이</span><span data-l="en" lang="en">The Tiger and the Red Bean Porridge</span></span></li>
-          <li><img src="assets/tales/sunmoon.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">해와 달이 된 오누이</span><span data-l="en" lang="en">The Sun and the Moon</span></span></li>
-          <li><img src="assets/tales/kongjwi.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">콩쥐 팥쥐</span><span data-l="en" lang="en">Kongjwi and Patjwi</span></span></li>
-          <li><img src="assets/tales/heungbu.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">흥부와 놀부</span><span data-l="en" lang="en">Heungbu and Nolbu</span></span></li>
-          <li><img src="assets/tales/magpie.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">은혜 갚은 까치</span><span data-l="en" lang="en">The Grateful Magpie</span></span></li>
-          <li><img src="assets/tales/magic_jar.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">요술 항아리</span><span data-l="en" lang="en">The Magic Jar</span></span></li>
-          <li><img src="assets/tales/byeoljubu.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">별주부전</span><span data-l="en" lang="en">The Rabbit and the Terrapin</span></span></li>
-          <li><img src="assets/tales/frog.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">황소와 개구리</span><span data-l="en" lang="en">The Ox and the Frog</span></span></li>
-          <li><img src="assets/tales/rabbit.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">토끼와 거북이</span><span data-l="en" lang="en">The Rabbit and the Turtle</span></span></li>
-          <li><img src="assets/tales/sun_wind.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">해와 바람</span><span data-l="en" lang="en">The Sun and the Wind</span></span></li>
-          <li><img src="assets/tales/lion_mouse.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">사자와 생쥐</span><span data-l="en" lang="en">The Lion and the Mouse</span></span></li>
-          <li><img src="assets/tales/fox_crane.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">여우와 두루미</span><span data-l="en" lang="en">The Fox and the Crane</span></span></li>
-          <li><img src="assets/tales/ant_grasshopper.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">개미와 베짱이</span><span data-l="en" lang="en">The Ant and the Grasshopper</span></span></li>
-          <li><img src="assets/tales/turnip.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">커다란 순무</span><span data-l="en" lang="en">The Giant Turnip</span></span></li>
-          <li><img src="assets/tales/goldilocks.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">골디락스와 곰 세 마리</span><span data-l="en" lang="en">Goldilocks and the Three Bears</span></span></li>
-          <li><img src="assets/tales/bremen.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">브레멘 음악대</span><span data-l="en" lang="en">The Bremen Town Musicians</span></span></li>
-          <li><img src="assets/tales/ugly_duckling.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">미운 아기 오리</span><span data-l="en" lang="en">The Ugly Duckling</span></span></li>
-          <li><img src="assets/tales/three_pigs.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">아기 돼지 삼형제</span><span data-l="en" lang="en">The Three Little Pigs</span></span></li>
-          <li><img src="assets/tales/wolf_goats.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">늑대와 일곱 마리 아기 염소</span><span data-l="en" lang="en">The Wolf and the Seven Kids</span></span></li>
-          <li><img src="assets/tales/hansel.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">헨젤과 그레텔</span><span data-l="en" lang="en">Hansel and Gretel</span></span></li>
-          <li><img src="assets/tales/cinderella.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">신데렐라</span><span data-l="en" lang="en">Cinderella</span></span></li>
-          <li><img src="assets/tales/red_hood.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">빨간 모자</span><span data-l="en" lang="en">Little Red Riding Hood</span></span></li>
-          <li><img src="assets/tales/snow_white.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">백설공주</span><span data-l="en" lang="en">Snow White</span></span></li>
-          <li><img src="assets/tales/little_mermaid.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">인어공주</span><span data-l="en" lang="en">The Little Mermaid</span></span></li>
-          <li><img src="assets/tales/beauty_beast.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">미녀와 야수</span><span data-l="en" lang="en">Beauty and the Beast</span></span></li>
-          <li><img src="assets/tales/red_hen.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">빨간 암탉</span><span data-l="en" lang="en">The Little Red Hen</span></span></li>
-          <li><img src="assets/tales/princess_pea.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">완두콩 공주</span><span data-l="en" lang="en">The Princess and the Pea</span></span></li>
-          <li><img src="assets/tales/rapunzel.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">라푼젤</span><span data-l="en" lang="en">Rapunzel</span></span></li>
-          <li><img src="assets/tales/frog_prince.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">개구리 왕자</span><span data-l="en" lang="en">The Frog Prince</span></span></li>
-          <li><img src="assets/tales/sleeping_beauty.webp" width="320" height="240" loading="lazy" decoding="async" alt=""><span><span data-l="ko">잠자는 숲속의 공주</span><span data-l="en" lang="en">The Sleeping Beauty</span></span></li>
-        </ul>
-      </div>
-    </section>
-  </article>
+      </li>
+      <li class="next"><svg class="star " viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 0c.7 5.6 3.9 8.8 10 10-6.1 1.2-9.3 4.4-10 10-.7-5.6-3.9-8.8-10-10C6.1 8.8 9.3 5.6 10 0z"/></svg><p><span data-l="ko">다음 작품을 만들고 있습니다.</span><span data-l="en" lang="en">The next one is in the works.</span></p></li>
+    </ul>
+  </div>
 </main>
 
 <footer class="night" id="contact">
   <div class="wrap contact">
     <div>
       <h2><span data-l="ko">문의</span><span data-l="en" lang="en">Contact</span></h2>
-      <p><span data-l="ko">앱 사용, 결제, 기록 삭제 요청은 메일로 받습니다.</span><span data-l="en" lang="en">For help with the app, purchases or deleting your records, write to us.</span></p>
+      <p><span data-l="ko">작품 사용, 결제, 기록 삭제 요청과 그 밖의 문의는 메일로 받습니다.</span><span data-l="en" lang="en">For help with our apps, purchases, deleting your records or anything else, write to us.</span></p>
     </div>
     <div><a class="mail" href="mailto:hello@ddoystory.com">hello@ddoystory.com</a></div>
   </div>
   <div class="wrap"><div class="foot">
     <img src="assets/ddoystory-logo-dark.webp" width="112" height="31" alt="ddoystory">
+    <ul aria-label="Toki Toki Tale">
+      <li><a href="tokitoki/support/#ko" data-href="tokitoki/support/"><span data-l="ko">톡톡 동화극장 고객 지원</span><span data-l="en" lang="en">Toki Toki Tale support</span></a></li>
+      <li><a href="tokitoki/privacy/"><span data-l="ko">개인정보 처리방침</span><span data-l="en" lang="en">Privacy policy</span></a></li>
+    </ul>
     <p><span data-l="ko">© 2026 또이다은 스튜디오</span><span data-l="en" lang="en">© 2026 ddoystory</span></p>
   </div></div>
 </footer>
-
 <script>
-/* ▼ App Store 주소: 앱 주소가 나오면 이 한 줄만 바꾼다. (a[data-appstore] 단추 전부에 들어간다) */
+/* ▼ 톡톡 동화극장 App Store 주소: tokitoki/index.html 의 같은 줄과 함께 바꾼다. (이 페이지의 a[data-appstore] 단추에 들어간다. 작품이 늘면 단추 href 에 주소를 직접 넣는다) */
 var APP_STORE_URL = 'https://apps.apple.com/';
 
 (function(){
