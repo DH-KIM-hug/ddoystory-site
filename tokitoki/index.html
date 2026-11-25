@@ -175,6 +175,8 @@
   .paper-card{--bo:10px}
 }
 </style>
+<style>.store.soon{pointer-events:none;opacity:.62;cursor:default}.store.soon svg{display:none}</style>
+<style>footer .biz{margin:0;padding:0 0 22px;font-size:.78rem;line-height:1.6;opacity:.72;letter-spacing:.01em}</style>
 </head>
 <body>
 <a class="skip" href="#app"><span data-l="ko">본문으로 건너뛰기</span><span data-l="en" lang="en">Skip to content</span></a>
@@ -386,8 +388,9 @@
       <ul aria-label="ddoystory">
         <li><a href="../#ko" data-href="../"><span data-l="ko">또이다은 스튜디오</span><span data-l="en" lang="en">ddoystory</span></a></li>
       </ul>
-      <p><span data-l="ko">© 2026 또이다은 스튜디오</span><span data-l="en" lang="en">© 2026 ddoystory</span></p>
+      <p><span data-l="ko">© 2026 또이다은 스튜디오 (DDO-YiDaEun Studio)</span><span data-l="en" lang="en">© 2026 DDO-YiDaEun Studio</span></p>
     </div>
+    <div class="wrap"><p class="biz"><span data-l="ko">상호 또이다은 스튜디오 (DDO-YiDaEun Studio)&ensp; 대표 김동현&ensp; 사업자등록번호 407-07-29565</span><span data-l="en" lang="en">DDO-YiDaEun Studio&ensp; Representative Donghyun Kim&ensp; Business Reg. No. 407-07-29565</span></p></div>
   </div></div>
 </footer>
 
@@ -397,7 +400,13 @@ var APP_STORE_URL = 'https://apps.apple.com/';
 
 (function(){
   var st=document.querySelectorAll('a[data-appstore]');
-  for(var s=0;s<st.length;s++) st[s].href=APP_STORE_URL;
+  for(var s=0;s<st.length;s++){
+    if(APP_STORE_URL==='https://apps.apple.com/'){   /* 앱 주소가 나오기 전: 깨진 링크 대신 '출시 예정' 표시 */
+      st[s].removeAttribute('href'); st[s].setAttribute('aria-disabled','true'); st[s].classList.add('soon');
+      var k=st[s].querySelector('[data-l="ko"]'), e=st[s].querySelector('[data-l="en"]');
+      if(k) k.textContent='App Store 출시 예정'; if(e) e.textContent='Coming soon to the App Store';
+    } else st[s].href=APP_STORE_URL;
+  }
   var h=document.documentElement;
   function set(l){
     h.lang=l;
